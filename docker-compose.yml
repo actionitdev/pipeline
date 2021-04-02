@@ -1,30 +1,30 @@
 version: '3.1'
 services:
-  # db:
-  #   image: mysql:latest
-  #   restart: always
-  #   environment:
-  #     MYSQL_DATABASE: wp
-  #     MYSQL_USER: user
-  #     MYSQL_PASSWORD: password
-  #     MYSQL_ROOT_PASSWORD: pwroot
-  #   volumes:
-  #     - db:/var/lib/mysql
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: pwroot
+    volumes:
+      - db:/var/lib/mysql
 
   wordpress:
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     image: wordpress:fpm-alpine
     container_name: wordpress
     restart: always
     ports:
       - '9000:9000'
-    # environment:
-    # #  WORDPRESS_DB_HOST: db
-    #   WORDPRESS_DB_USER: user
-    #   WORDPRESS_DB_PASSWORD: password
-    #   WORDPRESS_DB_NAME: wp
-    #   WORDPRESS_TABLE_PREFIX: wp_
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_TABLE_PREFIX: wp_
 
   nginx:
     image: nginx:latest
@@ -36,8 +36,8 @@ services:
       - ./nginx:/etc/nginx/conf.d
     links:
       - wordpress
-# volumes:
-#   db:
+volumes:
+  db:
 
  
  
