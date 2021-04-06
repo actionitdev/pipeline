@@ -1,0 +1,1985 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: fw/config/settings.php:329 fw/config/settings.php:338
+#: fw/config/settings.php:352 fw/config/settings.php:361
+#: fw/config/settings.php:387 fw/config/settings.php:415
+#: fw/config/settings.php:424 fw/config/settings.php:452
+#: fw/config/settings.php:461 fw/config/settings.php:487
+#: fw/config/settings.php:534 fw/config/settings.php:549
+#: fw/config/settings.php:575 fw/config/settings.php:600
+#: fw/config/settings.php:626 fw/config/settings.php:645
+msgid ""
+msgstr ""
+"Project-Id-Version: molongui-common-framework 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-13 11:07+0200\n"
+"PO-Revision-Date: 2017-09-18 09:50+0100\n"
+"Last-Translator: Amitzy <molongui@amitzy.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fw/admin/fw-class-admin.php:510
+msgid "Settings"
+msgstr "Konfiguration"
+
+#: fw/admin/fw-class-admin.php:511
+msgid "Docs"
+msgstr "Dokumente"
+
+#: fw/admin/fw-class-admin.php:516 fw/customizer/fw-class-customizer.php:262
+msgid "Go Premium"
+msgstr "Hole dir Premium"
+
+#: fw/admin/fw-class-admin.php:539
+#, php-format
+msgid "Molongui is a trademark of %1$s Amitzy%2$s."
+msgstr "Molongui ist eine Marke von %1$s Amitzy %2$s."
+
+#: fw/admin/fw-class-admin.php:548
+#, php-format
+msgid ""
+"If you like <strong>%s</strong> please leave us a %s&#9733;&#9733;&#9733;"
+"&#9733;&#9733;%s rating. A huge thank you from Molongui in advance!"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:550
+msgid "Thanks :)"
+msgstr "Danke :)"
+
+#: fw/admin/fw-class-admin.php:785
+#, php-format
+msgid ""
+"%sMore features? It's time to upgrade your %s plugin to Premium vesion!%s"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:789
+msgid "Extend standard plugin functionality with new great options."
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:798
+msgid "Learn more"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:875
+#, php-format
+msgid "Like %s?"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:876
+#, php-format
+msgid ""
+"Hey %s, hope you're happy with %s plugin. We would really appreciate it if "
+"you dropped us a quick rating!"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:888
+#, fuzzy
+msgid "Rate plugin"
+msgstr "Bewerten Sie dieses Plugin"
+
+#: fw/admin/fw-class-admin.php:934
+#, php-format
+msgid ""
+"%sPremium setting%s. You are using the free version of this plugin, so "
+"changing this setting will have no effect and default value will be used. "
+"Consider purchasing the %sPremium Version%s."
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:942
+#, php-format
+msgid ""
+"%sPremium setting%s. You are using the free version of this plugin, so "
+"selecting any option marked as \"PREMIUM\" will have no effect and default "
+"value will be used. Consider purchasing the %sPremium Version%s."
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:1067
+#, php-format
+msgid "[MOLONGUI] %s: %s"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:1082
+#, fuzzy
+msgid "System status report"
+msgstr "Aktualisieren"
+
+#: fw/admin/fw-class-admin.php:1083 fw/admin/views/html-admin-tab-more.php:24
+msgid "Molongui plugins"
+msgstr "Molongui Plugins"
+
+#: fw/admin/fw-class-admin.php:1088
+#, fuzzy
+msgid "Active plugins"
+msgstr "Installierte Plugins"
+
+#: fw/admin/fw-class-admin.php:1094
+#: fw/admin/views/html-admin-part-support-status.php:176
+#: fw/admin/views/html-admin-tab-support.php:241
+msgid "Active theme"
+msgstr "Aktiv thema"
+
+#: fw/admin/fw-class-admin.php:1096
+msgid "Client browser"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:1098
+msgid "Current user"
+msgstr ""
+
+#: fw/admin/fw-class-admin.php:1103
+#, php-format
+msgid ""
+"This support ticket was sent from the help request form on User's Dashboard "
+"(%s)"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-about.php:25
+msgid "Need help? Need more?"
+msgstr "Brauchen Sie Hilfe? Brauchen Sie mehr?"
+
+#: fw/admin/views/html-admin-page-about.php:34
+msgid "Website"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-about.php:35
+#: fw/admin/views/html-admin-tab-support.php:33
+msgid "Learn the basics to help you make the most of Molongui plugins."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-about.php:41
+#: fw/includes/fw-class-settings.php:115
+msgid "Plugins"
+msgstr "Plugins"
+
+#: fw/admin/views/html-admin-page-about.php:42
+#: fw/admin/views/html-admin-tab-support.php:54
+msgid ""
+"Unable to find what you are looking for? Open a support ticket to get help."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-about.php:48
+msgid "Contact"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-about.php:49
+msgid "Say Hello. Let us know how can we help."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-plugins.php:27
+msgid "Plugins that make your site better!"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-plugins.php:35
+msgid ""
+"Visit our site to find more plugins and themes we have created to improve "
+"your site."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-plugins.php:36
+msgid "Visit our site"
+msgstr "Besuche unsere Webseite"
+
+#: fw/admin/views/html-admin-page-plugins.php:41
+msgid ""
+"As part of our ongoing effort to provide high quality, eye-catching "
+"Wordpress plugins, here you have some you might find useful for your site."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:26
+msgid "Open a support ticket"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:27
+#, php-format
+msgid ""
+"Submit a ticket below and get help from our friendly and knowledgeable "
+"%sMolonguis%s. We reply to every ticket, please check your Spam folder if "
+"you haven’t heard from us."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:29
+msgid "All fields are mandatory"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:32
+msgid "Your name here"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:36
+msgid "Your e-mail here"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:40
+msgid "A subject here"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:51
+msgid "Your message"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:56
+#: fw/admin/views/html-admin-page-support-help.php:57
+msgid "Open ticket"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:64
+msgid "Chat with us"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support-help.php:65
+msgid ""
+"We speak English and Spanish and answer Monday to Friday during normal "
+"business hours (GMT). If offline, we will get back to you when back, so make "
+"sure to leave your e-mail address so we can reach you."
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support.php:22
+#, fuzzy
+msgid "Get help"
+msgstr "Brauchst du Hilfe?"
+
+#: fw/admin/views/html-admin-page-support.php:23
+msgid "System status"
+msgstr ""
+
+#: fw/admin/views/html-admin-page-support.php:31
+#, fuzzy
+msgid "Molongui Support"
+msgstr "Molongui"
+
+#: fw/admin/views/html-admin-part-sidebar-rate.php:24
+msgid ""
+"We are constantly looking for ways to improve the quality of our products "
+"and services. How you rate our product and service is the most important "
+"information we can obtain to support our goal."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-sidebar-rate.php:28
+msgid ""
+"We would really appreciate it if you would take a second to rate this plugin "
+"at the official directory of Wordpress plugins. A huge thank you from "
+"Molongui in advance!"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-sidebar-rate.php:32
+msgid "Rate this plugin"
+msgstr "Bewerten Sie dieses Plugin"
+
+#: fw/admin/views/html-admin-part-sidebar-rate.php:36
+msgid ""
+"We would really appreciate any feedback you would like to send us. A huge "
+"thank you from Molongui in advance!"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-sidebar-rate.php:40
+msgid "Send feedback"
+msgstr "Feedback senden"
+
+#: fw/admin/views/html-admin-part-sidebar-upsell.php:26
+#: fw/admin/views/html-admin-tab-more.php:26
+msgid ""
+"As part of our ongoing effort to provide high quality, eye-catching "
+"Wordpress plugins, here you have some you might find useful for your site:"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:30
+msgid ""
+"Please download and attach this report in your ticket when contacting "
+"support:"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:32
+#: fw/admin/views/html-admin-tab-support.php:70
+msgid "Download report as text file"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:33
+#: fw/admin/views/html-admin-tab-support.php:71
+msgid "Send report to Molongui"
+msgstr "Bericht an Molongui senden"
+
+#: fw/admin/views/html-admin-part-support-status.php:49
+#: fw/admin/views/html-admin-part-support-status.php:181
+#: fw/admin/views/html-admin-tab-support.php:87
+#: fw/admin/views/html-admin-tab-support.php:246
+msgid "Name"
+msgstr "Name"
+
+#: fw/admin/views/html-admin-part-support-status.php:50
+#, fuzzy
+msgid "The name of the plugin."
+msgstr "Name ddes übergeordneten Theme."
+
+#: fw/admin/views/html-admin-part-support-status.php:54
+#: fw/admin/views/html-admin-tab-support.php:92 fw/config/settings.php:516
+msgid "License"
+msgstr "Lizenz"
+
+#: fw/admin/views/html-admin-part-support-status.php:55
+#, fuzzy
+msgid "The license of the plugin."
+msgstr "Name ddes übergeordneten Theme."
+
+#: fw/admin/views/html-admin-part-support-status.php:57
+#: fw/admin/views/html-admin-tab-support.php:95
+#: fw/includes/fw-class-settings-2.php:546
+#: fw/includes/fw-class-settings-2.php:1471
+#: fw/includes/fw-class-settings.php:298
+msgid "Premium"
+msgstr "Premium"
+
+#: fw/admin/views/html-admin-part-support-status.php:57
+#: fw/admin/views/html-admin-part-upsells.php:35
+#: fw/admin/views/html-admin-tab-support.php:95
+#: fw/includes/fw-class-settings-2.php:546
+#: fw/includes/fw-class-settings.php:298
+msgid "Free"
+msgstr "Gratis"
+
+#: fw/admin/views/html-admin-part-support-status.php:60
+#: fw/admin/views/html-admin-tab-support.php:98
+msgid "Upgrade now!"
+msgstr "Jetzt erweitern!"
+
+#: fw/admin/views/html-admin-part-support-status.php:66
+#: fw/admin/views/html-admin-part-support-status.php:186
+#: fw/admin/views/html-admin-part-support-status.php:267
+#: fw/admin/views/html-admin-tab-support.php:104
+#: fw/admin/views/html-admin-tab-support.php:164
+#: fw/admin/views/html-admin-tab-support.php:251
+msgid "Version"
+msgstr "Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:67
+#: fw/admin/views/html-admin-tab-support.php:105
+msgid "The version of the plugin installed on your site."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:71
+#: fw/admin/views/html-admin-tab-support.php:109
+msgid "Framework"
+msgstr "Framework"
+
+#: fw/admin/views/html-admin-part-support-status.php:72
+msgid "The Molongui Framework the plugin is using."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:76
+#: fw/admin/views/html-admin-tab-support.php:114
+msgid "Database Version"
+msgstr "Datenbank Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:77
+#: fw/admin/views/html-admin-tab-support.php:115
+msgid "The version of the plugin that the database is formatted for."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:87
+#: fw/admin/views/html-admin-tab-support.php:125
+msgid "Plugin settings"
+msgstr "Plugin-Einstellungen"
+
+#: fw/admin/views/html-admin-part-support-status.php:113
+#: fw/admin/views/html-admin-tab-support.php:317
+msgid "Installed plugins"
+msgstr "Installierte Plugins"
+
+#: fw/admin/views/html-admin-part-support-status.php:131
+#: fw/admin/views/html-admin-part-support-status.php:158
+#: fw/admin/views/html-admin-tab-support.php:340
+#: fw/admin/views/html-admin-tab-support.php:374
+msgid "Network enabled"
+msgstr "Netzwerk aktiviert"
+
+#: fw/admin/views/html-admin-part-support-status.php:136
+#: fw/admin/views/html-admin-tab-support.php:345
+msgid "Active"
+msgstr "Aktiv"
+
+#: fw/admin/views/html-admin-part-support-status.php:137
+#: fw/admin/views/html-admin-part-support-status.php:164
+#: fw/admin/views/html-admin-part-support-status.php:240
+#: fw/admin/views/html-admin-tab-support.php:305
+#: fw/admin/views/html-admin-tab-support.php:346
+#: fw/admin/views/html-admin-tab-support.php:381
+#, php-format
+msgctxt "by author"
+msgid "by %s"
+msgstr "von %s"
+
+#: fw/admin/views/html-admin-part-support-status.php:163
+#: fw/admin/views/html-admin-part-support-status.php:239
+#: fw/admin/views/html-admin-tab-support.php:304
+#: fw/admin/views/html-admin-tab-support.php:380
+msgid "Disabled"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:182
+#: fw/admin/views/html-admin-tab-support.php:247
+msgid "The name of the current active theme."
+msgstr "Name des aktuell aktiven Themes."
+
+#: fw/admin/views/html-admin-part-support-status.php:187
+#: fw/admin/views/html-admin-tab-support.php:252
+msgid "The installed version of the current active theme."
+msgstr "Die installierte Version des aktuell aktiven Themes."
+
+#: fw/admin/views/html-admin-part-support-status.php:191
+#: fw/admin/views/html-admin-tab-support.php:256
+msgid "Author"
+msgstr "Autor:"
+
+#: fw/admin/views/html-admin-part-support-status.php:192
+#: fw/admin/views/html-admin-tab-support.php:257
+msgid "The theme developers."
+msgstr "Die Theme-Entwickler."
+
+#: fw/admin/views/html-admin-part-support-status.php:196
+#: fw/admin/views/html-admin-tab-support.php:261
+msgid "Author URL"
+msgstr "URL des Autors"
+
+#: fw/admin/views/html-admin-part-support-status.php:197
+#: fw/admin/views/html-admin-tab-support.php:262
+msgid "The theme developers URL."
+msgstr "Die URL des Themeentwicklers."
+
+#: fw/admin/views/html-admin-part-support-status.php:201
+#: fw/admin/views/html-admin-tab-support.php:266
+msgid "Child Theme"
+msgstr "Child Theme"
+
+#: fw/admin/views/html-admin-part-support-status.php:202
+#: fw/admin/views/html-admin-tab-support.php:267
+msgid "Displays whether or not the current theme is a child theme."
+msgstr ""
+"Zeigt an, ob das aktuelle Theme ein untergeordnetes Child-Theme ist oder "
+"nicht."
+
+#: fw/admin/views/html-admin-part-support-status.php:207
+#: fw/admin/views/html-admin-tab-support.php:272
+msgid "Parent Theme Name"
+msgstr "Name des übergeordneten Theme"
+
+#: fw/admin/views/html-admin-part-support-status.php:208
+#: fw/admin/views/html-admin-tab-support.php:273
+msgid "The name of the parent theme."
+msgstr "Name ddes übergeordneten Theme."
+
+#: fw/admin/views/html-admin-part-support-status.php:212
+#: fw/admin/views/html-admin-tab-support.php:277
+msgid "Parent Theme Version"
+msgstr "Eltern-Theme Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:213
+#: fw/admin/views/html-admin-tab-support.php:278
+msgid "The installed version of the parent theme."
+msgstr "Die installierte Version des übergeordneten Theme."
+
+#: fw/admin/views/html-admin-part-support-status.php:217
+#: fw/admin/views/html-admin-tab-support.php:282
+msgid "Parent Theme Author URL"
+msgstr "Eltern-Theme Entwickler-URL"
+
+#: fw/admin/views/html-admin-part-support-status.php:218
+#: fw/admin/views/html-admin-tab-support.php:283
+msgid "The parent theme developers URL."
+msgstr "URL des Entwicklers des übergeordneten Themes."
+
+#: fw/admin/views/html-admin-part-support-status.php:229
+#: fw/admin/views/html-admin-tab-support.php:294
+msgid "Installed themes"
+msgstr "Installiert thema"
+
+#: fw/admin/views/html-admin-part-support-status.php:252
+#, fuzzy
+msgid "WordPress environment"
+msgstr "WordPress Umgebung"
+
+#: fw/admin/views/html-admin-part-support-status.php:257
+#: fw/admin/views/html-admin-tab-support.php:154
+msgid "Home URL"
+msgstr "URL der Startseite"
+
+#: fw/admin/views/html-admin-part-support-status.php:258
+#, fuzzy
+msgid "The URL of your site."
+msgstr "Die URL deiner Seite."
+
+#: fw/admin/views/html-admin-part-support-status.php:262
+#: fw/admin/views/html-admin-tab-support.php:159
+msgid "Site URL"
+msgstr "Seiten URL"
+
+#: fw/admin/views/html-admin-part-support-status.php:263
+#: fw/admin/views/html-admin-tab-support.php:160
+msgid "The root URL of your site."
+msgstr "Die URL deiner Seite."
+
+#: fw/admin/views/html-admin-part-support-status.php:268
+#: fw/admin/views/html-admin-tab-support.php:165
+msgid "The version of WordPress installed on your site."
+msgstr "Die Wordpress-Version, die auf Ihrer Webseite installiert ist."
+
+#: fw/admin/views/html-admin-part-support-status.php:284
+#, php-format
+msgid "%1$s - There is a newer version of WordPress available (%2$s)"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:290
+#: fw/admin/views/html-admin-tab-support.php:169
+msgid "Multisite"
+msgstr "Multisite"
+
+#: fw/admin/views/html-admin-part-support-status.php:291
+#: fw/admin/views/html-admin-tab-support.php:170
+msgid "Whether or not you have WordPress Multisite enabled."
+msgstr "Ob Sie WordPress Multisite aktiviert haben oder nicht."
+
+#: fw/admin/views/html-admin-part-support-status.php:295
+#: fw/admin/views/html-admin-tab-support.php:179
+msgid "Memory Limit"
+msgstr "Speicherlimit"
+
+#: fw/admin/views/html-admin-part-support-status.php:296
+#: fw/admin/views/html-admin-tab-support.php:180
+msgid "The maximum amount of memory (RAM) that your site can use at one time."
+msgstr ""
+"Das Speichermaximum (RAM), das deine Website zu einem bestimmten Zeitpunkt "
+"maximal nutzen darf."
+
+#: fw/admin/views/html-admin-part-support-status.php:302
+#, fuzzy, php-format
+msgid "%1$s - We recommend setting memory to at least 64MB. See: %2$s"
+msgstr ""
+"%s - wir empfehlen den Speicher auf mindestens 64MB einzustellen. Siehe: %s"
+
+#: fw/admin/views/html-admin-part-support-status.php:302
+#: fw/admin/views/html-admin-tab-support.php:186
+msgid "Increasing memory allocated to PHP"
+msgstr "Wie Sie den für PHP verfügbaren Speicher erhöhen können"
+
+#: fw/admin/views/html-admin-part-support-status.php:309
+#: fw/admin/views/html-admin-tab-support.php:214
+msgid "Debug Mode"
+msgstr "Entwickler Modus"
+
+#: fw/admin/views/html-admin-part-support-status.php:310
+#: fw/admin/views/html-admin-tab-support.php:215
+msgid "Displays whether or not WordPress is in Debug Mode."
+msgstr "Zeigt an, ob WordPress im Debug-Modus ist oder nicht."
+
+#: fw/admin/views/html-admin-part-support-status.php:320
+#: fw/admin/views/html-admin-tab-support.php:203
+msgid "Cron"
+msgstr "Cron"
+
+#: fw/admin/views/html-admin-part-support-status.php:321
+#: fw/admin/views/html-admin-tab-support.php:204
+msgid "Displays whether or not WP Cron Jobs are enabled."
+msgstr "Zeigt an, ob WP Cron Jobs aktiviert sind oder nicht."
+
+#: fw/admin/views/html-admin-part-support-status.php:331
+#: fw/admin/views/html-admin-tab-support.php:225
+msgid "Timezone"
+msgstr "Zeitzone"
+
+#: fw/admin/views/html-admin-part-support-status.php:332
+#: fw/admin/views/html-admin-tab-support.php:226
+msgid "WordPress timezone."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:336
+#: fw/admin/views/html-admin-tab-support.php:230
+msgid "Language"
+msgstr "Sprache"
+
+#: fw/admin/views/html-admin-part-support-status.php:337
+#: fw/admin/views/html-admin-tab-support.php:231
+msgid "The current language used by WordPress. Default = English"
+msgstr ""
+"Die aktuell von WordPress verwendete Sprache. Standardsprache ist Englisch."
+
+#: fw/admin/views/html-admin-part-support-status.php:341
+#: fw/admin/views/html-admin-tab-support.php:193
+msgid "Permalink strucutre"
+msgstr "Permalink-Struktur"
+
+#: fw/admin/views/html-admin-part-support-status.php:342
+#: fw/admin/views/html-admin-tab-support.php:194
+msgid "WordPress permalink structure."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:346
+#: fw/admin/views/html-admin-tab-support.php:198
+msgid "Registered post status"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:347
+#: fw/admin/views/html-admin-tab-support.php:199
+msgid "WordPress registered post status types."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:351
+msgid "External object cache"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:352
+#, fuzzy
+msgid "Displays whether or not WordPress is using an external object cache."
+msgstr "Zeigt an, ob WordPress im Debug-Modus ist oder nicht."
+
+#: fw/admin/views/html-admin-part-support-status.php:368
+#, fuzzy
+msgid "Database"
+msgstr "Datenbank Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:374
+#, fuzzy
+msgid "MySQL version"
+msgstr "cURL Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:375
+#, fuzzy
+msgid "The version of MySQL installed on your hosting server."
+msgstr "Die PHP-Version, die auf Deinem Webserver installiert ist."
+
+#: fw/admin/views/html-admin-part-support-status.php:380
+#, fuzzy, php-format
+msgid "%1$s - We recommend a minimum MySQL version of 5.6. See: %2$s"
+msgstr "%s - Wir empfehlen mindestens PHP-Version 5.6. Siehe: %s"
+
+#: fw/admin/views/html-admin-part-support-status.php:380
+#, fuzzy
+msgid "WordPress requirements"
+msgstr "WordPress Umgebung"
+
+#: fw/admin/views/html-admin-part-support-status.php:389
+#: fw/admin/views/html-admin-tab-support.php:174
+msgid "DB table prefix"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:390
+#: fw/admin/views/html-admin-tab-support.php:175
+msgid "WordPress database table prefix."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:400
+#, fuzzy
+msgid "Server environment"
+msgstr "Server Umgebung"
+
+#: fw/admin/views/html-admin-part-support-status.php:405
+#: fw/admin/views/html-admin-tab-support.php:399
+msgid "Server Info"
+msgstr "Server Info"
+
+#: fw/admin/views/html-admin-part-support-status.php:406
+#: fw/admin/views/html-admin-tab-support.php:400
+msgid "Information about the web server that is currently hosting your site."
+msgstr ""
+"Informationen über den Webserver, der gegenwärtig Deine Webseite hostet."
+
+#: fw/admin/views/html-admin-part-support-status.php:410
+#: fw/admin/views/html-admin-tab-support.php:409
+msgid "PHP Version"
+msgstr "PHP Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:411
+#: fw/admin/views/html-admin-tab-support.php:410
+msgid "The version of PHP installed on your hosting server."
+msgstr "Die PHP-Version, die auf Deinem Webserver installiert ist."
+
+#: fw/admin/views/html-admin-part-support-status.php:420
+#: fw/admin/views/html-admin-tab-support.php:420
+msgid "How to update your PHP version"
+msgstr "Wie du deine PHP-Version updaten kannst"
+
+#: fw/admin/views/html-admin-part-support-status.php:424
+msgid ""
+"Molongui plugins will not run properly under this version of PHP. Support "
+"for this version has been dropped. We recommend using PHP version 7.2 or "
+"above for greater performance and security."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:426
+msgid ""
+"Molongui plugins will run under this version of PHP, however, it has reached "
+"end of life. We recommend using PHP version 7.2 or above for greater "
+"performance and security."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:428
+msgid ""
+"We recommend using PHP version 7.2 or above for greater performance and "
+"security."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:439
+#, fuzzy
+msgid "PHP memory limit"
+msgstr "PHP Memory Limit"
+
+#: fw/admin/views/html-admin-part-support-status.php:440
+#: fw/admin/views/html-admin-tab-support.php:442
+msgid "The maximum amount of memory (RAM) that PHP can use at one time."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:444
+#, fuzzy
+msgid "PHP post max size"
+msgstr "PHP Post Max Size"
+
+#: fw/admin/views/html-admin-part-support-status.php:445
+#: fw/admin/views/html-admin-tab-support.php:447
+msgid "The largest filesize that can be contained in one post."
+msgstr "Die maximale Dateigröße, die ein Beitrag enthalten darf."
+
+#: fw/admin/views/html-admin-part-support-status.php:449
+#, fuzzy
+msgid "PHP Max upload size"
+msgstr "PHP Post Max Size"
+
+#: fw/admin/views/html-admin-part-support-status.php:450
+#: fw/admin/views/html-admin-tab-support.php:452
+msgid ""
+"The largest filesize that can be uploaded to your WordPress installation."
+msgstr ""
+"Die maximale Dateigröße, die in Deine WordPress-Installation hochgeladen "
+"werden darf."
+
+#: fw/admin/views/html-admin-part-support-status.php:454
+#, fuzzy
+msgid "PHP time limit"
+msgstr "PHP Time Limit"
+
+#: fw/admin/views/html-admin-part-support-status.php:455
+#: fw/admin/views/html-admin-tab-support.php:457
+msgid ""
+"The amount of time (in seconds) that your site will spend on a single "
+"operation before timing out (to avoid server lockups)"
+msgstr ""
+"Die Zeit (in Sekunden), die Ihre Seite für einzelne Aufgaben verbringt, "
+"bevor ein Time-out erfolgt (um eine Überlastung des Servers zu verhindern)"
+
+#: fw/admin/views/html-admin-part-support-status.php:459
+#, fuzzy
+msgid "PHP max input vars"
+msgstr "PHP Max Input Vars"
+
+#: fw/admin/views/html-admin-part-support-status.php:460
+#: fw/admin/views/html-admin-tab-support.php:462
+msgid ""
+"The maximum number of variables your server can use for a single function to "
+"avoid overloads."
+msgstr ""
+"Die maximale Anzahl an Eingabe-Variablen, die ihr Server für eine einzelne "
+"Funktion nutzen kann, ohne überlastet zu werden."
+
+#: fw/admin/views/html-admin-part-support-status.php:464
+msgid "PHP arg separator"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:465
+#: fw/admin/views/html-admin-tab-support.php:467
+msgid "Character used as argument separator."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:469
+#, fuzzy
+msgid "PHP display errors"
+msgstr "PHP Anzeige-Fehler"
+
+#: fw/admin/views/html-admin-part-support-status.php:470
+#: fw/admin/views/html-admin-tab-support.php:472
+msgid "Does your site prints errors to the screen as part of the output?"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:474
+msgid "PHP allow URL file open"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:475
+#: fw/admin/views/html-admin-part-support-status.php:480
+#: fw/admin/views/html-admin-part-support-status.php:485
+#: fw/admin/views/html-admin-part-support-status.php:490
+#: fw/admin/views/html-admin-part-support-status.php:495
+#: fw/admin/views/html-admin-part-support-status.php:500
+#: fw/admin/views/html-admin-part-support-status.php:505
+#: fw/admin/views/html-admin-tab-support.php:477
+#: fw/admin/views/html-admin-tab-support.php:482
+#: fw/admin/views/html-admin-tab-support.php:487
+#: fw/admin/views/html-admin-tab-support.php:492
+#: fw/admin/views/html-admin-tab-support.php:497
+#: fw/admin/views/html-admin-tab-support.php:502
+#: fw/admin/views/html-admin-tab-support.php:507
+msgid "Does your site enable accessing URL object like files?"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:479
+#, fuzzy
+msgid "PHP session"
+msgstr "PHP Session"
+
+#: fw/admin/views/html-admin-part-support-status.php:484
+#, fuzzy
+msgid "PHP session name"
+msgstr "PHP Session"
+
+#: fw/admin/views/html-admin-part-support-status.php:489
+msgid "PHP cookie path"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:494
+msgid "PHP save path"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:499
+msgid "PHP use cookies"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:504
+msgid "PHP use only cookies"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:510
+#, fuzzy
+msgid "SUHOSIN installed"
+msgstr "SUHOSIN installiert"
+
+#: fw/admin/views/html-admin-part-support-status.php:511
+#: fw/admin/views/html-admin-tab-support.php:513
+msgid ""
+"Suhosin is an advanced protection system for PHP installations. It was "
+"designed to protect your servers on the one hand against a number of well "
+"known problems in PHP applications and on the other hand against potential "
+"unknown vulnerabilities within these applications or the PHP core itself. If "
+"enabled on your server, Suhosin may need to be configured to increase its "
+"data submission limits."
+msgstr ""
+"Suhosin ist ein erweitertes Sicherheitssystem für PHP-Installationen. Es "
+"wurde entwickelt, um einerseits Ihre Server gegen eine Vielzahl "
+"wohlbekannter Probleme in PHP-Anwendungen zu schützen und andererseits gegen "
+"möglicherweise noch unbekannte Schwachstellen innerhalb dieser Anwendungen "
+"oder dem PHP-Kern selbst. Wenn es auf Ihrem Server aktiviert ist, dann "
+"müsste Suhosin unter Umständen so konfiguriert werden, dass dessen "
+"Datenübertragungsgrenzen (data submission limits) erhöht werden."
+
+#: fw/admin/views/html-admin-part-support-status.php:515
+#, fuzzy
+msgid "cURL version"
+msgstr "cURL Version"
+
+#: fw/admin/views/html-admin-part-support-status.php:516
+#: fw/admin/views/html-admin-tab-support.php:518
+msgid "The version of cURL installed on your server."
+msgstr "Die cURL-Version, die auf deinem Server installiert ist."
+
+#: fw/admin/views/html-admin-part-support-status.php:521
+msgid "fsockopen/cURL"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:522
+#: fw/admin/views/html-admin-tab-support.php:537
+msgid "Some plugins can use cURL to communicate with remote servers."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:528
+msgid ""
+"Your server does not have fsockopen or cURL enabled - Plugins which "
+"communicate with other servers will not work. Contact your hosting provider."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:534
+msgid "SoapClient"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:535
+#: fw/admin/views/html-admin-tab-support.php:548
+msgid "Some webservices use SOAP to get information from remote servers."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:542
+#: fw/admin/views/html-admin-tab-support.php:554
+#, php-format
+msgid ""
+"Your server does not have the %s class enabled - some plugins which use SOAP "
+"may not work as expected."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:548
+msgid "DOMDocument"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:549
+#: fw/admin/views/html-admin-tab-support.php:559
+msgid ""
+"HTML/Multipart emails use DOMDocument to generate inline CSS in templates."
+msgstr ""
+"HTML/Multipart E-Mails verwenden DOMDocument um in Mail-Vorlagen (Templates) "
+"Inline-CSS zu erzeugen."
+
+#: fw/admin/views/html-admin-part-support-status.php:556
+#: fw/admin/views/html-admin-tab-support.php:565
+#, php-format
+msgid ""
+"Your server does not have the %s class enabled - HTML/Multipart emails, and "
+"also some extensions, will not work without DOMDocument."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:562
+msgid "GZip"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:563
+#: fw/admin/views/html-admin-tab-support.php:570
+msgid "GZip (gzopen) is used to open the GEOIP database from MaxMind."
+msgstr ""
+"GZip (gzopen) wird verwendet um die GEOIP-Datenbank von MaxMind zu öffnen."
+
+#: fw/admin/views/html-admin-part-support-status.php:570
+#: fw/admin/views/html-admin-tab-support.php:576
+#, php-format
+msgid ""
+"Your server does not support the %s function - this is required to use the "
+"GeoIP database from MaxMind."
+msgstr ""
+"Dein Server unterstützt die Funktion %s nicht. Diese Funktion wird benötigt, "
+"um die GeoIP-Datenbank von MaxMind verwenden zu können. Stattdessen wird ein "
+"API-Fallback für die Geolokalisierung verwendet."
+
+#: fw/admin/views/html-admin-part-support-status.php:576
+msgid "Multibyte string"
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:577
+#: fw/admin/views/html-admin-tab-support.php:581
+msgid ""
+"Multibyte String (mbstring) is used to convert character encoding, like for "
+"emails or converting characters to lowercase."
+msgstr ""
+"Multibyte-String (mbstring) wird verwendet, um die Zeichenkodierung zu "
+"konvertieren, wie zum Beispiel für E-Mails oder das Umwandeln von Groß- zu "
+"Kleinbuchstaben."
+
+#: fw/admin/views/html-admin-part-support-status.php:584
+#: fw/admin/views/html-admin-tab-support.php:587
+#, php-format
+msgid ""
+"Your server does not support the %s functions - this is required for better "
+"character encoding. Some fallbacks will be used instead for it."
+msgstr ""
+"Ihr Server unterstützt die Funktion %s nicht - diese wird jedoch für eine "
+"bessere Zeichenkodierung benötigt. Als Ersatz werden einige Fallbacks "
+"verwendet."
+
+#: fw/admin/views/html-admin-part-support-status.php:590
+#, fuzzy
+msgid "Remote post"
+msgstr "Remote Post"
+
+#: fw/admin/views/html-admin-part-support-status.php:591
+#, fuzzy
+msgid ""
+"Some services may use this method of communicating when sending back "
+"information."
+msgstr ""
+"PayPal verwendet diese Kommunikationsmethode, um Transaktionsinformationen "
+"zurückzusenden."
+
+#: fw/admin/views/html-admin-part-support-status.php:598
+#: fw/admin/views/html-admin-part-support-status.php:612
+#, fuzzy, php-format
+msgid "%s failed. Contact your hosting provider."
+msgstr "Die PHP-Version, die auf Deinem Webserver installiert ist."
+
+#: fw/admin/views/html-admin-part-support-status.php:604
+#, fuzzy
+msgid "Remote get"
+msgstr "Remote Get"
+
+#: fw/admin/views/html-admin-part-support-status.php:605
+#: fw/admin/views/html-admin-tab-support.php:617
+msgid ""
+"Molongui plugins may use this method of communication when checking for "
+"plugin updates."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:618
+#: fw/admin/views/html-admin-tab-support.php:650
+msgid "Default Timezone is UTC"
+msgstr "Standardzeitzone ist UTC"
+
+#: fw/admin/views/html-admin-part-support-status.php:619
+#: fw/admin/views/html-admin-tab-support.php:651
+msgid "The default timezone for your server."
+msgstr "Die Standard-Zeitzone für deine Server."
+
+#: fw/admin/views/html-admin-part-support-status.php:624
+#: fw/admin/views/html-admin-tab-support.php:655
+#, php-format
+msgid "Default timezone is %s - it should be UTC"
+msgstr "Standardzeitzone ist %s - es sollte UTC sein"
+
+#: fw/admin/views/html-admin-part-support-status.php:639
+#, fuzzy
+msgid "Client environment"
+msgstr "Server Umgebung"
+
+#: fw/admin/views/html-admin-part-support-status.php:644
+#: fw/admin/views/html-admin-tab-support.php:673
+msgid "Platform"
+msgstr "Plattform"
+
+#: fw/admin/views/html-admin-part-support-status.php:645
+#: fw/admin/views/html-admin-tab-support.php:674
+msgid "Information of the platform being used."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:649
+#: fw/admin/views/html-admin-tab-support.php:678
+msgid "Browser"
+msgstr "Browser"
+
+#: fw/admin/views/html-admin-part-support-status.php:650
+#: fw/admin/views/html-admin-tab-support.php:679
+msgid "Information of the browser being used."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:654
+#: fw/admin/views/html-admin-tab-support.php:683
+msgid "User Agent"
+msgstr "User Agent"
+
+#: fw/admin/views/html-admin-part-support-status.php:655
+#: fw/admin/views/html-admin-tab-support.php:684
+msgid "Information of the user agent being used."
+msgstr ""
+
+#: fw/admin/views/html-admin-part-support-status.php:659
+#: fw/admin/views/html-admin-tab-support.php:688
+msgid "IP address"
+msgstr "IP-Adresse"
+
+#: fw/admin/views/html-admin-part-support-status.php:660
+#: fw/admin/views/html-admin-tab-support.php:689
+msgid "Your IP address."
+msgstr "Ihre IP-Adresse."
+
+#: fw/admin/views/html-admin-part-upsells.php:34
+msgid "Installed"
+msgstr "Installiert"
+
+#: fw/admin/views/html-admin-tab-support.php:24
+msgid "Need help?"
+msgstr "Brauchst du Hilfe?"
+
+#: fw/admin/views/html-admin-tab-support.php:32
+msgid "Read the docs"
+msgstr "Dokumentation lesen"
+
+#: fw/admin/views/html-admin-tab-support.php:39
+msgid "Get report"
+msgstr "Aktualisieren"
+
+#: fw/admin/views/html-admin-tab-support.php:40
+msgid ""
+"Download and attach this information in your ticket when contacting support."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:46
+msgid "Send report"
+msgstr "Bericht senden"
+
+#: fw/admin/views/html-admin-tab-support.php:47
+msgid "Submit report only if instructed so by the Molongui Support Team."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:53
+msgid "Help request"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:60
+msgid "Upgrade!"
+msgstr "Erweiterung"
+
+#: fw/admin/views/html-admin-tab-support.php:61
+msgid "Upgrade to unlock all premium features."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:68
+msgid ""
+"Please download and attach this information in your ticket when contacting "
+"support:"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:76
+msgid ""
+"This page displays information about your WordPress configuration and Server "
+"information that may be useful for debugging."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:82
+msgid "Plugin information"
+msgstr "Plugin-Informationen"
+
+#: fw/admin/views/html-admin-tab-support.php:88
+msgid "The name of this plugin."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:93
+msgid "The license of this plugin."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:110
+msgid "The Molongui Framework this plugin is using."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:149
+msgid "WordPress Environment"
+msgstr "WordPress Umgebung"
+
+#: fw/admin/views/html-admin-tab-support.php:155
+msgid "The URL of your site's homepage."
+msgstr "Die URL der Homepage Ihrer WebSite."
+
+#: fw/admin/views/html-admin-tab-support.php:186
+#, php-format
+msgid "%s - We recommend setting memory to at least 64MB. See: %s"
+msgstr ""
+"%s - wir empfehlen den Speicher auf mindestens 64MB einzustellen. Siehe: %s"
+
+#: fw/admin/views/html-admin-tab-support.php:334
+#: fw/admin/views/html-admin-tab-support.php:361
+msgid "Visit plugin homepage"
+msgstr "Besuche die Erweiterungs Webseite"
+
+#: fw/admin/views/html-admin-tab-support.php:368
+msgid "Visit author homepage"
+msgstr "Internetseite des Autors besuchen"
+
+#: fw/admin/views/html-admin-tab-support.php:394
+msgid "Server Environment"
+msgstr "Server Umgebung"
+
+#: fw/admin/views/html-admin-tab-support.php:404
+msgid "Database Info"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:405
+msgid "Information about the database installed on your hosting server."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:420
+#, php-format
+msgid "%s - We recommend a minimum PHP version of 5.6. See: %s"
+msgstr "%s - Wir empfehlen mindestens PHP-Version 5.6. Siehe: %s"
+
+#: fw/admin/views/html-admin-tab-support.php:429
+msgid "Couldn't determine PHP version because phpversion() doesn't exist."
+msgstr ""
+"Die verwendete PHP-Version konnte nicht festgestellt werden, weil "
+"phpversion() nicht existiert."
+
+#: fw/admin/views/html-admin-tab-support.php:436
+msgid "PHP Safe Mode"
+msgstr "PHP Safe Mode"
+
+#: fw/admin/views/html-admin-tab-support.php:437
+msgid "Whether PHP's safe mode is enabled."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:441
+msgid "PHP Memory Limit"
+msgstr "PHP Memory Limit"
+
+#: fw/admin/views/html-admin-tab-support.php:446
+msgid "PHP Post Max Size"
+msgstr "PHP Post Max Size"
+
+#: fw/admin/views/html-admin-tab-support.php:451
+msgid "PHP Upload Max Size"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:456
+msgid "PHP Time Limit"
+msgstr "PHP Time Limit"
+
+#: fw/admin/views/html-admin-tab-support.php:461
+msgid "PHP Max Input Vars"
+msgstr "PHP Max Input Vars"
+
+#: fw/admin/views/html-admin-tab-support.php:466
+msgid "PHP Arg Separator"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:471
+msgid "PHP Display Errors"
+msgstr "PHP Anzeige-Fehler"
+
+#: fw/admin/views/html-admin-tab-support.php:476
+msgid "PHP Allow URL File Open"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:481
+msgid "PHP Session"
+msgstr "PHP Session"
+
+#: fw/admin/views/html-admin-tab-support.php:486
+msgid "PHP Session Name"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:491
+msgid "PHP Cookie Path"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:496
+msgid "PHP Save Path"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:501
+msgid "PHP Use Cookies"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:506
+msgid "PHP Use Only Cookies"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:512
+msgid "SUHOSIN Installed"
+msgstr "SUHOSIN installiert"
+
+#: fw/admin/views/html-admin-tab-support.php:517
+msgid "cURL Version"
+msgstr "cURL Version"
+
+#: fw/admin/views/html-admin-tab-support.php:526
+msgid "N/A"
+msgstr "kA"
+
+#: fw/admin/views/html-admin-tab-support.php:543
+msgid ""
+"Your server does not have fsockopen or cURL enabled - some plugins which "
+"communicate with other servers will not work. Contact your hosting provider."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:591
+msgid "Remote Post"
+msgstr "Remote Post"
+
+#: fw/admin/views/html-admin-tab-support.php:592
+msgid ""
+"PayPal uses this method of communicating when sending back transaction "
+"information."
+msgstr ""
+"PayPal verwendet diese Kommunikationsmethode, um Transaktionsinformationen "
+"zurückzusenden."
+
+#: fw/admin/views/html-admin-tab-support.php:606
+msgid ""
+"wp_remote_post() failed. PayPal IPN won't work with your server. Contact "
+"your hosting provider."
+msgstr ""
+"wp_remote_post() schlug fehl. PayPal IPN wird nicht mit ihrem Server "
+"funktionieren. Kontaktieren Sie ihren Webhoster."
+
+#: fw/admin/views/html-admin-tab-support.php:608
+#: fw/admin/views/html-admin-tab-support.php:626
+#, php-format
+msgid "Error: %s"
+msgstr "Fehler: %s"
+
+#: fw/admin/views/html-admin-tab-support.php:610
+#: fw/admin/views/html-admin-tab-support.php:628
+#, php-format
+msgid "Status code: %s"
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:616
+msgid "Remote Get"
+msgstr "Remote Get"
+
+#: fw/admin/views/html-admin-tab-support.php:624
+msgid ""
+"wp_remote_get() failed. The Molongui plugin updater won't work with your "
+"server. Contact your hosting provider."
+msgstr ""
+
+#: fw/admin/views/html-admin-tab-support.php:668
+msgid "Client Environment"
+msgstr ""
+
+#: fw/config/settings.php:320
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: fw/config/settings.php:328
+msgid "Post types"
+msgstr ""
+
+#: fw/config/settings.php:337
+#, fuzzy
+msgid "Enable plugin on..."
+msgstr "Installierte Plugins"
+
+#: fw/config/settings.php:339
+msgid "Choose which post types extend plugin functionality to."
+msgstr ""
+
+#: fw/config/settings.php:351
+msgid "Spam protection"
+msgstr ""
+
+#: fw/config/settings.php:360
+msgid "Encode mail addresses"
+msgstr ""
+
+#: fw/config/settings.php:362
+msgid ""
+"Whether to encode e-mail addresses on the source code so SPAM bots can not "
+"retrieve them."
+msgstr ""
+
+#: fw/config/settings.php:371 fw/config/settings.php:397
+#: fw/config/settings.php:434 fw/config/settings.php:471
+#: fw/config/settings.php:497 fw/config/settings.php:584
+msgid "Yes"
+msgstr "Ja"
+
+#: fw/config/settings.php:377 fw/config/settings.php:403
+#: fw/config/settings.php:440 fw/config/settings.php:477
+#: fw/config/settings.php:503 fw/config/settings.php:590
+msgid "No"
+msgstr "Nein"
+
+#: fw/config/settings.php:386
+msgid "Encode phone numbers"
+msgstr ""
+
+#: fw/config/settings.php:388
+msgid ""
+"Whether to encode phone numbers on the source code so SPAM bots can not "
+"retrieve them."
+msgstr ""
+
+#: fw/config/settings.php:414
+msgid "Shortcodes"
+msgstr "Shortcodes"
+
+#: fw/config/settings.php:423
+msgid "Enable in text widgets"
+msgstr ""
+
+#: fw/config/settings.php:425
+msgid "Whether to enable the use of shortcodes in text widgets."
+msgstr ""
+
+#: fw/config/settings.php:451
+msgid "Uninstalling"
+msgstr "Deinstallationsprogramm"
+
+#: fw/config/settings.php:460
+msgid "Keep configuration?"
+msgstr "Beibehalten Konfiguration?"
+
+#: fw/config/settings.php:462
+msgid "Whether to keep plugin configuration settings upon plugin uninstalling."
+msgstr ""
+
+#: fw/config/settings.php:486
+msgid "Keep data?"
+msgstr "Halten Daten?"
+
+#: fw/config/settings.php:488
+msgid "Whether to keep plugin related data upon plugin uninstalling."
+msgstr ""
+
+#: fw/config/settings.php:524
+msgid "Credentials"
+msgstr "Referenzen"
+
+#: fw/config/settings.php:525
+#, php-format
+msgid ""
+"Insert your license credentials to make the plugin work, you will find them "
+"by logging in %sto your account%s."
+msgstr ""
+
+#: fw/config/settings.php:533
+msgid "License Key"
+msgstr "Lizenzschlüssel"
+
+#: fw/config/settings.php:535
+msgid "The key we provided upon premium plugin purchase."
+msgstr ""
+
+#: fw/config/settings.php:548
+msgid "License email"
+msgstr "Lizenz Email"
+
+#: fw/config/settings.php:550
+msgid "The email you used to purchase the premium license."
+msgstr ""
+
+#: fw/config/settings.php:565
+msgid "Deactivation"
+msgstr "Deaktivierung"
+
+#: fw/config/settings.php:566
+#, php-format
+msgid ""
+"Choose whether to deactivate the licence key upon plugin deactivation. "
+"Deactivating the license releases it so it can be used on another website "
+"but also removes it from this one, so should you reactivate the plugin, you "
+"will need to set again your credentials. %sRegardless of the value of this "
+"setting, the license will be released when uninstalling the plugin."
+msgstr ""
+
+#: fw/config/settings.php:574
+msgid "Keep on deactivation"
+msgstr ""
+
+#: fw/config/settings.php:576
+msgid "Whether to keep license credentials upon plugin deactivation."
+msgstr ""
+
+#: fw/config/settings.php:599
+msgid "Deactivate license"
+msgstr "Lizenz deaktivieren"
+
+#: fw/config/settings.php:601
+msgid ""
+"Deactivates your premium license so you can use it on another installation."
+msgstr ""
+
+#: fw/config/settings.php:606
+msgid "Deactivate now"
+msgstr "Jetzt deaktivieren"
+
+#: fw/config/settings.php:618 fw/includes/fw-class-settings.php:121
+msgid "Support"
+msgstr "Support"
+
+#: fw/config/settings.php:637
+msgid "More"
+msgstr "Mehr"
+
+#: fw/customizer/controls/classes/color.php:143
+#: fw/customizer/controls/classes/color.php:158
+#: fw/customizer/controls/classes/number.php:51
+#: fw/customizer/controls/classes/range.php:124
+#: fw/customizer/controls/classes/select.php:115
+#: fw/customizer/controls/classes/text-radio.php:118
+#: fw/customizer/controls/classes/toggle.php:134
+#: fw/customizer/controls/classes/toggle.php:178
+msgid "Premium setting. Only preview available."
+msgstr ""
+
+#: fw/customizer/controls/classes/image-checkbox.php:156
+#: fw/customizer/controls/classes/image-radio.php:145
+msgid "Premium option. Only preview available."
+msgstr ""
+
+#: fw/customizer/fw-class-customizer.php:262
+#, fuzzy
+msgid "Premium features"
+msgstr "Premium"
+
+#: fw/customizer/fw-class-customizer.php:262
+msgid "Take a look at all the available premium features."
+msgstr ""
+
+#: fw/includes/fw-class-compatibility.php:154
+#, php-format
+msgid ""
+"There can be only one instance of %s plugin installed. Please, uninstall all "
+"other instances but the one you want to activate."
+msgstr ""
+
+#: fw/includes/fw-class-compatibility.php:164
+#: fw/includes/fw-class-dependencies.php:155
+#: fw/includes/fw-class-dependencies.php:218
+#, fuzzy
+msgid "Manage plugins"
+msgstr "Molongui Plugins"
+
+#: fw/includes/fw-class-dependencies.php:142
+#: fw/includes/fw-class-dependencies.php:205
+#, fuzzy
+msgid "Plugin disabled"
+msgstr "Plugins"
+
+#: fw/includes/fw-class-dependencies.php:143
+#, php-format
+msgid ""
+"%s%s%s has been disabled because %s %s is not active. Please, install/"
+"activate %s to enable %s."
+msgstr ""
+
+#: fw/includes/fw-class-dependencies.php:206
+#, php-format
+msgid ""
+"%s%s%s has been disabled because the minimum required version of the %s %s "
+"is %s. Please, update %s to enable %s."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:273
+msgid "Saving"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:274
+msgid ""
+"You are about to leave this page without saving. All changes will be lost."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:275
+msgid ""
+"WARNING: You are about to delete all your settings! Please confirm this "
+"action."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:277
+msgid ""
+"WARNING: You are about to restore your backup. This will overwrite all your "
+"settings! Please confirm this action."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:278
+msgid ""
+"WARNING: You are about to delete your backup. All unsaved options will be "
+"lost. We recommend that you save your options before deleting a backup. "
+"Please confirm this action."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:279
+msgid ""
+"WARNING: You are about to create a backup. All unsaved options will be lost. "
+"We recommend that you save your options before deleting a backup. Please "
+"confirm this action."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:280
+#: fw/includes/fw-class-settings-2.php:1366
+msgid "Delete"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:516
+msgid "There are no settings defined for this tab."
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:554
+msgid "Save Options"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:556
+msgid "Quick Save"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:557
+msgid "Saved"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:558
+#, fuzzy
+msgid "Error"
+msgstr "Fehler: %s"
+
+#: fw/includes/fw-class-settings-2.php:652
+msgid "Insert "
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:653
+msgid "Choose as "
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1061
+#: fw/includes/fw-class-settings-2.php:1082
+msgid "Upload"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1062
+#: fw/includes/fw-class-settings-2.php:1083
+msgid "Clear"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1224
+#: fw/includes/fw-class-settings-2.php:1288
+msgid "Light"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1225
+#: fw/includes/fw-class-settings-2.php:1289
+msgid "Light Italic"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1226
+#: fw/includes/fw-class-settings-2.php:1233
+#: fw/includes/fw-class-settings-2.php:1290
+#: fw/includes/fw-class-settings-2.php:1297
+msgid "Normal"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1227
+#: fw/includes/fw-class-settings-2.php:1291
+msgid "Bold"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1228
+#: fw/includes/fw-class-settings-2.php:1292
+msgid "Italic"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1229
+#: fw/includes/fw-class-settings-2.php:1293
+msgid "Bold Italic"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1234
+#: fw/includes/fw-class-settings-2.php:1298
+msgid "Capitalize"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1235
+#: fw/includes/fw-class-settings-2.php:1299
+msgid "Uppercase"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1236
+#: fw/includes/fw-class-settings-2.php:1300
+msgid "Small Caps"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1361
+msgid "Back-up available"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1362
+msgid ""
+"Your options have been backed up. You can always restore your options by "
+"clicking the <strong>Restore</strong> button below:"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1366
+msgid "Restore"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1369
+msgid ""
+"You currently have not backups. You can create a backup by clicking the "
+"<strong>Backup Now</strong> link below:"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1370
+msgid "Backup Now"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1390
+msgid "Reset Options"
+msgstr ""
+
+#: fw/includes/fw-class-settings-2.php:1434
+msgid "Import Options"
+msgstr ""
+
+#: fw/includes/fw-class-settings.php:112
+msgid "Molongui"
+msgstr "Molongui"
+
+#: fw/includes/fw-class-settings.php:118
+msgid "About"
+msgstr "Über"
+
+#: fw/includes/fw-class-sysinfo.php:333
+#, php-format
+msgid "MOLONGUI - Support report for %s"
+msgstr ""
+
+#: fw/includes/fw-helper-functions.php:532
+msgid "Too early to run molongui_debug() function. Sorry..."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:268
+msgid "License not activated"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:269
+#, php-format
+msgid ""
+"No license for %s has been found, so the plugin won't work! %sClick here%s "
+"to activate your copy of the plugin."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:281
+#, fuzzy
+msgid "Activate plugin"
+msgstr "Lizenz deaktivieren"
+
+#: fw/premium/update/includes/fw-class-license.php:339
+msgid "Your license expires soon."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:340
+#, php-format
+msgid ""
+"%sRenew your license today%s to keep getting feature updates and premium "
+"support for %s plugin."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:350
+#: fw/premium/update/includes/fw-class-license.php:401
+#, fuzzy
+msgid "Renew license"
+msgstr "Lizenz deaktivieren"
+
+#: fw/premium/update/includes/fw-class-license.php:390
+msgid "Your license has expired!"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:391
+#, php-format
+msgid ""
+"%sRenew your license today%s to get feature updates and premium support for "
+"%s plugin."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:478
+msgid "Plugin activated. "
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:488
+msgid "Connection failed to the License Key API server. Try again later."
+msgstr ""
+"Die Verbindung zum Lizenzschlüssel-API-Server ist fehlgeschlagen. Versuche "
+"es später noch mal."
+
+#: fw/premium/update/includes/fw-class-license.php:562
+msgid ""
+"The license could not be deactivated. Use the License Deactivation button to "
+"manually deactivate the license before activating a new license."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:616
+#, php-format
+msgid "Your license has been deactivated. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:625
+msgid "UNDEFINED ERROR. Please, try again or contact Molongui"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:631
+#, php-format
+msgid "EMAIL ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:634
+#, php-format
+msgid "KEY ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:637
+#, php-format
+msgid "PURCHASE INCOMPLETE ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:640
+#, php-format
+msgid "EXCEEDED ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:643
+#, php-format
+msgid "KEY NOT ACTIVATED ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:646
+#, php-format
+msgid "INVALID KEY ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:649
+#, php-format
+msgid "NOT ACTIVE ERROR: %s. %s"
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-license.php:677
+msgid "There is no active license to deactivate..."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-update.php:541
+msgid ""
+"The plugin has been updated, but might have not been reactivated. Please "
+"reactivate it manually if needed."
+msgstr ""
+
+#: fw/premium/update/includes/fw-class-update.php:542
+msgid "Plugin reactivated successfully."
+msgstr "Plugin wurde erfolgreich reaktiviert"
+
+#: fw/premium/update/includes/fw-class-update.php:575
+#: fw/premium/update/includes/fw-class-update.php:628
+#, php-format
+msgid ""
+"A license key for %s could not be found. Maybe you forgot to enter a license "
+"key when setting up %s, or the key was deactivated in your account. You can "
+"reactivate or purchase a license key from your account <a href=\"%s\" target="
+"\"_blank\">dashboard</a>."
+msgstr ""
+"Ein Lizenzschlüssel für %s konnte nicht gefunden werden. Vielleicht hast du "
+"vergessen, beim Einrichten von %s einen Lizenzschlüssel einzugeben oder der "
+"Schlüssel in deinem Konto wurde deaktiviert. Einen Lizenzschlüssel kannst du "
+"über dein Konto-<a href=„%s“ target=„_blank“>Dashboard</a> reaktivieren oder "
+"kaufen."
+
+#: fw/premium/update/includes/fw-class-update.php:578
+#: fw/premium/update/includes/fw-class-update.php:618
+#, php-format
+msgid ""
+"A subscription for %s could not be found. You can purchase a subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Das Abonnement für %s konnte nicht gefunden werden. Du kannst ein Abonnement "
+"von deinem Konto aus kaufen. <a href=\"%s\" target=\"_blank\">dashboard</a>."
+
+#: fw/premium/update/includes/fw-class-update.php:583
+#, php-format
+msgid ""
+"The license key for %s has expired. You can reactivate or purchase a license "
+"key from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Der Lizenzschlüssel für %s ist abgelaufen. Sie können ihn reaktivieren oder "
+"einen neuen Lizenzschlüssel über Ihr Konto <a href=\"%s\" target=\"_blank\"> "
+"Dashboard</a> kaufen."
+
+#: fw/premium/update/includes/fw-class-update.php:588
+#, php-format
+msgid ""
+"The subscription for %s is on-hold. You can reactivate the subscription from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Das Abonnement für %s ist ausgesetzt. Sie können es über Ihr Account "
+"reaktivieren. <a href=\"%s\" target=\"_blank\">dashboard</a>."
+
+#: fw/premium/update/includes/fw-class-update.php:593
+#, php-format
+msgid ""
+"The subscription for %s has been cancelled. You can renew the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>. A new "
+"license key will be emailed to you after your order has been completed."
+msgstr ""
+"Das Abo für %s wurde beendet. Du kannst es von deinem <a href=\"%s\" target="
+"\"_blank\">Account-Dashboard</a> aus erneuern. Ein neuer Lizenzschlüssel "
+"wird an deine E-Mail-Adresse geschickt, sobald die Bestellung abgeschlossen "
+"ist."
+
+#: fw/premium/update/includes/fw-class-update.php:598
+#, php-format
+msgid ""
+"The subscription for %s has expired. You can reactivate the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Das Abo für %s ist ausgelaufen. Du kannst es über dein <a href=\"%s\" target="
+"\"_blank\">Account-Dashboard</a> erneuern."
+
+#: fw/premium/update/includes/fw-class-update.php:603
+#, php-format
+msgid ""
+"The subscription for %s has been suspended. You can reactivate the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+"The subscription for %s has been suspended. You can reactivate the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+
+#: fw/premium/update/includes/fw-class-update.php:608
+#, php-format
+msgid ""
+"The subscription for %s is still pending. You can check on the status of the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+"Das Abonnement für %s ist noch schwebend. Du kannst den Status des "
+"Abonnements von deines Accounts überprüfen <a href=\"%s\" target=\"_blank"
+"\">dashboard</a>."
+
+#: fw/premium/update/includes/fw-class-update.php:613
+#, php-format
+msgid ""
+"The subscription for %s has been placed in the trash and will be deleted "
+"soon. You can purchase a new subscription from your account <a href=\"%s\" "
+"target=\"_blank\">dashboard</a>."
+msgstr ""
+"Das Abonnement für %s wurde in den Papierkorb verschoben und wird gelöscht. "
+"Sie können ein neues Abonnement über Ihr Account erwerben. <a href=\"%s\" "
+"target=\"_blank\">dashboard</a>."
+
+#: fw/premium/update/includes/fw-class-update.php:623
+#, php-format
+msgid ""
+"%s has not been activated. Go to the settings page and enter the license key "
+"and license email to activate %s."
+msgstr ""
+"%s has not been activated. Go to the settings page and enter the license key "
+"and license email to activate %s."
+
+#: fw/premium/update/includes/fw-class-update.php:633
+#, php-format
+msgid ""
+"Download permission for %s has been revoked possibly due to a license key or "
+"subscription expiring. You can reactivate or purchase a license key from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Herunterladen Berechtigung für %s wurde möglicherweise aufgrund eines "
+"Lizenzschlüssels oder Bezugs Erlöschen widerrufen wurde. Sie können zu "
+"reaktivieren oder Kauf einen Lizenzschlüssel von Ihrem <a href=\"%s\" target="
+"\"_blank\">Konto-Dashboard.</a> ."
+
+#: fw/premium/update/includes/fw-class-update.php:638
+#, php-format
+msgid ""
+"You changed the subscription for %s, so you will need to enter your new API "
+"License Key in the settings page. The License Key should have arrived in "
+"your email inbox, if not you can get it by logging into your account <a href="
+"\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+"Sie veränderten das Abonnement für %s und müssen den neuen API-"
+"Lizenzschlüssel auf der Lizenz-Seite eingeben. Der Lizenzschlüssel sollte in "
+"Ihrem E-Mail-Posteingang angekommen sein, falls nicht schauen Sie in Ihrem "
+"Konto im <a href=\"%s\" target=\"_blank\">dashboard</a> ."
+
+#: fw/premium/update/includes/fw-class-update.php:660
+#, php-format
+msgid ""
+"An error occurred with your %s license. Please, open a support ticket %shere"
+"%s so we can help you."
+msgstr ""
+
+#~ msgid "Preview"
+#~ msgstr "Vorschau"
+
+#~ msgid "Note"
+#~ msgstr "Hinweis"
+
+#~ msgid "Close"
+#~ msgstr "Schließen"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Keep configuration"
+#~ msgstr "Konfiguration beibehalten"
+
+#~ msgid "Keep data"
+#~ msgstr "Daten halten"
+
+#~ msgid "Theme"
+#~ msgstr "Theme"
