@@ -1,30 +1,43 @@
-version: '3.1'
+version: '3.7'
 services:
-  db:
+  mysql:
     image: mysql:latest
     restart: always
+    container_name: mysql
     environment:
-      MYSQL_DATABASE: wp
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: pwroot
+      MYSQL_DATABASE: /run/secrets/mysql_db_secret
+      MYSQL_USER: /run/secrets/mysql_user_secret
+      MYSQL_PASSWORD: /run/secrets/mysql_pw_secret
+      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_pw_secret
     volumes:
-      - db:/var/lib/mysql
+      - mysql_db:/var/lib/mysql
+    secrets:
+      - mysql_db_secret
+      - mysql_user_secret
+      - mysql_pw_secret
+      - mysql_root_pw_secret
+    
 
   wordpress:
     depends_on:
-      - db
+      - mysql
     image: wordpress:fpm-alpine
     container_name: wordpress
     restart: always
     ports:
       - '9000:9000'
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: user
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: /run/secrets/mysql_user_secret
+      WORDPRESS_DB_PASSWORD: /run/secrets/mysql_pw_secret
+      WORDPRESS_DB_NAME: /run/secrets/mysql_db_secret
       WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - ./plugins:/var/www/html/wp-content/plugins
+    secrets:
+      - mysql_db_secret
+      - mysql_pw_secret
+      - mysql_user_secret
 
   nginx:
     image: nginx:latest
@@ -37,7 +50,14 @@ services:
     links:
       - wordpress
 volumes:
-  db:
-
- 
+  mysql_db:
+secrets:
+  mysql_db_secret:
+    file: db.txt
+  mysql_pw_secret:
+    file: pw.txt
+  mysql_root_pw_secret:
+    file: root.txt
+  mysql_user_secret:
+    file: user.txt
  
