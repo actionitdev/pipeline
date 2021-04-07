@@ -4,6 +4,8 @@ services:
     image: mysql:latest
     restart: always
     container_name: mysql
+    ports:
+      - '3306:3306'
     environment:
       MYSQL_DATABASE: /run/secrets/mysql_db_secret
       MYSQL_USER: /run/secrets/mysql_user_secret
@@ -16,12 +18,13 @@ services:
       - mysql_user_secret
       - mysql_pw_secret
       - mysql_root_pw_secret
-    
 
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:fpm-alpine
+    image: wordpress:v1
+    build:
+      context: ./
     container_name: wordpress
     restart: always
     ports:
@@ -32,6 +35,7 @@ services:
       WORDPRESS_DB_PASSWORD: /run/secrets/mysql_pw_secret
       WORDPRESS_DB_NAME: /run/secrets/mysql_db_secret
       WORDPRESS_TABLE_PREFIX: wp_
+      WAIT_HOSTS: mysql:3306
     volumes:
       - ./plugins:/var/www/html/wp-content/plugins
       - wp:/var/www/html
@@ -44,6 +48,8 @@ services:
     image: nginx:latest
     container_name: nginx
     restart: always
+    depends_on:
+      - wordpress
     ports:
       - "8080:80"
     volumes:
@@ -51,6 +57,7 @@ services:
       - wp:/var/www/html
     links:
       - wordpress
+
 volumes:
   mysql_db:
   wp:
