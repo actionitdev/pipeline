@@ -11,8 +11,8 @@ Once the code changes were pushed to the `master` branch, the CI services will b
  1) Circle CI
 
 # Important Notes:
-Make changes in the `docker-compose.yml` file as per the product requirement changes.
-Continuous intergartion pipeline work flow can be managed by editing the `config.yml` file.
+Make modifications in the `docker-compose.yml` file as per the product requirement changes.
+Continuous intergartion pipeline workflow can be managed by editing the `config.yml` file.
 
 
 
