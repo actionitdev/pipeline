@@ -3,13 +3,35 @@ services:
   db:
     image: mysql:latest
     restart: always
+    container_name: mysql
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: pwroot
+    ports:
+        - '3306:3306'
     volumes:
       - db:/var/lib/mysql
+      - ./db/dbConfig:/etc/mysql/conf.d
+  
+  backupdb:
+    image: fradelg/mysql-cron-backup
+    depends_on:
+      - db
+    restart: always
+    volumes:
+      - db:/backup
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASS=pwroot
+      - MYSQL_DATABASE=wp
+      - CRON_TIME=0 0 * * *
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - TIMEOUT=10s
+      - INIT_BACKUP=1
+      - GZIP_LEVEL=9
 
   wordpress:
     depends_on:
@@ -38,6 +60,3 @@ services:
       - wordpress
 volumes:
   db:
-
- 
- 
