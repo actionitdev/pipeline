@@ -11,3 +11,4 @@ jobs:
           name: "test docker-compose"
           command: |
             docker-compose up -d
+            curl localhost:8080
