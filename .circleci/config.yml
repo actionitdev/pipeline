@@ -1,10 +1,9 @@
 version: 2.0
 jobs:
-  only:
-    - master
-  except:
-    - branches
   build:
+    branches:
+      only:
+        - master
     machine: true
     steps:
       - checkout
@@ -13,3 +12,5 @@ jobs:
           command: |
             docker-compose up -d
             curl localhost:8080
+          
+          
