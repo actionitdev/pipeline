@@ -1,5 +1,4 @@
 version: 2.0
-#Test circleCI auto buid
 jobs:
   build:
     machine: true
