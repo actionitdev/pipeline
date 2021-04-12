@@ -7,7 +7,7 @@ This pipeline implements combined practices of continuous integration continuous
 # Workflow: 
 Once the code changes were pushed to the `master` branch, the CI services will be triggered which builds the changes and deploy to our staging server. The system runs the unit test cases, integration test cases, and also performance tools. This will also alert the team about the status of the test cases and the build results.
 
-# `Build starts only when changes are pushed to a particular branch. Now "master" is provided as a default branch.`
+###### `Build starts only when changes are pushed to a particular branch. Now "master" is provided as a default branch.`
 
 # Software/Tools used:
  1) Circle CI
