@@ -17,6 +17,7 @@ services:
   
   backupdb:
     image: fradelg/mysql-cron-backup
+    container_name: backup
     depends_on:
       - mysql
     restart: always
