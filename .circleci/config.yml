@@ -9,4 +9,4 @@ jobs:
           name: "test docker-compose"
           command: |
             docker-compose up -d
-            docker container exec backup ls /backup/ -name "*.wp.sql.gz"
+            curl localhost:8080

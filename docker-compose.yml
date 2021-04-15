@@ -12,8 +12,7 @@ services:
       MYSQL_PASSWORD: ${mysql_pw}
       MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
     volumes:
-      - mysql_db:/var/lib/mysql
-      - ./mysql_db/dbConfig:/etc/mysql/conf.d
+      - ./.init:/docker-entrypoint-initdb.d
   
   backupdb:
     image: fradelg/mysql-cron-backup
@@ -53,7 +52,7 @@ services:
       WORDPRESS_TABLE_PREFIX: wp_
       # WAIT_HOSTS: mysql:3306
     volumes:
-      - wp:/var/www/html
+      - ./wp:/var/www/html
 
   nginx:
     image: nginx:alpine
@@ -67,10 +66,6 @@ services:
       - "8080:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - wp:/var/www/html
+      - ./wp:/var/www/html
     links:
       - wordpress
-
-volumes:
-  mysql_db:
-  wp:
