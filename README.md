@@ -17,13 +17,9 @@ Once the code changes were pushed to the `master` branch, the CI services will b
 Make modifications in the `docker-compose.yml` file as per the product requirement changes.
 Continuous intergartion pipeline workflow can be managed by editing the `config.yml` file.
 
-# Essential Secret Files:
-The following text files are necessary for wordpress and mysql containers to run:
-1. `user.txt` refers to the username of mysql service
-2. `pw.txt` refers to the user password of mysql service
-3. `root.txt` refers to the root password of mysql service
-4. `db.txt` refers to the database name for wordpress
-
-
-
- 
+# Essential Environment Variables for Services to run
+The following environment variables should be specified in `.env` file in the root directory:
+1. `mysql_user` refers to the username of mysql service
+2. `mysql_pw` refers to the user password of mysql service
+3. `mysql_root_pw` refers to the root password of mysql service
+4. `mysql_db` refers to the database name used by wordpress service
