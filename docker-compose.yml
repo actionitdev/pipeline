@@ -7,67 +7,68 @@ services:
     ports:
       - '3306:3306'
     environment:
-      MYSQL_DATABASE: /run/secrets/mysql_db_secret
-      MYSQL_USER: /run/secrets/mysql_user_secret
-      MYSQL_PASSWORD: /run/secrets/mysql_pw_secret
-      MYSQL_ROOT_PASSWORD: /run/secrets/mysql_root_pw_secret
+      MYSQL_DATABASE: ${mysql_db}
+      MYSQL_USER: ${mysql_user}
+      MYSQL_PASSWORD: ${mysql_pw}
+      MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
     volumes:
+      - ./.init:/docker-entrypoint-initdb.d
       - mysql_db:/var/lib/mysql
-    secrets:
-      - mysql_db_secret
-      - mysql_user_secret
-      - mysql_pw_secret
-      - mysql_root_pw_secret
+  
+  backupdb:
+    image: fradelg/mysql-cron-backup
+    container_name: backup
+    depends_on:
+      - mysql
+    restart: always
+    volumes:
+      - mysql_db:/backup
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASS=${mysql_root_pw}
+      - MYSQL_DATABASE=${mysql_db}
+      - CRON_TIME=0 0 * * *
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - TIMEOUT=10s
+      - INIT_BACKUP=1
+      - GZIP_LEVEL=9
+    
 
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:v1
-    build:
-      context: ./
+    image: wordpress:fpm-alpine
+    # build:
+    #   context: ./
     container_name: wordpress
     restart: always
     ports:
       - '9000:9000'
     environment:
       WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: /run/secrets/mysql_user_secret
-      WORDPRESS_DB_PASSWORD: /run/secrets/mysql_pw_secret
-      WORDPRESS_DB_NAME: /run/secrets/mysql_db_secret
+      WORDPRESS_DB_USER: ${mysql_user}
+      WORDPRESS_DB_PASSWORD: ${mysql_pw}
+      WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
-      WAIT_HOSTS: mysql:3306
+      # WAIT_HOSTS: mysql:3306
     volumes:
-      - ./plugins:/var/www/html/wp-content/plugins
-      - wp:/var/www/html
-    secrets:
-      - mysql_db_secret
-      - mysql_pw_secret
-      - mysql_user_secret
+      - ./wp:/var/www/html
 
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: nginx
     restart: always
     depends_on:
       - wordpress
+    environment: 
+      NGINX_ENTRYPOINT_QUIET_LOGS: 1
     ports:
       - "8080:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - wp:/var/www/html
+      - ./wp:/var/www/html
     links:
       - wordpress
-
 volumes:
   mysql_db:
-  wp:
-secrets:
-  mysql_db_secret:
-    file: db.txt
-  mysql_pw_secret:
-    file: pw.txt
-  mysql_root_pw_secret:
-    file: root.txt
-  mysql_user_secret:
-    file: user.txt
- 
