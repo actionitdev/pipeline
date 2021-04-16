@@ -13,6 +13,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
     volumes:
       - ./.init:/docker-entrypoint-initdb.d
+      - mysql_db:/var/lib/mysql
   
   backupdb:
     image: fradelg/mysql-cron-backup
@@ -69,3 +70,5 @@ services:
       - ./wp:/var/www/html
     links:
       - wordpress
+volumes:
+  mysql_db:
