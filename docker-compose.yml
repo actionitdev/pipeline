@@ -6,6 +6,8 @@ services:
     container_name: mysql
     ports:
       - '3306:3306'
+    security_opt:
+      - seccomp:unconfined
     environment:
       MYSQL_DATABASE: ${mysql_db}
       MYSQL_USER: ${mysql_user}
