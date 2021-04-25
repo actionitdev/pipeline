@@ -30,7 +30,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=${mysql_root_pw}
       - MYSQL_HOST=mysql
-      - SCHEDULE="@daily"
+      #- SCHEDULE="@daily"
     
 
   wordpress:
@@ -68,3 +68,5 @@ services:
       - ./wp:/var/www/html
     links:
       - wordpress
+volumes:
+  mysql_db:

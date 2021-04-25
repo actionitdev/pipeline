@@ -52,8 +52,8 @@ copy_s3 () {
 
   echo "Uploading ${DEST_FILE} on S3..."
 
-  cat $SRC_FILE | aws $AWS_ARGS s3 cp - s3://$S3_BUCKET/$S3_PREFIX/$DEST_FILE
-
+  #cat $SRC_FILE | aws $AWS_ARGS s3 cp - s3://$S3_BUCKET/$S3_PREFIX/$DEST_FILE
+  cat $SRC_FILE | aws s3 cp - s3://$S3_BUCKET/$S3_PREFIX/$DEST_FILE
   if [ $? != 0 ]; then
     >&2 echo "Error uploading ${DEST_FILE} on S3"
   fi
@@ -89,24 +89,24 @@ if [ ! -z "$(echo $MULTI_FILES | grep -i -E "(yes|true|1)")" ]; then
   done
 # Multi file: no
 else
-  echo "Creating dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
+  echo "Creating schema and dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
 
   DUMP_FILE="/tmp/dump.sql.gz"
-  DUMP_SCHEMA_FILE = "/tmp/schema.sql.gz"
-  mysqldump $MYSQL_HOST_OPTS --skip-lock-tables --single-transaction --all-databases | gzip > $DUMP_FILE
-  mysqldump $MYSQL_HOST_OPTS --no-data --all-databases | gzip > $DUMP_SCHEMA_FILE
+  #DUMP_SCHEMA_FILE = "/tmp/schema.sql.gz"
+  mysqldump -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD --skip-lock-tables --single-transaction --all-databases | gzip > $DUMP_FILE
+  #mysqldump $MYSQL_HOST_OPTS --no-data --all-databases | gzip > $DUMP_SCHEMA_FILE
 
   if [ $? == 0 ]; then
     if [ "${S3_FILENAME}" == "**None**" ]; then
       S3_FILE="${DUMP_START_TIME}.dump.sql.gz"
       copy_s3 $DUMP_FILE $S3_FILE
-      S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
-      copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
+      #S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
+      #copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
     else
       S3_FILE="${S3_FILENAME}.sql.gz"
       copy_s3 $DUMP_FILE $S3_FILE
-      S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
-      copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
+      #S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
+      #copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
     fi
   else
     >&2 echo "Error creating dump of all databases"
