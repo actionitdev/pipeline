@@ -1,0 +1,9 @@
+log:
+  level: DEBUG
+providers:
+  docker: {}
+entryPoints:
+  web:
+   address: ":80"
+api:
+  insecure: true
