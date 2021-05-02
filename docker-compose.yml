@@ -53,13 +53,13 @@ services:
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:fpm-alpine
+    image: wordpress:latest
     # build:
     #   context: ./
     container_name: wordpress
     restart: always
     expose: 
-      - "9000"
+      - "80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${mysql_user}
@@ -68,27 +68,6 @@ services:
       WORDPRESS_TABLE_PREFIX: wp_
       # WAIT_HOSTS: mysql:3306
     labels:
-      # Disable traefik in wordpress fpm
-      - "traefik.enable=false"
+      - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
     volumes:
-      - ./wp:/var/www/html
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    restart: always
-    depends_on:
-      - wordpress
-    environment: 
-      NGINX_ENTRYPOINT_QUIET_LOGS: 1
-    expose: 
-      - "80"
-    labels:
-      - "traefik.http.routers.nginx.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./wp:/var/www/html
-    links:
-      - wordpress
-volumes:
-  mysql_db:
+      - ./wp-content:/var/www/html/wp-content
