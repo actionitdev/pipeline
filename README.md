@@ -21,6 +21,11 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 
 ## How to Run Docker Services
 
+### Prerequisities
+1. Docker
+
+Please ensure Docker is installed and running properly. [Install Docker](https://docs.docker.com/get-docker/)
+
 ### Extra Files for Docker Services to Run
 1. `.env` file
 
@@ -44,3 +49,6 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 2. `wp-content` folder
 
     `wp-content` folder contains themes, plugins and user uploads used by the wordpress application. You can enable your own wordpress themes, plugins and user uploads by putting your `wp-content` folder in the root directory of this project. 
+
+### Start Docker Services
+
