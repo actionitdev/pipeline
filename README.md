@@ -22,9 +22,26 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 ## How to Run Docker Services
 
 ### Prerequisities
-1. Docker
+1. docker
 
-Please ensure Docker is installed and running properly. [Install Docker](https://docs.docker.com/get-docker/)
+    Please ensure docker is installed and running properly. 
+    
+    Check docker installation: 
+    ```console
+    $ docker -v
+    ```
+
+    [Install docker](https://docs.docker.com/get-docker/)
+
+2. docker-compose
+    Please ensure docker-compose is installed.
+
+    Check docker-compose installation: 
+    ```console
+    $ docker-compose -v
+    ```
+
+    [Install docker-compose](https://docs.docker.com/compose/install/)
 
 ### Extra Files for Docker Services to Run
 1. `.env` file
