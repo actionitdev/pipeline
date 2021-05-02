@@ -68,3 +68,5 @@ To start docker services and run wordpress website, simply execute following com
 $ docker-compose up -d
 ```
 
+### Access Wordpress Website Locally
+After docker services are started successfully, you can access the wordpress website via `http://localhost:8080` and access wordpress admin console via `http:localhost:8080/wp-admin`.
