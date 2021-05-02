@@ -24,24 +24,19 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 ### Prerequisities
 1. docker
 
-    Please ensure docker is installed and running properly. 
+    Please ensure docker is installed and running properly. Or [Install docker](https://docs.docker.com/get-docker/)
     
     Check docker installation: 
     ```console
     $ docker -v
     ```
-
-    [Install docker](https://docs.docker.com/get-docker/)
-
 2. docker-compose
-    Please ensure docker-compose is installed.
+    Please ensure docker-compose is installed. Or [Install docker-compose](https://docs.docker.com/compose/install/)
 
     Check docker-compose installation: 
     ```console
     $ docker-compose -v
     ```
-
-    [Install docker-compose](https://docs.docker.com/compose/install/)
 
 ### Extra Files for Docker Services to Run
 1. `.env` file
@@ -68,4 +63,8 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
     `wp-content` folder contains themes, plugins and user uploads used by the wordpress application. You can enable your own wordpress themes, plugins and user uploads by putting your `wp-content` folder in the root directory of this project. 
 
 ### Start Docker Services
+To start docker services and run wordpress website, simply execute following commands in the command line:
+```console
+$ docker-compose up -d
+```
 
