@@ -21,12 +21,17 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 
 ## How to Run Docker Services
 
-### Extra Essential Files
+### Extra Files for Docker Services to Run
 1. `.env` file
-    `.env` file is necessary for mysql database service to run. Please add the following credentials variables in `.env` file.
+
+    `.env` file is mandatory for mysql database service to run. Please add the following credentials variables in `.env` file. Then, put `.env` file in the root directory of this project.
+
         - `mysql_db` (database name)
+
         - `mysql_user` (username)
+
         - `mysql_pw` (user password)
+
         - `mysql_root_pw` (root password)
     
     Example `.env` file:
@@ -36,4 +41,6 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
     mysql_pw=userpw
     mysql_root_pw=rootpw
     ```
+2. `wp-content` folder
 
+    `wp-content` folder contains themes, plugins and user uploads used by the wordpress application. You can enable your own wordpress themes, plugins and user uploads by putting your `wp-content` folder in the root directory of this project. 
