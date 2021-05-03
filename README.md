@@ -21,6 +21,7 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 
 ## Project File Structure
 - `docker-compose.yml`
+
     `docker-compose.yml` defines the services to run in the docker container. According to [Docker Services Architecture](#docker-services-architecture), three services are included:
     - `traefik`: Serves as the reverse proxy, based on traefik official image v2.4
     - `mysql`: Database service, based on latest mysql official image
@@ -28,9 +29,15 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
     - `dbBackup`: Customised container in charge of data and schema backup
 
 - `.circleci`
+
     `.circleci` is the folder to store CircleCI configuration files. 
     - `config.yml`: Specifies commands to execute in CI and criteria to decide whether tests are passed or failed.
 
+- `.init`
+
+    `.init` is the folder to store mysql database initialization files.
+    - `dumpfile.sql.gz`: Specifies sql commands to initialize the data inside mysql container.
+    
 ## How to Run Docker Services
 
 ### Prerequisities
