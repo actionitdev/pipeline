@@ -9,15 +9,27 @@ This pipeline aims to containerize Solferino WordPress website with common featu
  2) [Traefik](https://doc.traefik.io/traefik/)
  3) [Wordpress Apache docker image](https://hub.docker.com/_/wordpress)
 
+## CI/CD Workflow
+Once any code changes were pushed to the `master` branch, CircleCI will be automatically triggered to build updates and conduct unit tests. Next, the code changes will be deployed to our staging server, where integration tests and performance tests run.
+
+![Image of CI/CD](https://github.com/actionitdev/pipeline/blob/docs/CI-CD%20Pipeline%20Diagram.jpg)
+
 ## Docker Services Architecture
 
 
 ![Image of Docker Services](https://github.com/actionitdev/pipeline/blob/docs/Docker%20Services%20Diagram.jpeg)
 
-## CI/CD Workflow
-Once any code changes were pushed to the `master` branch, CircleCI will be automatically triggered to build updates and conduct unit tests. Next, the code changes will be deployed to our staging server, where integration tests and performance tests run.
+## Project File Structure
+- `docker-compose.yml`
+    `docker-compose.yml` defines the services to run in the docker container. According to [Docker Services Architecture](#docker-services-architecture), three services are included:
+    - `traefik`: Serves as the reverse proxy, based on traefik official image v2.4
+    - `mysql`: Database service, based on latest mysql official image
+    - `wordpress`: Wordpress web application service, based on latest wordpress official image (Apache included) 
+    - `dbBackup`: Customised container in charge of data and schema backup
 
-![Image of CI/CD](https://github.com/actionitdev/pipeline/blob/docs/CI-CD%20Pipeline%20Diagram.jpg)
+- `.circleci`
+    `.circleci` is the folder to store CircleCI configuration files. 
+    - `config.yml`: Specifies commands to execute in CI and criteria to decide whether tests are passed or failed.
 
 ## How to Run Docker Services
 
