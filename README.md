@@ -15,7 +15,11 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
 ![Image of CI/CD](https://github.com/actionitdev/pipeline/blob/docs/CI-CD%20Pipeline%20Diagram.jpg)
 
 ## Docker Services Architecture
-
+The following four containers will be running together:
+- Traefik: When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
+- Wordpress: Wordpress is the main application service. It processes the HTTP request forwarded by traefik. Also, WP-Content folder is mounted to the wordpress container for themes, plugins and user uploads.
+- MySQL: MySQL service is for data storage. It stores data which support for wordpress service. 
+- dbBackup: DbBackup service is for data backup. It backs up the data dumped from MySQL service and restores data back to MySQL database when necessary. Basically, it periodically backs up data from both MySQL and WP-Content to Amazon S3.
 
 ![Image of Docker Services](https://github.com/actionitdev/pipeline/blob/docs/Docker%20Services%20Diagram.jpeg)
 
