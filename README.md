@@ -26,18 +26,30 @@ Once any code changes were pushed to the `master` branch, CircleCI will be autom
     - `traefik`: Serves as the reverse proxy, based on traefik official image v2.4
     - `mysql`: Database service, based on latest mysql official image
     - `wordpress`: Wordpress web application service, based on latest wordpress official image (Apache included) 
-    - `dbBackup`: Customised container in charge of data and schema backup
+    - `dbBackup`: Customized container in charge of data and schema backup
 
 - `.circleci`
 
     `.circleci` is the folder to store CircleCI configuration files. 
-    - `config.yml`: Specifies commands to execute in CI and criteria to decide whether tests are passed or failed.
+    - `config.yml`: Specifies commands to execute in CI and criteria to decide whether tests are passed or failed
 
 - `.init`
 
     `.init` is the folder to store mysql database initialization files.
-    - `dumpfile.sql.gz`: Specifies sql commands to initialize the data inside mysql container.
-    
+    - `dumpfile.sql.gz`: Specifies sql commands to initialize the data inside mysql container
+
+- `traefik.yml`
+
+    `traefik.yml` defines the configuration of the reverse proxy and ensures auto-detection of other docker services available.
+
+- `dbBackup`
+
+    `dbBackup` is the folder to store configuration and essential scripts of customized data backup container.
+    - `Dockerfile`: Defines the instructions to build data backup container
+    - `backup.sh`
+    - `install.sh`
+    - `run.sh`
+
 ## How to Run Docker Services
 
 ### Prerequisities
