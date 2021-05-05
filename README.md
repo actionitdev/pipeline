@@ -50,9 +50,9 @@ The following four containers will be running together:
 
     `dbBackup` is the folder to store configuration and essential scripts of customized data backup container.
     - `Dockerfile`: Defines the instructions to build data backup container
-    - `backup.sh`
-    - `install.sh`
-    - `run.sh`
+    - `backup.sh`: Script of the commands to make dump file from sql server and make backup in AWS S3 bucket. The dump files consist of user data and also the schema of the whole database. This container allows developer to build the sql database from a blank database or with existing data.
+    - `install.sh`: A script defines the packages to be installed in the image.
+    - `run.sh`: A script defines 
 
 ## How to Run Docker Services
 
