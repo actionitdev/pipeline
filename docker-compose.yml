@@ -1,11 +1,23 @@
 version: '3.2'
 services:
+  traefik:
+    image: traefik:v2.4
+    ports:
+      # The HTTP port
+      - "8080:80"
+      # The Web UI (enabled by `api.insecure: true`)
+      - "8081:8080"
+    volumes:
+      # Access to Docker API
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.yml:/etc/traefik/traefik.yml
+
   mysql:
-    image: mysql:latest
+    image: mysql:8.0.23
     restart: always
     container_name: mysql
-    ports:
-      - '3306:3306'
+    expose:
+      - "3306"
     environment:
       MYSQL_DATABASE: ${mysql_db}
       MYSQL_USER: ${mysql_user}
@@ -16,7 +28,7 @@ services:
       - mysql_db:/var/lib/mysql
   
   backupdb:
-    image: fradelg/mysql-cron-backup
+    image: fradelg/mysql-cron-backup:1.7.1
     container_name: backup
     depends_on:
       - mysql
@@ -34,17 +46,20 @@ services:
       - INIT_BACKUP=1
       - GZIP_LEVEL=9
     
+    labels:
+      # Disable traefik in mysql
+      - "traefik.enable=false"
 
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:fpm-alpine
+    image: wordpress:5.7.1-php7.4-apache
     # build:
     #   context: ./
     container_name: wordpress
     restart: always
-    ports:
-      - '9000:9000'
+    expose: 
+      - "80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${mysql_user}
@@ -52,23 +67,7 @@ services:
       WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
       # WAIT_HOSTS: mysql:3306
+    labels:
+      - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
     volumes:
-      - ./wp:/var/www/html
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    restart: always
-    depends_on:
-      - wordpress
-    environment: 
-      NGINX_ENTRYPOINT_QUIET_LOGS: 1
-    ports:
-      - "8080:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./wp:/var/www/html
-    links:
-      - wordpress
-volumes:
-  mysql_db:
+      - ./wp-content:/var/www/html/wp-content
