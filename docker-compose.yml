@@ -13,7 +13,7 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml
 
   mysql:
-    image: mysql:latest
+    image: mysql:8.0.23
     restart: always
     container_name: mysql
     expose:
@@ -28,7 +28,7 @@ services:
       - mysql_db:/var/lib/mysql
   
   backupdb:
-    image: fradelg/mysql-cron-backup
+    image: fradelg/mysql-cron-backup:1.7.1
     container_name: backup
     depends_on:
       - mysql
@@ -53,7 +53,7 @@ services:
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:latest
+    image: wordpress:5.7.1-php7.4-apache
     # build:
     #   context: ./
     container_name: wordpress
