@@ -16,6 +16,8 @@ services:
     image: mysql:8.0.23
     restart: always
     container_name: mysql
+    security_opt:
+      - seccomp:unconfined
     expose:
       - "3306"
     environment:
@@ -25,26 +27,22 @@ services:
       MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
     volumes:
       - ./.init:/docker-entrypoint-initdb.d
-      - mysql_db:/var/lib/mysql
   
   backupdb:
-    image: fradelg/mysql-cron-backup:1.7.1
+    build: ./dbBackup/
     container_name: backup
     depends_on:
       - mysql
-    restart: always
-    volumes:
-      - mysql_db:/backup
+    restart: on-failure
     environment:
+      - S3_ACCESS_KEY_ID=${id}
+      - S3_SECRET_ACCESS_KEY=${secret}
+      - S3_BUCKET=actionit-staging
+      - S3_PREFIX=backup
       - MYSQL_USER=root
-      - MYSQL_PASS=${mysql_root_pw}
-      - MYSQL_DATABASE=${mysql_db}
-      - CRON_TIME=0 0 * * *
+      - MYSQL_PASSWORD=${mysql_root_pw}
       - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - TIMEOUT=10s
-      - INIT_BACKUP=1
-      - GZIP_LEVEL=9
+      - SCHEDULE="@daily"
     
     labels:
       # Disable traefik in mysql
