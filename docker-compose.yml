@@ -28,7 +28,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=${mysql_root_pw}
       - MYSQL_HOST=mysql
-      - SCHEDULE="@daily"
+      - SCHEDULE=0 0 0 * * *
+      #- SCHEDULE=5 * * * *
     
 
   wordpress:
