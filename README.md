@@ -52,7 +52,7 @@ The following four containers will be running together:
     - `Dockerfile`: Defines the instructions to build data backup container
     - `backup.sh`: Script of the commands to make dump file from sql server and make backup in AWS S3 bucket. The dump files consist of user data and also the schema of the whole database. This container allows developer to build the sql database from a blank database or with existing data.
     - `install.sh`: A script defines the packages to be installed in the image.
-    - `run.sh`: A script defines 
+    - `run.sh`: A script defines when the command to run when the docker image is built.
 
 ## How to Run Docker Services
 
@@ -85,6 +85,10 @@ The following four containers will be running together:
         - `mysql_pw` (user password)
 
         - `mysql_root_pw` (root password)
+
+        - `id` (aws user id)
+
+        - `secret` (aws user secret)
     
     Example `.env` file:
     ```
@@ -92,6 +96,8 @@ The following four containers will be running together:
     mysql_user=user
     mysql_pw=userpw
     mysql_root_pw=rootpw
+    id=someid
+    secret=TheSecretOfTheUser
     ```
 2. `wp-content` folder
 
@@ -105,3 +111,30 @@ $ docker-compose up -d
 
 ### Access Wordpress Website Locally
 After docker services are started successfully, you can access the wordpress website via `http://localhost:8080` and access wordpress admin console via `http:localhost:8080/wp-admin`.
+
+## Backup
+### Acknowledge
+The files to build the backup container has used part code from (https://github.com/schickling/dockerfiles) and (https://github.com/fradelg/docker-mysql-cron-backup)
+### Usage
+The funciton of the backup container is making the backup of data and schema from mysql database and store it in AWS S3 bucket.
+The back up is achieved by using the `mysqldump` commond of MYSQL.
+
+The envrionment variables:
+- `MYSQLDUMP_OPTIONS` mysqldump options (default: --skip-lock-tables --single-transaction)
+- `MYSQLDUMP_DATABASE` list of databases you want to backup (default: --all-databases)
+- `MYSQL_HOST` the mysql host *required*
+- `MYSQL_PORT` the mysql port (default: 3306)
+- `MYSQL_USER` the mysql user *required*
+- `MYSQL_PASSWORD` the mysql password *required*
+- `S3_ACCESS_KEY_ID` your AWS access key *required*
+- `S3_SECRET_ACCESS_KEY` your AWS secret key *required*
+- `S3_BUCKET` your AWS S3 bucket path *required*
+- `S3_PREFIX` path prefix in your bucket (default: 'backup')
+- `S3_FILENAME` a consistent filename to overwrite with your backup.  If not set will use a timestamp.
+- `S3_REGION` the AWS S3 bucket region (default: us-eest-2)
+- `MULTI_FILES` Allow to have one file per database if set `yes` (default: no)
+- `SCHEDULE` backup schedule time, see explainatons below
+
+### Periodic Backups
+To change the backup frequency, you can modify the `SCHEDULE` environment variable using cron job format.
+Cron job use five or six variables format, For example, `SCHEDULE=10 * * * * *` means to make the schedule and data backup every 10 mins or `SCHEDULE=0 0 * * * *` means to make the backup once an hour, at the beginning of hour. More information can be found in cron document (https://pkg.go.dev/github.com/robfig/cron)
