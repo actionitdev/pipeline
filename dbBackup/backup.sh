@@ -100,23 +100,23 @@ else
 
   DUMP_FILE="/tmp/dump.sql.gz"
   DUMP_SCHEMA_FILE="/tmp/schema.sql.gz"
-  mysqldump -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD --skip-lock-tables --single-transaction --all-databases | gzip > $DUMP_FILE
+  mysqldump -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD --skip-lock-tables --single-transaction --databases wp | gzip > $DUMP_FILE
   mysqldump $MYSQL_HOST_OPTS --no-data --all-databases | gzip > $DUMP_SCHEMA_FILE
   echo "Dumping successful"
 
   if [ $? == 0 ]; then
     if [ "${S3_FILENAME}" == "**None**" ]; then
-      S3_FILE="${DUMP_START_TIME}.dump.sql.gz"
+      S3_FILE="${DUMP_START_TIME}-dump.sql.gz"
       copy_s3 $DUMP_FILE $S3_FILE
       echo "1dumping data successful"
-      S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
+      S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
       copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
       echo "1dumping schema successful"
     else
-      S3_FILE="${S3_FILENAME}.sql.gz"
+      S3_FILE="${S3_FILENAME}-dump.sql.gz"
       copy_s3 $DUMP_FILE $S3_FILE
       echo "1dumping data successful"
-      S3_FILE="${DUMP_START_TIME}.schema.sql.gz"
+      S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
       copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
       echo "2dumping successful"
     fi
