@@ -16,8 +16,13 @@ jobs:
       - run:
           name: "test website avaliability"
           command: |
-            curl localhost:8080
+            res=`curl localhost:8080`
             if [ "$?" -ne 0 ]
+            then
+              exit 1
+            fi
+
+            if [ "$res" -eq "404 page not found" ]
             then
               exit 1
             fi
