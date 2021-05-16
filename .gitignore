@@ -1,3 +1,5 @@
 .DS_Store
 .env
-/wp
+wp-content.zip
+wp-content/
+wpBackup/
