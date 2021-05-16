@@ -15,7 +15,7 @@ jobs:
       - run: sleep 100
       - run:
           name: "test database connection"
-          command: docker exec -t $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
+          command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
       - run:
           name: "test website avaliability"
           command: |
