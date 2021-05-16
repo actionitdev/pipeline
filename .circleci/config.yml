@@ -12,7 +12,7 @@ jobs:
       - run:
           name: "test docker-compose build"
           command: docker-compose up -d
-      # - run: sleep 100
+      - run: sleep 100
       - run:
           name: "test database connection"
           command: docker exec -t $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
