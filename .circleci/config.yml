@@ -10,6 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "test docker-compose"
-        command: docker-compose up -d
+          name: "test docker-compose"
+          command: docker-compose up -d
+      - run: sleep 60
       - run: curl localhost:8080
