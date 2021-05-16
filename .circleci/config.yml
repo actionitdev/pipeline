@@ -1,5 +1,4 @@
 version: 2.0
-#testing
 jobs:
   build:
     branches:
@@ -11,6 +10,5 @@ jobs:
       - checkout
       - run:
           name: "test docker-compose"
-          command: |
-            docker-compose up -d
-            curl localhost:8080
+          command: docker-compose up -d
+      - run: curl localhost:8080
