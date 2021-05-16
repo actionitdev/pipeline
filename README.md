@@ -113,8 +113,10 @@ $ docker-compose up -d
 After docker services are started successfully, you can access the wordpress website via `http://localhost:8080` and access wordpress admin console via `http:localhost:8080/wp-admin`.
 
 ## Backup
+
 ### Acknowledge
 The files to build the backup container has used part code from (https://github.com/schickling/dockerfiles) and (https://github.com/fradelg/docker-mysql-cron-backup)
+
 ### Usage
 The funciton of the backup container is making the backup of data and schema from mysql database and store it in AWS S3 bucket.
 The back up process is achieved by using the `mysqldump` commond of MYSQL. There are two back up process, one is for all the user data from the database. By using this one, developer can restore the whole website. The other one is the schema file which does not consist user data. By using this one, developer can restore an empty website.
