@@ -10,13 +10,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "test docker-compose"
+          name: "test docker-compose build"
           command: docker-compose up -d
-      # - run: sleep 60
+      # - run: sleep 100
+      - run:
+          name: "test database connection"
+          command: docker exec -t $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
       - run:
           name: "test website avaliability"
           command: |
             res=`curl localhost:8080`
+
             if [ "$?" -ne 0 ]
             then
               exit 1
