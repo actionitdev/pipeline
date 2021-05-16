@@ -141,19 +141,17 @@ The envrionment variables:
 To change the backup frequency, you can modify the `SCHEDULE` environment variable using cron job format.
 Cron job use five or six variables format, For example, `SCHEDULE=10 * * * * *` means to make the schedule and data backup every 10 mins or `SCHEDULE=0 0 * * * *` means to make the backup once an hour, at the beginning of hour. More information can be found in cron document (https://pkg.go.dev/github.com/robfig/cron)
 
-### s3 bucket的configuration
-	* S3 lifecycle 
-		* https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-set-lifecycle-configuration-intro.html
-	In bucket list, we can select the bucket we are using for backup, then select **management** tab and chose Create lifecycle rule. 
-	The configuration now is apply to all the objects in the bucket. 
-	There are several options in the lifecycle rule:
-		The configuration now is to Permanently delete previous versions of objects in a 90 days cycle
-	- S3 bucket policy
+### S3 bucket configuration
+#### S3 lifecycle 
+(https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-set-lifecycle-configuration-intro.html)
+- In bucket list, we can select the bucket we are using for backup, then select **management** tab and chose Create lifecycle rule. The configuration now is apply to all the objects in the bucket. 
+- There are several options in the lifecycle rule. The configuration now is to Permanently delete previous versions of objects in a 90 days cycle
+- S3 bucket policy
 	If we need to modify which user can access the bucket, we need to set the Bucket policy which is in the **Permissions** tab.
-	The policy now allows the user that created for the website application to write to the bucket. Also, the Bucket and objects are not public.
+	<br>The policy now allows the user that created for the website application to write to the bucket. Also, the Bucket and objects are not public.
 
 ### Backup container selection
 
 ## docker stage server configuration
-	* Install docker and docker compose
-	* Prepare wp-content 
+	- Install docker and docker compose
+	- Prepare wp-content 
