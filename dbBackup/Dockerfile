@@ -36,8 +36,8 @@ ENV SCHEDULE_WP **None**
 ENV S3_IAMROLE false
 
 ADD run.sh run.sh
-ADD backupDB.sh backupDB.sh
-ADD backupWP.sh backupWP.sh
+ADD backupdb.sh backupdb.sh
+ADD backupwp.sh backupwp.sh
 
 # 	# configure your default profile
 # RUN aws configure set region us-west-1

@@ -2,3 +2,5 @@
 .env
 wp-content/
 .init
+wpBackup/
+wp-content.zip
