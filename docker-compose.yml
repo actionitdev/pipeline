@@ -42,12 +42,15 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=${mysql_root_pw}
       - MYSQL_HOST=mysql
-      - SCHEDULE=0 0 0 * * *
-      #- SCHEDULE=5 * * * *
-    
+      - MYSQLDUMP_DATABASE=wp
+      # - SCHEDULE=0 0 0 * * *
+      - SCHEDULE_DB=1 * * * *
+      - SCHEDULE_WP=1 * * * *
     labels:
       # Disable traefik in mysql
       - "traefik.enable=false"
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
 
   wordpress:
     depends_on:

@@ -1,4 +1,3 @@
-
 FROM golang:1.15.8-alpine3.12 AS binary
 RUN apk -U add openssl git
 
@@ -19,7 +18,7 @@ COPY --from=binary /go/bin/dockerize /usr/local/bin
 
 ENV TIMEOUT "10s"
 ENV MYSQLDUMP_OPTIONS --quote-names --quick --add-drop-table --add-locks --allow-keywords --disable-keys --extended-insert --single-transaction --create-options --comments --net_buffer_length=16384
-ENV MYSQLDUMP_DATABASE --all-databases
+ENV MYSQLDUMP_DATABASE wp
 ENV MYSQL_HOST mysql
 ENV MYSQL_PORT 3306
 ENV MYSQL_USER **None**
@@ -32,12 +31,13 @@ ENV S3_ENDPOINT **None**
 ENV S3_S3V4 no
 ENV S3_PREFIX 'backup'
 ENV S3_FILENAME **None**
-ENV MULTI_FILES no
-ENV SCHEDULE **None**
+ENV SCHEDULE_DB **None**
+ENV SCHEDULE_WP **None**
 ENV S3_IAMROLE false
 
 ADD run.sh run.sh
-ADD backup.sh backup.sh
+ADD backupDB.sh backupDB.sh
+ADD backupWP.sh backupWP.sh
 
 # 	# configure your default profile
 # RUN aws configure set region us-west-1
