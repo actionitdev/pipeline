@@ -12,5 +12,12 @@ jobs:
       - run:
           name: "test docker-compose"
           command: docker-compose up -d
-      - run: sleep 60
-      - run: curl localhost:8080
+      # - run: sleep 60
+      - run:
+          name: "test website avaliability"
+          command: |
+            curl localhost:8080
+            if [ "$?" -ne 0 ]
+            then
+	            exit 1
+            fi
