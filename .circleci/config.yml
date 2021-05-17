@@ -1,8 +1,6 @@
 version: 2.0
 jobs:
   build:
-    branches:
-      only: dbBackup
     machine:
       image: ubuntu-2004:202010-01
     steps:
