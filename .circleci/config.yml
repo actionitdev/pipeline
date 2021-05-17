@@ -5,6 +5,7 @@ jobs:
       only:
         - dev
         - master
+        - dbBackup
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -30,3 +31,27 @@ jobs:
             then
               exit 1
             fi
+  deployment:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - run:
+          name: lightsail stage server delploy  
+          command: |
+            ssh -i ~/ai-sandbox.pem ubuntu@52.63.82.106
+            "echo deploy starting && \
+            cd wordpress && \
+            git pull orgin dev && \ 
+            docker-compose up -d && \
+            echo depoly finished"
+
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+
