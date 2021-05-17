@@ -30,10 +30,13 @@ jobs:
     machine:
       image: ubuntu-2004:202010-01
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "8a:45:83:7c:a1:87:b2:cd:cc:1e:f9:f1:d5:1a:4b:21"
       - run:
           name: lightsail stage server delploy  
           command: |
-            ssh -i ./ai-sandbox.pem ubuntu@52.63.82.106
+            ssh -i ubuntu@52.63.82.106
             "echo deploy starting && \
             cd wordpress && \
             git pull orgin dev && \ 
