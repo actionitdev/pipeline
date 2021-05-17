@@ -36,7 +36,7 @@ jobs:
       - run:
           name: lightsail stage server delploy  
           command: |
-            ssh ubuntu@52.63.82.106 \
+            ssh ubuntu@54.206.184.206 \
             "echo deploy starting && \
             cd wordpress && \
             cd pipeline && \
