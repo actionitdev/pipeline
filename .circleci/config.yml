@@ -36,11 +36,13 @@ jobs:
       - run:
           name: lightsail stage server delploy  
           command: |
-            ssh ubuntu@52.63.82.106
+            ssh ubuntu@52.63.82.106 \
             "echo deploy starting && \
             cd wordpress && \
-            git pull orgin dev && \ 
-            docker-compose up -d && \
+            cd pipeline && \
+            git checkout dev && \
+            git pull && \ 
+            sudo docker-compose up -d && \
             echo depoly finished"
 
 
@@ -54,5 +56,5 @@ workflows:
             - build
           filters:
             branches:
-              only: dbBackup
+              only: dev
 
