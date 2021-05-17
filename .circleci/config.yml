@@ -3,12 +3,30 @@ jobs:
   build:
     branches:
       only:
+        - dev
         - master
-    machine: true
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
       - run:
-          name: "test docker-compose"
+          name: "test docker-compose build"
+          command: docker-compose up -d
+      - run: sleep 100
+      - run:
+          name: "test database connection"
+          command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
+      - run:
+          name: "test website avaliability"
           command: |
-            docker-compose up -d
-            curl localhost:8080
+            res=`curl localhost:8080`
+
+            if [ "$?" -ne 0 ]
+            then
+              exit 1
+            fi
+
+            if [ "$res" = "404 page not found" ]
+            then
+              exit 1
+            fi
