@@ -39,7 +39,7 @@ ADD run.sh run.sh
 ADD backupdb.sh backupdb.sh
 ADD backupwp.sh backupwp.sh
 
-# 	# configure your default profile
+#configure your default profile
 # RUN aws configure set region us-west-1
 
 # # or in non-interactive environment
