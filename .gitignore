@@ -1,4 +1,7 @@
 .DS_Store
 .env
+wp-content.zip
+wp-content/
+wpBackup/
 .idea
 /wp-content
