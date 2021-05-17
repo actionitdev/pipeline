@@ -7,9 +7,9 @@ if [ "${S3_S3V4}" = "yes" ]; then
 fi
 
 if [ "${SCHEDULE_DB}" = "**None**" ]; then
-  # sh backupdb.sh
-  sh backupwp.sh
+  # sh backupDB.sh
+  sh backupWP.sh
 else
-  #exec go-cron "$SCHEDULE_DB" /bin/sh backupdb.sh & "$SCHEDULE_WP" /bin/sh backupwp.sh
-  exec go-cron "$SCHEDULE_WP" /bin/sh backupwp.sh
+  #exec go-cron "$SCHEDULE_DB" /bin/sh backupDB.sh & "$SCHEDULE_WP" /bin/sh backupWP.sh
+  exec go-cron "$SCHEDULE_WP" /bin/sh backupaWP.sh
 fi
