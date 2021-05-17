@@ -51,7 +51,7 @@ workflows:
       - deploy:
           requires:
             - build
-        filters:
-          branches:
-            only: dbBackup
+          filters:
+            branches:
+              only: dbBackup
 
