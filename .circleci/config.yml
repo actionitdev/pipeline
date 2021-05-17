@@ -28,7 +28,7 @@ jobs:
             then
               exit 1
             fi
-  deployment:
+  deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -47,7 +47,10 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - build:
+        filters:
+          branches:
+            only: dbBackup
       - deploy:
           requires:
             - build
