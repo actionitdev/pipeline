@@ -2,10 +2,7 @@ version: 2.0
 jobs:
   build:
     branches:
-      only:
-        - dev
-        - master
-        - dbBackup
+      only: dbBackup
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -38,7 +35,7 @@ jobs:
       - run:
           name: lightsail stage server delploy  
           command: |
-            ssh -i ~/ai-sandbox.pem ubuntu@52.63.82.106
+            ssh -i ./ai-sandbox.pem ubuntu@52.63.82.106
             "echo deploy starting && \
             cd wordpress && \
             git pull orgin dev && \ 
@@ -54,4 +51,7 @@ workflows:
       - deploy:
           requires:
             - build
+        filters:
+          branches:
+            only: dbBackup
 
