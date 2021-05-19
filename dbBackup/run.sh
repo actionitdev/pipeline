@@ -11,5 +11,5 @@ if [ "${SCHEDULE_DB}" = "**None**" ]; then
   sh backupWP.sh
 else
   #exec go-cron "$SCHEDULE_DB" /bin/sh backupDB.sh & "$SCHEDULE_WP" /bin/sh backupWP.sh
-  exec go-cron "$SCHEDULE_WP" /bin/sh backupaWP.sh
+  exec go-cron "$SCHEDULE_WP" /bin/sh backupWP.sh
 fi
