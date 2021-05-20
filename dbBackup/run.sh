@@ -1,15 +1,9 @@
-#! /bin/sh
+#! /bin/bash
 
 set -e
 
-if [ "${S3_S3V4}" = "yes" ]; then
-    aws configure set default.s3.signature_version s3v4
-fi
-
-if [ "${SCHEDULE_DB}" = "**None**" ]; then
-  # sh backupDB.sh
-  sh backupWP.sh
-else
-  #exec go-cron "$SCHEDULE_DB" /bin/sh backupDB.sh & "$SCHEDULE_WP" /bin/sh backupWP.sh
-  exec go-cron "$SCHEDULE_WP" /bin/sh backupWP.sh
-fi
+#exec go-cron "$SCHEDULE_DB" /bin/sh backupDB.sh & "$SCHEDULE_WP" /bin/sh backupWP.sh
+# exec cron && tail -f /var/log/cron.log
+# crontab /etc/cron.d/backup-cron
+# crond && tail -f /var/log/cron.log
+crond -f

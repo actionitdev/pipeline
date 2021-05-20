@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 set -e
 
@@ -65,8 +65,7 @@ copy_s3 () {
   if [ $? != 0 ]; then
     >&2 echo "Error uploading ${DEST_FILE} on S3"
   fi
-
-  rm $SRC_FILE
+  
 }
 
 echo "Creating schema and dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
