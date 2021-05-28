@@ -1,4 +1,8 @@
-version: 2.0
+version: 2.1
+
+orbs:
+  gh: circleci/github-cli@1.0.2
+
 jobs:
   build:
     machine:
@@ -13,7 +17,7 @@ jobs:
           name: "test database connection"
           command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
       - run:
-          name: "test website avaliability"
+          name: "test website availability"
           command: |
             res=`curl localhost:8080`
 
@@ -26,6 +30,12 @@ jobs:
             then
               exit 1
             fi
+      - gh/setup
+      - run:
+          name: "create new pull request"
+          command: |
+            currentdate=`date`
+            gh pr create --title "Update from dev branch" --body "$currentdate"
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -34,7 +44,7 @@ jobs:
           fingerprints:
             - "8a:45:83:7c:a1:87:b2:cd:cc:1e:f9:f1:d5:1a:4b:21"
       - run:
-          name: lightsail stage server delploy  
+          name: lightsail stage server deploy  
           command: |
             ssh ubuntu@54.206.184.206 \
             "echo deploy starting && \
@@ -44,8 +54,7 @@ jobs:
             git pull && \ 
             sudo docker-compose up -d && \
             curl localhost:8080 && \
-            echo depoly finished"
-
+            echo deploy finished"
 
 workflows:
   version: 2
@@ -57,5 +66,5 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: dev
 
