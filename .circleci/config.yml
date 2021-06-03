@@ -10,32 +10,32 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "test docker-compose build"
+          name: "Test docker-compose build"
           command: docker-compose up -d
       - run: sleep 100
       - run:
-          name: "test database connection"
+          name: "Test database connection"
           command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
-      - run:
-          name: "test website availability"
-          command: |
-            res=`curl localhost:8080`
+      # - run:
+      #     name: "Test website availability"
+      #     command: |
+      #       res=`curl localhost:8080`
 
-            if [ "$?" -ne 0 ]
-            then
-              exit 1
-            fi
+      #       if [ "$?" -ne 0 ]
+      #       then
+      #         exit 1
+      #       fi
 
-            if [ "$res" = "404 page not found" ]
-            then
-              exit 1
-            fi
+      #       if [ "$res" = "404 page not found" ]
+      #       then
+      #         exit 1
+      #       fi
       - gh/setup
       - run:
-          name: "create new pull request"
+          name: "Create new pull request"
           command: |
-            currentdate=`date`
-            gh pr create --title "Update from dev branch" --body "$currentdate"
+            msg=`git log -1 --pretty=format:"Latest Commit: %s"`
+            gh pr create --title "New pull request from dev" --body "$msg" || echo "Previous pull request hasn't been closed."
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -60,11 +60,11 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-              # only: dev
+      - build
+          # filters:
+          #   branches:
+          #     only: master
+          #     only: dev
       - deploy:
           requires:
             - build
@@ -72,4 +72,3 @@ workflows:
             branches:
               only: master
               # only: dev
-
