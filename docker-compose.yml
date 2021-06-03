@@ -2,15 +2,31 @@ version: '3.2'
 services:
   traefik:
     image: traefik:v2.4
+    container_name: traefik
     ports:
       # The HTTP port
-      - "8080:80"
+      - "80:80"
+      # The HTTPS port
+      - "443:443"
       # The Web UI (enabled by `api.insecure: true`)
-      - "8081:8080"
+      - "8080:8080"
+    command: 
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=admin@actionit.dev"
+      - "--certificatesresolvers.myresolver.acme.storage=/traefik/acme.json"
     volumes:
       # Access to Docker API
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik:/traefik
 
   mysql:
     image: mysql:8.0.23
@@ -95,6 +111,8 @@ services:
       WORDPRESS_TABLE_PREFIX: wp_
       # WAIT_HOSTS: mysql:3306
     labels:
-      - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
+      - "traefik.http.routers.wordpress-apache.rule=Host(`staging-sa.actionit.dev`)"
+      # - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
+      - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
       - ./wp-content:/var/www/html/wp-content
