@@ -9,11 +9,6 @@ This pipeline aims to containerize Solferino WordPress website with common featu
  2) [Traefik](https://doc.traefik.io/traefik/)
  3) [Wordpress Apache docker image](https://hub.docker.com/_/wordpress)
 
-## CI/CD Workflow
-Once any code changes were pushed to the `master` branch, CircleCI will be automatically triggered to build updates and conduct unit tests. Next, the code changes will be deployed to our staging server, where integration tests and performance tests run.
-
-![Image of CI/CD](https://github.com/actionitdev/pipeline/blob/docs/CI-CD%20Pipeline%20Diagram.jpg)
-
 ## Docker Services Architecture
 The following four containers will be running together:
 - Traefik: When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
@@ -26,7 +21,7 @@ The following four containers will be running together:
 ## Project File Structure
 - `docker-compose.yml`
 
-    `docker-compose.yml` defines the services to run in the docker container. According to [Docker Services Architecture](#docker-services-architecture), three services are included:
+    `docker-compose.yml` defines the services to run in the docker container. According to [Docker Services Architecture](#docker-services-architecture), four services are included:
     - `traefik`: Serves as the reverse proxy, based on traefik official image v2.4
     - `mysql`: Database service, based on latest mysql official image
     - `wordpress`: Wordpress web application service, based on latest wordpress official image (Apache included) 
@@ -35,16 +30,12 @@ The following four containers will be running together:
 - `.circleci`
 
     `.circleci` is the folder to store CircleCI configuration files. 
-    - `config.yml`: Specifies commands to execute in CI and criteria to decide whether tests are passed or failed
+    - `config.yml`: Specifies commands to execute in CI and criteria to decide whether build tests and deployment process are passed or failed
 
 - `.init`
 
     `.init` is the folder to store mysql database initialization files.
     - `dumpfile.sql.gz`: Specifies sql commands to initialize the data inside mysql container
-
-- `traefik.yml`
-
-    `traefik.yml` defines the configuration of the reverse proxy and ensures auto-detection of other docker services available.
 
 - `dbBackup`
 
@@ -53,6 +44,32 @@ The following four containers will be running together:
     - `backup.sh`: Script of the commands to make dump file from sql server and make backup in AWS S3 bucket. The dump files consist of user data and also the schema of the whole database. This container allows developer to build the sql database from a blank database or with existing data.
     - `install.sh`: A script defines the packages to be installed in the image.
     - `run.sh`: A script defines when the command to run when the docker image is built.
+
+## CI/CD Workflow
+Once any code changes were pushed to the `dev` branch, CircleCI will be automatically triggered to build updates and conduct unit tests. Next, the code changes will be deployed to our staging server, where integration tests and performance tests run.
+
+![Image of CI/CD](https://github.com/actionitdev/pipeline/blob/docs/CI-CD%20Pipeline%20Diagram.jpg)
+
+### Essential Environment Variables in CircleCI
+
+- `GITHUB_TOKEN` (github access token for operations on the github repository, eg. create new pull requests)
+
+- `SSH_USER` (staging server user for ssh access)
+
+- `SSH_HOST` (staging server host for ssh access)
+
+- `mysql_db` (database name for mysql docker service)
+
+- `mysql_user` (username for mysql docker service)
+
+- `mysql_pw` (user password for mysql docker service)
+
+- `mysql_root_pw` (root password for mysql docker service)
+
+- `id` (aws user id for backup service)
+
+- `secret` (aws user secret for backup service)
+
 
 ## How to Run Docker Services
 
@@ -109,17 +126,18 @@ To start docker services and run wordpress website, simply execute following com
 $ docker-compose up -d
 ```
 
-### Access Wordpress Website Locally
-After docker services are started successfully, you can access the wordpress website via `http://localhost:8080` and access wordpress admin console via `http:localhost:8080/wp-admin`.
+## Staging Server Configuration
+	- Install docker and docker compose
+	- Prepare wp-content 
 
-## Backup
+## Data Backup
 
 ### Acknowledge
-The files to build the backup container has used part code from (https://github.com/schickling/dockerfiles) and (https://github.com/fradelg/docker-mysql-cron-backup)
+The files to build the backup container has used part code from (https://github.com/schickling/dockerfiles) and (https://github.com/fradelg/docker-mysql-cron-backup).
 
 ### Usage
 The funciton of the backup container is making the backup of data and schema from mysql database and store it in AWS S3 bucket.
-The back up process is achieved by using the `mysqldump` commond of MYSQL. There are two back up process, one is for all the user data from the database. By using this one, developer can restore the whole website. The other one is the schema file which does not consist user data. By using this one, developer can restore an empty website.
+The backup process is achieved by using the `mysqldump` commond of MYSQL. There are two back up process, one is for all the user data from the database. By using this one, developer can restore the whole website. The other one is the schema file which does not consist user data. By using this one, developer can restore an empty website.
 
 The envrionment variables:
 - `MYSQLDUMP_OPTIONS` mysqldump options (default: --skip-lock-tables --single-transaction)
@@ -141,8 +159,8 @@ The envrionment variables:
 To change the backup frequency, you can modify the `SCHEDULE` environment variable using cron job format.
 Cron job use five or six variables format, For example, `SCHEDULE=10 * * * * *` means to make the schedule and data backup every 10 mins or `SCHEDULE=0 0 * * * *` means to make the backup once an hour, at the beginning of hour. More information can be found in cron document (https://pkg.go.dev/github.com/robfig/cron)
 
-### S3 bucket configuration
-#### S3 lifecycle 
+### S3 Bucket Configuration
+#### S3 Lifecycle 
 (https://docs.aws.amazon.com/AmazonS3/latest/userguide/how-to-set-lifecycle-configuration-intro.html)
 - In bucket list, we can select the bucket we are using for backup, then select **management** tab and chose Create lifecycle rule. The configuration now is apply to all the objects in the bucket. 
 - There are several options in the lifecycle rule. The configuration now is to Permanently delete previous versions of objects in a 90 days cycle
@@ -150,8 +168,4 @@ Cron job use five or six variables format, For example, `SCHEDULE=10 * * * * *` 
 	If we need to modify which user can access the bucket, we need to set the Bucket policy which is in the **Permissions** tab.
 	<br>The policy now allows the user that created for the website application to write to the bucket. Also, the Bucket and objects are not public.
 
-### Backup container selection
-
-## docker stage server configuration
-	- Install docker and docker compose
-	- Prepare wp-content 
+<!-- ### Backup container selection -->
