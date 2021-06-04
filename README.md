@@ -4,6 +4,29 @@ A staging pipeline for Solferino Wordpress website.
 ## Purpose
 This pipeline aims to containerize Solferino WordPress website with common features and settings that apply to other NS sites. Combined practices of docker and CI/CD are implemented. By using this pipeline, we are aiming to enforce automation in building, testing and deployment of our containerized version of wordpress application.
 
+## Table of Contents
+
+- [Software/Tools Used](#softwaretools-used)
+- [Project File Structure](#project-file-structure)
+- [Docker Services Architecture](#docker-services-architecture)
+  - [Traefik](#traefik)
+  - [Wordpress](#wordpress)
+  - [MySQL](#mysql)
+  - [dbBackup](#dbbackup)
+- [CI/CD Workflow](#cicd-workflow)
+  - [Essential Environment Variables in CI](#essential-environment-variables-in-circleci)
+  - [Detailed CI/CD Process](#detailed-cicd-process)
+- [Staging Server Configuration](#staging-server-configuration)
+  - [Prerequisites](#prerequisities)
+  - [Extra Files for Docker Services to Run](#extra-files-for-docker-services-to-run)
+  - [Start Docker Services](#start-docker-services)
+  - [Access Running Wordpress Website](#access-running-wordpress-website)
+- [Data Backup](#data-backup)
+  - [Acknowledgement](#acknowledgement)
+  - [Usage](#usage)
+  - [Periodic Backups](#periodic-backups)
+  - [S3 Bucket Configuration](#s3-bucket-configuration)
+
 ## Software/Tools Used
  1) [CircleCI](https://circleci.com/)
  2) [Traefik](https://doc.traefik.io/traefik/)
@@ -38,13 +61,17 @@ This pipeline aims to containerize Solferino WordPress website with common featu
 
 ## Docker Services Architecture
 The following four containers will be running together:
-- __Traefik__: When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
+### Traefik
+When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
 
-- __Wordpress__: Wordpress is the main application service. It processes the HTTP request forwarded by traefik. Also, WP-Content folder is mounted to the wordpress container for themes, plugins and user uploads.
+### Wordpress
+Wordpress is the main application service. It processes the HTTP request forwarded by traefik. Also, WP-Content folder is mounted to the wordpress container for themes, plugins and user uploads.
 
-- __MySQL__: MySQL service is for data storage. It stores data which support for wordpress service. 
+### MySQL
+MySQL service is for data storage. It stores data which support for wordpress service. 
 
-- __dbBackup__: DbBackup service is for data backup. It backs up the data dumped from MySQL service and restores data back to MySQL database when necessary. Basically, it periodically backs up data from both MySQL and WP-Content to Amazon S3.
+### dbBackup
+DbBackup service is for data backup. It backs up the data dumped from MySQL service and restores data back to MySQL database when necessary. Basically, it periodically backs up data from both MySQL and WP-Content to Amazon S3.
 
 ![Image of Docker Services](https://github.com/actionitdev/pipeline/blob/docs/Docker%20Services%20Diagram.jpeg)
 
