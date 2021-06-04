@@ -9,15 +9,6 @@ This pipeline aims to containerize Solferino WordPress website with common featu
  2) [Traefik](https://doc.traefik.io/traefik/)
  3) [Wordpress Apache docker image](https://hub.docker.com/_/wordpress)
 
-## Docker Services Architecture
-The following four containers will be running together:
-- Traefik: When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
-- Wordpress: Wordpress is the main application service. It processes the HTTP request forwarded by traefik. Also, WP-Content folder is mounted to the wordpress container for themes, plugins and user uploads.
-- MySQL: MySQL service is for data storage. It stores data which support for wordpress service. 
-- dbBackup: DbBackup service is for data backup. It backs up the data dumped from MySQL service and restores data back to MySQL database when necessary. Basically, it periodically backs up data from both MySQL and WP-Content to Amazon S3.
-
-![Image of Docker Services](https://github.com/actionitdev/pipeline/blob/docs/Docker%20Services%20Diagram.jpeg)
-
 ## Project File Structure
 - `docker-compose.yml`
 
@@ -45,6 +36,18 @@ The following four containers will be running together:
     - `install.sh`: A script defines the packages to be installed in the image.
     - `run.sh`: A script defines when the command to run when the docker image is built.
 
+## Docker Services Architecture
+The following four containers will be running together:
+- __Traefik__: When a HTTP request comes in, traefik will intercept the request and forward it to the wordpress service for processing.
+
+- __Wordpress__: Wordpress is the main application service. It processes the HTTP request forwarded by traefik. Also, WP-Content folder is mounted to the wordpress container for themes, plugins and user uploads.
+
+- __MySQL__: MySQL service is for data storage. It stores data which support for wordpress service. 
+
+- __dbBackup__: DbBackup service is for data backup. It backs up the data dumped from MySQL service and restores data back to MySQL database when necessary. Basically, it periodically backs up data from both MySQL and WP-Content to Amazon S3.
+
+![Image of Docker Services](https://github.com/actionitdev/pipeline/blob/docs/Docker%20Services%20Diagram.jpeg)
+
 ## CI/CD Workflow
 Once any code changes were pushed to the `dev` branch, CircleCI will be automatically triggered to build updates and conduct unit tests. Next, the code changes will be deployed to our staging server, where integration tests and performance tests run.
 
@@ -69,6 +72,28 @@ Once any code changes were pushed to the `dev` branch, CircleCI will be automati
 - `id` (aws user id for backup service)
 
 - `secret` (aws user secret for backup service)
+
+### Detailed CI/CD Process
+
+For the whole CI/CD workflow, we have two jobs set up in CircleCI:
+
+1. __build__: This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
+
+    - __checkout__: This step checks out the code from the github repository for CircleCI to use.
+
+    - __Test docker-compose build__: This step checks whether the docker services can be built and running successfully.
+
+    - __Test database connection__: This step checks whether the mysql database service is running properly and can be accessed.
+
+    - __gh/setup__: This step sets up environment for github cli commands.
+
+    - __Create new pull request__: This step creates a new pull request from `dev` branch to `master` branch if necessary.
+
+2. __deploy__: This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
+
+    - __add_ssh_keys__: This step prepares the ssh access to the staging server.
+
+    - __Deploy to lightsail staging server__: In this step, firstly, access the staging server via ssh. Then, pull the latest code updates from GitHub repository. Finally, update docker services.
 
 
 ## How to Run Docker Services
