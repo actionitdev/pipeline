@@ -47,9 +47,7 @@ jobs:
           name: Deploy to lightsail staging server
           command: |
             ssh $SSH_USER@$SSH_HOST \
-            "echo deploy starting && \
-            mkdir testaccess \
-            echo deploy finished"
+            "lss"
           # command: |
           #   ssh $SSH_USER@$SSH_HOST \
           #   "echo deploy starting && \
@@ -64,14 +62,14 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      # - build
           # filters:
           #   branches:
           #     only: master
           #     only: dev
       - deploy:
-          requires:
-            - build
+          # requires:
+          #   - build
           filters:
             branches:
               # only: master
