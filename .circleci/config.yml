@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Deploy to lightsail staging server
           command: |
-            ssh ubuntu@13.237.60.232 \
+            ssh $SSH_USER@$SSH_HOST \
             "echo deploy starting && \
             cd wordpress && \
             cd pipeline && \
