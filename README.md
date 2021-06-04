@@ -79,7 +79,7 @@ For the whole CI/CD workflow, we have two jobs set up in CircleCI:
 
 1. __build__: 
 
-This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
+    This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
 
     - __checkout__: This step checks out the code from the github repository for CircleCI to use.
 
@@ -93,7 +93,7 @@ This job mainly tests whether the docker services can be built and running prope
 
 2. __deploy__: 
 
-This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
+    This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
 
     - __add_ssh_keys__: This step prepares the ssh access to the staging server.
 
