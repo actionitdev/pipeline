@@ -77,7 +77,8 @@ Once any code changes were pushed to the `dev` branch, CircleCI will be automati
 
 For the whole CI/CD workflow, we have two jobs set up in CircleCI:
 
-1. __build__: This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
+1. __build__: 
+This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
 
     - __checkout__: This step checks out the code from the github repository for CircleCI to use.
 
@@ -89,18 +90,18 @@ For the whole CI/CD workflow, we have two jobs set up in CircleCI:
 
     - __Create new pull request__: This step creates a new pull request from `dev` branch to `master` branch if necessary.
 
-2. __deploy__: This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
+2. __deploy__: 
+This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
 
     - __add_ssh_keys__: This step prepares the ssh access to the staging server.
 
     - __Deploy to lightsail staging server__: In this step, firstly, access the staging server via ssh. Then, pull the latest code updates from GitHub repository. Finally, update docker services.
 
 
-## How to Run Docker Services
+## Staging Server Configuration
 
 ### Prerequisities
 1. docker
-
     Please ensure docker is installed and running properly. Or [Install docker](https://docs.docker.com/get-docker/)
     
     Check docker installation: 
@@ -151,13 +152,12 @@ To start docker services and run wordpress website, simply execute following com
 $ docker-compose up -d
 ```
 
-## Staging Server Configuration
-	- Install docker and docker compose
-	- Prepare wp-content 
+### Access Running Wordpress Website
+After docker services are started successfully, you can access the wordpress website via `https://staging-sa.actionit.dev` and access wordpress admin console via `https://staging-sa.actionit.dev/wp-admin` 
 
 ## Data Backup
 
-### Acknowledge
+### Acknowledgement
 The files to build the backup container has used part code from (https://github.com/schickling/dockerfiles) and (https://github.com/fradelg/docker-mysql-cron-backup).
 
 ### Usage
