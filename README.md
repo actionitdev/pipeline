@@ -78,6 +78,7 @@ Once any code changes were pushed to the `dev` branch, CircleCI will be automati
 For the whole CI/CD workflow, we have two jobs set up in CircleCI:
 
 1. __build__: 
+
 This job mainly tests whether the docker services can be built and running properly. If tests are passed, a new pull request will be created to merge updated code to `master` branch. The steps of `build` job are as followed:
 
     - __checkout__: This step checks out the code from the github repository for CircleCI to use.
@@ -91,6 +92,7 @@ This job mainly tests whether the docker services can be built and running prope
     - __Create new pull request__: This step creates a new pull request from `dev` branch to `master` branch if necessary.
 
 2. __deploy__: 
+
 This job mainly focuses on the deployment of latest code changes. It depends on the previous `build` job. The steps of `deploy` job are as followed:
 
     - __add_ssh_keys__: This step prepares the ssh access to the staging server.
@@ -102,6 +104,7 @@ This job mainly focuses on the deployment of latest code changes. It depends on 
 
 ### Prerequisities
 1. docker
+
     Please ensure docker is installed and running properly. Or [Install docker](https://docs.docker.com/get-docker/)
     
     Check docker installation: 
@@ -109,12 +112,23 @@ This job mainly focuses on the deployment of latest code changes. It depends on 
     $ docker -v
     ```
 2. docker-compose
+
     Please ensure docker-compose is installed. Or [Install docker-compose](https://docs.docker.com/compose/install/)
 
     Check docker-compose installation: 
     ```console
     $ docker-compose -v
     ```
+
+3. Firewall settings
+
+    Please ensure the following TCP ports are open to the Internet:
+
+    - Port 22 (for ssh access)
+
+    - Port 80 (for http access)
+
+    - Port 443 (for https access)
 
 ### Extra Files for Docker Services to Run
 1. `.env` file
@@ -153,7 +167,7 @@ $ docker-compose up -d
 ```
 
 ### Access Running Wordpress Website
-After docker services are started successfully, you can access the wordpress website via `https://staging-sa.actionit.dev` and access wordpress admin console via `https://staging-sa.actionit.dev/wp-admin` 
+After docker services are started successfully, you can access the wordpress website via (https://staging-sa.actionit.dev) and access wordpress admin console via (https://staging-sa.actionit.dev/wp-admin) 
 
 ## Data Backup
 
