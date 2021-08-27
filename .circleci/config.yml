@@ -51,12 +51,12 @@ jobs:
             cd wordpress/pipeline && \
             git config core.sparsecheckout true && \
             rm .git/info/sparse-checkout 2> /dev/null && \
-            cat >> .git/info/sparse-checkout <<EOL
+            cat >> .git/info/sparse-checkout \\<<EOL
             /*
             !README.md
             !*jpg
             !*jpeg
-            EOL>> && \
+            EOL && \
             git checkout dev && \ 
             git pull && \ 
             sudo docker-compose up -d && \
