@@ -50,10 +50,10 @@ jobs:
             "echo starting the deployment pipeline && \
             cd wordpress/pipeline && \
             git checkout dev && \ 
-            git config core.sparsecheckout true && \
-            rm .git/info/sparse-checkout 2> /dev/null && \
-            echo -e '/* \n!README.md \n!*jpg \n!*jpeg' > .git/info/sparse-checkout && \
             git pull && \ 
+            rm README.md && \ 
+            rm *.jpg && \
+            rm *.jpeg && \
             sudo docker-compose up -d && \
             echo deployment is finished"
             
