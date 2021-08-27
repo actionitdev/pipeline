@@ -46,23 +46,8 @@ jobs:
       - run:
           name: Deploy to lightsail staging server
           command: |
-            ssh $SSH_USER@$SSH_HOST \
-            "echo starting the deployment pipeline && \
-            cd wordpress/pipeline && \
-            git config core.sparsecheckout true && \
-            rm .git/info/sparse-checkout 2> /dev/null && \
-            cat >> .git/info/sparse-checkout <<EOL
-            /*
-            !README.md
-            !*jpg
-            !*jpeg
-            EOL && \
-            git checkout dev && \ 
-            git pull && \ 
-            sudo docker-compose up -d && \
-            sudo chmod -R 775 wp-content && \
-            echo deployment is finished"
-
+            ./scripts/circleci/circleci_deploy_staging.sh
+            
 workflows:
   version: 2
   build-and-deploy:
