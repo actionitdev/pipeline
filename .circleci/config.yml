@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Deploy to lightsail staging server
           command: |
-            ./scripts/circleci/circleci_deploy_staging.sh
+            ../scripts/circleci/circleci_deploy_staging.sh
             
 workflows:
   version: 2
