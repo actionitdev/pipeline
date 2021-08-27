@@ -49,10 +49,10 @@ jobs:
             ssh $SSH_USER@$SSH_HOST \
             "echo starting the deployment pipeline && \
             cd wordpress/pipeline && \
+            git checkout dev && \ 
             git config core.sparsecheckout true && \
-            git checkout dev && \ W
             rm .git/info/sparse-checkout 2> /dev/null && \
-            echo -e '/* \n!README.md \n!*jpg \n!*jpeg' > .git/inWfo/sparse-checkout && \
+            echo -e '/* \n!README.md \n!*jpg \n!*jpeg' > .git/info/sparse-checkout && \
             git pull && \ 
             sudo docker-compose up -d && \
             echo deployment is finished"
