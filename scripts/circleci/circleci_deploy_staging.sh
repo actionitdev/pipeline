@@ -28,8 +28,4 @@ git pull
 #run the docker service
 sudo docker-compose up -d
 
-#change the wp-content permission and its all sub-directories to be able to install any plugins
-sudo chmod -R 775 wp-content 
-
-
 echo "deployment is finished"
