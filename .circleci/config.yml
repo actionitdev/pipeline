@@ -55,8 +55,8 @@ jobs:
             /* 
             !README.md 
             !*jpg 
-            !*jpeg 
-            EOT  && \
+            !*jpeg && \ 
+            EOT && \
             git checkout dev && \ 
             git pull && \ 
             sudo docker-compose up -d && \
