@@ -49,12 +49,12 @@ jobs:
             ssh $SSH_USER@$SSH_HOST \
             "echo starting the deployment pipeline && \
             cd wordpress/pipeline && \
-            git config core.sparsecheckout true && \
-            rm .git/info/sparse-checkout 2> /dev/null && \
-            echo -e '/* \n!README.md \n!*jpg \n!*jpeg' > .git/info/sparse-checkout && \
             git checkout dev && \ 
             git pull && \ 
             sudo docker-compose up -d && \
+            sudo chown -R www-data:www-data wp-content/plugins/ && \
+            sudo chmod 775 wp-content && \
+            sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
             
 workflows:
