@@ -55,6 +55,9 @@ jobs:
             rm *.jpg && \
             rm *.jpeg && \
             sudo docker-compose up -d && \
+            sudo chown -R www-data:www-data wp-content/plugins/ && \
+            sudo chmod 775 wp-content && \
+            sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
             
 workflows:
