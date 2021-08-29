@@ -51,9 +51,6 @@ jobs:
             cd wordpress/pipeline && \
             git checkout dev && \ 
             git pull && \ 
-            rm README.md 2> /dev/null && \ 
-            rm *.jpg 2> /dev/null && \
-            rm *.jpeg 2> /dev/null && \
             sudo docker-compose up -d && \
             sudo chown -R www-data:www-data wp-content/plugins/ && \
             sudo chmod 775 wp-content && \
