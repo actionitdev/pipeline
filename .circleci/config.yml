@@ -42,12 +42,12 @@ jobs:
 
   production-build:
     machine:
-        image: ubuntu-2004:202010-01
-      steps:
-        - checkout
-        - run:
-            name: "Test production-docker-compose build"
-            command: docker-compose -f production-docker-compose.yml up -d
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: "Test production-docker-compose build"
+          command: docker-compose -f production-docker-compose.yml up -d
 
   #todo: change the name into staging-development-job
   deploy:
