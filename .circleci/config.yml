@@ -7,14 +7,14 @@ jobs:
   #done: create another build for the production server, called production-build, which test a different docker-compose for the production server
   #done: create another docker compose for the production server by duplicating staging server's configuration
 
-  build:
+  staging-build:
     machine:
       image: ubuntu-2004:202010-01
     steps:
       - checkout
       - run:
           name: "Test staging-docker-compose build"
-          command: docker-compose -f staging-docker-compose.yml up -d
+          command: docker-compose -f ./docker-compose/staging-docker-compose.yml up -d
       - run: sleep 100
       - run:
           name: "Test database connection"
@@ -47,10 +47,10 @@ jobs:
       - checkout
       - run:
           name: "Test production-docker-compose build"
-          command: docker-compose -f production-docker-compose.yml up -d
+          command: docker-compose -f ./docker-compose/production-docker-compose.yml up -d
 
   #todo: change the name into staging-development-job
-  deploy:
+  staging-deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -65,7 +65,7 @@ jobs:
             cd wordpress/pipeline && \
             git checkout dev && \ 
             git pull && \ 
-            sudo docker-compose up -d && \
+            sudo docker-compose -f ./docker-compose/staging-docker-compose.yml up -d && \
             sudo chown -R www-data:www-data wp-content/plugins/ && \
             sudo chmod 775 wp-content && \
             sudo chown -R www-data:www-data wp-content/ && \
@@ -83,12 +83,12 @@ jobs:
       - run:
           name: Deploy to lightsail production server
           command: |
-            ssh $SSH_USER@$SSH_HOST \
-            "echo starting the deployment pipeline && \
+            ssh $SSH_USER@$SSH_PROD_HOST \
+            "echo starting the production deployment pipeline && \
             cd wordpress/pipeline && \
             git checkout master && \ 
             git pull && \ 
-            sudo docker-compose up -d && \
+            sudo docker-compose -f ./docker-compose/production-docker-compose.yml up -d && \
             sudo chown -R www-data:www-data wp-content/plugins/ && \
             sudo chmod 775 wp-content && \
             sudo chown -R www-data:www-data wp-content/ && \
@@ -98,15 +98,14 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build:
+      - staging-build:
           filters:
             branches:
               only:
                 - dev
-                - master
-      - deploy:
+      - staging-deploy:
           requires:
-            - build
+            - staging-build
           filters:
             branches:
               only:
