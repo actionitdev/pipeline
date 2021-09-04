@@ -108,7 +108,7 @@ services:
       WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
     labels:
-      - "traefik.http.routers.wordpress-apache.rule=Host(`staging-sa.actionit.dev`)"
+      - "traefik.http.routers.wordpress-apache.rule=Host(`staging-test.actionit.dev`)"
       # - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
       - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
