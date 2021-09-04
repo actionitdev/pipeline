@@ -4,6 +4,10 @@ orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
+
+  #todo: create another build for the production server, called production-build, which test a different docker-compose for the production server
+  #todo: create another docker compose for the production server by duplicating staging server's configuration
+
   build:
     machine:
       image: ubuntu-2004:202010-01
@@ -36,6 +40,9 @@ jobs:
           command: |
             msg=`git log -1 --pretty=format:"Latest Commit: %s"`
             gh pr create --title "New pull request from dev" --body "$msg" || echo "No need to create a new pull request."
+
+  #todo: change the name into staging-development-job
+  
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -56,7 +63,9 @@ jobs:
             sudo chmod 775 wp-content && \
             sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
-            
+
+  #todo: create another deployment job for the production server, with different ssh keys, user and host
+
 workflows:
   version: 2
   build-and-deploy:
@@ -74,4 +83,6 @@ workflows:
             branches:
               only: 
                 - dev
+                #todo: remove the master branch from the staging workflow
                 - master
+      #todo: create another deployment workflow for the production server (filter=dev)
