@@ -4,9 +4,8 @@ orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
-
-  #todo: create another build for the production server, called production-build, which test a different docker-compose for the production server
-  #todo: create another docker compose for the production server by duplicating staging server's configuration
+  #done: create another build for the production server, called production-build, which test a different docker-compose for the production server
+  #done: create another docker compose for the production server by duplicating staging server's configuration
 
   build:
     machine:
@@ -14,8 +13,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Test docker-compose build"
-          command: docker-compose up -d
+          name: "Test staging-docker-compose build"
+          command: docker-compose -f staging-docker-compose.yml up -d
       - run: sleep 100
       - run:
           name: "Test database connection"
@@ -41,8 +40,16 @@ jobs:
             msg=`git log -1 --pretty=format:"Latest Commit: %s"`
             gh pr create --title "New pull request from dev" --body "$msg" || echo "No need to create a new pull request."
 
+  production-build:
+    machine:
+        image: ubuntu-2004:202010-01
+      steps:
+        - checkout
+        - run:
+            name: "Test production-docker-compose build"
+            command: docker-compose -f production-docker-compose.yml up -d
+
   #todo: change the name into staging-development-job
-  
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -64,7 +71,28 @@ jobs:
             sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
 
-  #todo: create another deployment job for the production server, with different ssh keys, user and host
+  #done: create another deployment job for the production server, with different ssh keys, user and host
+  #update: no need to change the ssh key since it's only for circleCI to access the project, and change the checkout branch to master
+  production-deploy:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "8a:45:83:7c:a1:87:b2:cd:cc:1e:f9:f1:d5:1a:4b:21"
+      - run:
+          name: Deploy to lightsail production server
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo starting the deployment pipeline && \
+            cd wordpress/pipeline && \
+            git checkout master && \ 
+            git pull && \ 
+            sudo docker-compose up -d && \
+            sudo chown -R www-data:www-data wp-content/plugins/ && \
+            sudo chmod 775 wp-content && \
+            sudo chown -R www-data:www-data wp-content/ && \
+            echo deployment to production server is finished"
 
 workflows:
   version: 2
@@ -73,7 +101,7 @@ workflows:
       - build:
           filters:
             branches:
-              only: 
+              only:
                 - dev
                 - master
       - deploy:
@@ -81,8 +109,20 @@ workflows:
             - build
           filters:
             branches:
-              only: 
+              only:
                 - dev
-                #todo: remove the master branch from the staging workflow
+                #done: remove the master branch from the staging workflow
+
+      #done: create another deployment workflow for the production server (filter=dev)
+      - production-build:
+          filters:
+            branches:
+              only:
                 - master
-      #todo: create another deployment workflow for the production server (filter=dev)
+      - production-deploy:
+          requires:
+            - production-build
+          filters:
+            branches:
+              only:
+                - master

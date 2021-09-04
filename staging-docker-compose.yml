@@ -1,0 +1,115 @@
+version: '3.2'
+services:
+  traefik:
+    image: traefik:v2.4
+    container_name: traefik
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The HTTPS port
+      - "443:443"
+      # The Web UI (enabled by `api.insecure: true`)
+      - "8080:8080"
+    command: 
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=admin@actionit.dev"
+      - "--certificatesresolvers.myresolver.acme.storage=/traefik/acme.json"
+    volumes:
+      # Access to Docker API
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik:/traefik
+
+  mysql:
+    image: mysql:8.0.23
+    restart: always
+    container_name: mysql
+    security_opt:
+      - seccomp:unconfined
+    expose:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: ${mysql_db}
+      MYSQL_USER: ${mysql_user}
+      MYSQL_PASSWORD: ${mysql_pw}
+      MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
+    volumes:
+      - ./.init:/docker-entrypoint-initdb.d
+  
+  backupdb:
+    build: ./dbBackup/
+    container_name: backupdb
+    depends_on:
+      - mysql
+    restart: on-failure
+    environment:
+      - S3_ACCESS_KEY_ID=${id}
+      - S3_SECRET_ACCESS_KEY=${secret}
+      - S3_BUCKET=actionit-staging
+      - S3_PREFIX=backup
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=${mysql_root_pw}
+      - MYSQL_HOST=mysql
+      - MYSQLDUMP_DATABASE=wp
+      # - SCHEDULE=0 0 0 * * *
+      - SCHEDULE_DB=*/10 * * * *
+      - SCHEDULE_WP=*/10 * * * *
+    labels:
+      # Disable traefik in mysql
+      - "traefik.enable=false"
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+
+  # backupwp:
+  #   build: ./wpBackup/
+  #   container_name: backupwp
+  #   depends_on:
+  #     - mysql
+  #   restart: on-failure
+  #   environment:
+  #     - S3_ACCESS_KEY_ID=${id}
+  #     - S3_SECRET_ACCESS_KEY=${secret}
+  #     - S3_BUCKET=actionit-staging
+  #     - S3_PREFIX=backup
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=${mysql_root_pw}
+  #     - MYSQL_HOST=mysql
+  #     - MYSQLDUMP_DATABASE=wp
+  #     # - SCHEDULE=0 0 0 * * *
+  #     # - SCHEDULE_WP=* 1 * * *
+  #   labels:
+  #     # Disable traefik in mysql
+  #     - "traefik.enable=false"
+  #   volumes:
+  #     - ./wp-content:/var/www/html/wp-content
+
+    
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:5.7.1-php7.4-apache
+    container_name: wordpress
+    restart: always
+    expose: 
+      - "80"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: ${mysql_user}
+      WORDPRESS_DB_PASSWORD: ${mysql_pw}
+      WORDPRESS_DB_NAME: ${mysql_db}
+      WORDPRESS_TABLE_PREFIX: wp_
+    labels:
+      - "traefik.http.routers.wordpress-apache.rule=Host(`staging-sa.actionit.dev`)"
+      # - "traefik.http.routers.wordpress-apache.rule=Method(`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`)"
+      - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
