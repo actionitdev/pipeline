@@ -91,7 +91,7 @@ services:
   #   volumes:
   #     - ./wp-content:/var/www/html/wp-content
 
-    
+  
 
   wordpress:
     depends_on:
