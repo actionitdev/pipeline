@@ -79,7 +79,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "8a:45:83:7c:a1:87:b2:cd:cc:1e:f9:f1:d5:1a:4b:21"
+            - "a1:0b:92:bb:27:64:20:fa:f4:7d:a8:aa:94:31:9a:0e"
       - run:
           name: Deploy to lightsail production server
           command: |
