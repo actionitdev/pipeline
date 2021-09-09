@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 services:
   #Todo: uncomment the traefik if a domain name is available.
   # traefik:
@@ -11,7 +11,7 @@ services:
   #     - "443:443"
   #     # The Web UI (enabled by `api.insecure: true`)
   #     - "8080:8080"
-  #   command: 
+  #   command:
   #     - "--log.level=DEBUG"
   #     - "--api.insecure=true"
   #     - "--providers.docker=true"
@@ -44,7 +44,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${mysql_root_pw}
     volumes:
       - ./.init:/docker-entrypoint-initdb.d
-  
+
   # backupdb:
   #   build: ./dbBackup/
   #   container_name: backupdb
@@ -69,15 +69,16 @@ services:
   #   volumes:
   #     - ./wp-content:/var/www/html/wp-content
 
-
   wordpress:
     depends_on:
       - mysql
     image: wordpress:5.7.1-php7.4-apache
     container_name: wordpress
     restart: always
-    expose: 
-      - "80"
+    # expose:
+    #   - "80"
+    ports:
+      - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${mysql_user}
@@ -86,6 +87,8 @@ services:
       WORDPRESS_TABLE_PREFIX: wp_
     #todo: uncomment if a domain name is available
     # labels:
+    #   - "traefik.enable=true"
+    #   # - "traefik.docker.network=proxy"
     #   - "traefik.http.routers.wordpress-apache.rule=Host(`production-sa.actionit.dev`)"
     #   - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
