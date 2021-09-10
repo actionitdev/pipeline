@@ -49,7 +49,6 @@ jobs:
           name: "Test production-docker-compose build"
           command: docker-compose -f production-docker-compose.yml up -d
 
-  #todo: change the name into staging-development-job
   staging-deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -71,8 +70,6 @@ jobs:
             sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
 
-  #done: create another deployment job for the production server, with different ssh keys, user and host
-  #update: no need to change the ssh key since it's only for circleCI to access the project, and change the checkout branch to master
   production-deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -83,8 +80,15 @@ jobs:
       - run:
           name: Deploy to lightsail production server
           command: |
-            ssh $SSH_USER@$SSH_PROD_HOST \
+            ssh $SSH_USER@SSH_HOST \
             "echo starting the production deployment pipeline && \
+            sudo zip -r wp-content-staging.zip wordpress/pipeline/wp-content && \
+            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+            sudo rm wp-content-staging.zip && \ 
+            exit && \
+            ssh $SSH_USER@$SSH_PROD_HOST && \
+            sudo rm wordpress/pipeline/wp-content && \
+            sudo unzip wp-content-staging.zip -d wordpress/pipeline && \
             cd wordpress/pipeline && \
             git checkout master && \ 
             git pull && \ 
@@ -110,9 +114,7 @@ workflows:
             branches:
               only:
                 - dev
-                #done: remove the master branch from the staging workflow
 
-      #done: create another deployment workflow for the production server (filter=dev)
       - production-build:
           filters:
             branches:
