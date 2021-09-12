@@ -86,7 +86,7 @@ jobs:
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
             rm wp-content-staging.zip && \ 
-            rm dumpfile.sql.gz && \
+            rm dumpfile.staging.sql.gz && \
             echo migration process is completed"
             
       - run:
