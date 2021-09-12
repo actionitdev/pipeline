@@ -99,7 +99,7 @@ jobs:
               git checkout master && \ 
               git pull && \ 
               rm .init/dumpfile.sql.gz && \
-              mv /home/ubuntu/dumpfile.staging.sql.gz .init && \ 
+              mv ~/dumpfile.staging.sql.gz .init && \ 
               sudo docker-compose -f production-docker-compose.yml up -d && \
               echo deployment to production server is finished"
 workflows:
