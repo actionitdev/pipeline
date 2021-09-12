@@ -97,7 +97,7 @@ jobs:
               cd wordpress/pipeline && \
               sudo rm -rf wp-content && \
               mkdir wp-content && \
-              sudo unzip /home/ubuntu/wp-content-staging.zip -d wp-content && \
+              sudo unzip /home/ubuntu/wp-content-staging.zip && \
               git checkout master && \ 
               git pull && \ 
               rm .init/dumpfile.sql.gz && \
