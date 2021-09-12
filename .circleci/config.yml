@@ -101,9 +101,6 @@ jobs:
               rm .init/dumpfile.sql.gz && \
               mv /home/ubuntu/dumpfile.sql.gz .init/ && \ 
               sudo docker-compose -f production-docker-compose.yml up -d && \
-              sudo chown -R www-data:www-data wp-content/plugins/ && \
-              sudo chmod 775 wp-content && \
-              sudo chown -R www-data:www-data wp-content/ && \
               echo deployment to production server is finished"
 workflows:
   version: 2
