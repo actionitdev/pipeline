@@ -93,7 +93,7 @@ jobs:
           command: |
               ssh $SSH_USER@$SSH_PROD_HOST \
               "echo starting the deployment pipeline && \
-              sudo rm wordpress/pipeline/wp-content && \
+              sudo rm -rf wordpress/pipeline/wp-content && \
               sudo unzip wp-content-staging.zip -d wordpress/pipeline/wp-content && \
               cd wordpress/pipeline && \
               git checkout master && \ 
