@@ -78,7 +78,7 @@ jobs:
       - run:
           name: Migrate sql and wp-content from staging to the production server
           command: |
-            ssh $SSH_USER@SSH_HOST \
+            ssh $SSH_USER@$SSH_HOST \
             "echo starting the migration process && \
             sudo zip -r wp-content-staging.zip wordpress/pipeline/wp-content && \
             sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.sql && gzip dumpfile.sql && \
