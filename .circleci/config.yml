@@ -76,31 +76,35 @@ jobs:
           fingerprints:
             - "a1:0b:92:bb:27:64:20:fa:f4:7d:a8:aa:94:31:9a:0e"
       - run:
-          name: Deploy to lightsail production server
+          name: Migrate sql and wp-content from staging to the production server
           command: |
             ssh $SSH_USER@SSH_HOST \
-            "echo starting the production deployment pipeline && \
+            "echo starting the migration process && \
             sudo zip -r wp-content-staging.zip wordpress/pipeline/wp-content && \
             sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.sql && gzip dumpfile.sql && \
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
             rm wp-content-staging.zip && \ 
             rm dumpfile.sql.gz && \
-            exit && \
-            ssh $SSH_USER@$SSH_PROD_HOST && \
-            sudo rm wordpress/pipeline/wp-content && \
-            sudo unzip wp-content-staging.zip -d wordpress/pipeline/wp-content && \
-            cd wordpress/pipeline && \
-            git checkout master && \ 
-            git pull && \ 
-            rm .init/dumpfile.sql.gz && \
-            mv /home/ubuntu/dumpfile.sql.gz .init/ && \ 
-            sudo docker-compose -f production-docker-compose.yml up -d && \
-            sudo chown -R www-data:www-data wp-content/plugins/ && \
-            sudo chmod 775 wp-content && \
-            sudo chown -R www-data:www-data wp-content/ && \
-            echo deployment to production server is finished"
-
+            echo migration process is completed"
+            
+      - run:
+          name: Deploy to the production server
+          command: |
+              ssh $SSH_USER@$SSH_PROD_HOST \
+              "echo starting the deployment pipeline && \
+              sudo rm wordpress/pipeline/wp-content && \
+              sudo unzip wp-content-staging.zip -d wordpress/pipeline/wp-content && \
+              cd wordpress/pipeline && \
+              git checkout master && \ 
+              git pull && \ 
+              rm .init/dumpfile.sql.gz && \
+              mv /home/ubuntu/dumpfile.sql.gz .init/ && \ 
+              sudo docker-compose -f production-docker-compose.yml up -d && \
+              sudo chown -R www-data:www-data wp-content/plugins/ && \
+              sudo chmod 775 wp-content && \
+              sudo chown -R www-data:www-data wp-content/ && \
+              echo deployment to production server is finished"
 workflows:
   version: 2
   build-and-deploy:
