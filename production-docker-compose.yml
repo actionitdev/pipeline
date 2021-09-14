@@ -89,7 +89,7 @@ services:
     labels:
       # - "traefik.enable=true"
       # - "traefik.docker.network=proxy"
-      - "traefik.http.routers.wordpress-apache.rule=Host(`3.104.75.134:8080`)"
+      - "traefik.http.routers.wordpress-apache.rule=Host(`3.104.75.134`)"
       - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
       - ./wp-content:/var/www/html/wp-content
