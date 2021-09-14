@@ -1,33 +1,33 @@
 version: "3.2"
 services:
-  #Todo: uncomment the traefik if a domain name is available.
-  # traefik:
-  #   image: traefik:v2.4
-  #   container_name: traefik
-  #   ports:
-  #     # The HTTP port
-  #     - "80:80"
-  #     # The HTTPS port
-  #     - "443:443"
-  #     # The Web UI (enabled by `api.insecure: true`)
-  #     - "8080:8080"
-  #   command:
-  #     - "--log.level=DEBUG"
-  #     - "--api.insecure=true"
-  #     - "--providers.docker=true"
-  #     - "--providers.docker.exposedbydefault=true"
-  #     - "--entrypoints.websecure.address=:443"
-  #     - "--entrypoints.web.address=:80"
-  #     - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
-  #     - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
-  #     - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
-  #     - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
-  #     - "--certificatesresolvers.myresolver.acme.email=admin@actionit.dev"
-  #     - "--certificatesresolvers.myresolver.acme.storage=/traefik/acme.json"
-  #   volumes:
-  #     # Access to Docker API
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - ./traefik:/traefik
+  # Todo: uncomment the traefik if a domain name is available.
+  traefik:
+    image: traefik:v2.4
+    container_name: traefik
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The HTTPS port
+      - "443:443"
+      # The Web UI (enabled by `api.insecure: true`)
+      - "8080:8080"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=admin@actionit.dev"
+      - "--certificatesresolvers.myresolver.acme.storage=/traefik/prod-acme.json"
+    volumes:
+      # Access to Docker API
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik:/traefik
 
   mysql:
     image: mysql:8.0.23
@@ -75,10 +75,10 @@ services:
     image: wordpress:5.7.1-php7.4-apache
     container_name: wordpress
     restart: always
-    # expose:
-    #   - "80"
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
+    # ports:
+    #   - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${mysql_user}
@@ -86,10 +86,10 @@ services:
       WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
     #todo: uncomment if a domain name is available
-    # labels:
-    #   - "traefik.enable=true"
-    #   # - "traefik.docker.network=proxy"
-    #   - "traefik.http.routers.wordpress-apache.rule=Host(`production-sa.actionit.dev`)"
-    #   - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
+    labels:
+      # - "traefik.enable=true"
+      # - "traefik.docker.network=proxy"
+      - "traefik.http.routers.wordpress-apache.rule=Host(`3.104.75.134`)"
+      - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
       - ./wp-content:/var/www/html/wp-content
