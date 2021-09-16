@@ -48,6 +48,8 @@ jobs:
             cd wordpress/pipeline && \
             git checkout dev && \ 
             git pull && \ 
+            sudo chmod 755 dbBackup/staging/backupStagingDB.sh && \
+            sudo chmod 755 dbBackup/staging/backupStagingWP.sh && \
             sudo docker-compose -f staging-docker-compose.yml up -d && \
             sudo chown -R www-data:www-data wp-content/plugins/ && \
             sudo chmod 775 wp-content && \
@@ -66,8 +68,8 @@ jobs:
           command: |
             ssh $SSH_USER@$SSH_HOST \
             "echo backup the staging server && \
-             wordpress/pipeline/dbBackup/staging/backupStagingDB.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION $MYSQL_STAGING_PORT $MYSQL_STAGING_USER $MYSQL_STAGING_PASSWORD $MYSQL_STAGING_DATABASE && \
-             wordpress/pipeline/dbBackup/staging/backupStagingWP.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION && \
+             sudo wordpress/pipeline/dbBackup/staging/backupStagingDB.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION $MYSQL_STAGING_PORT $MYSQL_STAGING_USER $MYSQL_STAGING_PASSWORD $MYSQL_STAGING_DATABASE && \
+             sudo wordpress/pipeline/dbBackup/staging/backupStagingWP.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION && \
              echo backup process for the staging server is completed"
       - run:
           name: Migrate sql and wp-content from staging to the production server
