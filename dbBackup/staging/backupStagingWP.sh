@@ -37,7 +37,7 @@ copy_to_s3() {
     sudo docker exec wordpress tar -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content > wp-content-staging-backup.tar.gz
     if [ $? == 0 ]; then
         echo "wp-content backup has been created!"
-        aws s3 cp wp-content-staging-backup.tar.gz s3://actionit-staging/backup/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
+        aws s3 cp wp-content-staging-backup.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
         if [ $? == 0 ]; then
             echo "successfully backup the wordpress content!"
     fi

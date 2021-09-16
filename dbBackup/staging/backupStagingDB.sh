@@ -66,7 +66,7 @@ copy_to_s3() {
     sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > backup_staging.sql && gzip backup_staging.sql
     if [ $? == 0 ]; then
         echo "dump sql file has been created!"
-        aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/db/"${DUMP_START_TIME}-data.sql.gz"
+        aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/staging/db/"${DUMP_START_TIME}-data.sql.gz"
         if [ $? == 0 ]; then
             echo "successfully backup the database!"
     fi
