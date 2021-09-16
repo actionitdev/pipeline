@@ -85,11 +85,10 @@ services:
       WORDPRESS_DB_PASSWORD: ${mysql_pw}
       WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
-    #todo: uncomment if a domain name is available
     labels:
       # - "traefik.enable=true"
       # - "traefik.docker.network=proxy"
-      - "traefik.http.routers.wordpress-apache.rule=Host(`3.104.75.134`)"
+      - "traefik.http.routers.wordpress-apache.rule=Host(`production-sa.actionit.dev`)"
       - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
       - ./wp-content:/var/www/html/wp-content

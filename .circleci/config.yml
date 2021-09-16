@@ -90,7 +90,7 @@ jobs:
               "echo starting the deployment pipeline && \
               cd wordpress/pipeline && \
               sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
-              git checkout master && \ 
+              git checkout dev && \ 
               git pull && \ 
               rm .init/dumpfile.sql.gz && \
               mv ~/dumpfile.staging.sql.gz .init && \ 
@@ -114,14 +114,16 @@ workflows:
                 - dev
 
       - production-build:
+          requires:
+            - staging-deploy
           filters:
             branches:
               only:
-                - master
+                - dev
       - production-deploy:
           requires:
             - production-build
           filters:
             branches:
               only:
-                - master
+                - dev
