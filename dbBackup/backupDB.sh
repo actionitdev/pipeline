@@ -2,6 +2,7 @@
 
 set -e
 
+#todo: add credentials to the linux environment
 if [ "${S3_ACCESS_KEY_ID}" == "**None**" ]; then
   echo "Warning: You did not set the S3_ACCESS_KEY_ID environment variable."
 fi
@@ -29,15 +30,6 @@ if [ "${MYSQL_PASSWORD}" == "**None**" ]; then
   echo "You need to set the MYSQL_PASSWORD environment variable or link to a container named MYSQL."
   exit 1
 fi
-
-
-# if [ "${S3_IAMROLE}" != "true" ]; then
-#   # env vars needed for aws tools - only if an IAM role is not used
-
-#   export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-#   export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-#   export AWS_DEFAULT_REGION=$S3_REGION
-# fi
 
 MYSQL_HOST_OPTS="-h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD"
 DUMP_START_TIME=$(date +"%Y-%m-%dT%H%M%SZ")
@@ -73,6 +65,7 @@ echo "Creating schema and dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
 DUMP_FILE="/tmp/dump.sql.gz"
 DUMP_SCHEMA_FILE="/tmp/schema.sql.gz"
 mysqldump -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD --skip-lock-tables --single-transaction --databases $MYSQLDUMP_DATABASE | gzip > $DUMP_FILE
+#todo: remove the schema backup from the backupDB.sh
 mysqldump $MYSQL_HOST_OPTS --no-data --databases $MYSQLDUMP_DATABASE | gzip > $DUMP_SCHEMA_FILE
 echo "Dumping successful"
 
