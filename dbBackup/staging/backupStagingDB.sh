@@ -69,6 +69,7 @@ copy_to_s3() {
         aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/staging/db/"${DUMP_START_TIME}-data.sql.gz"
         if [ $? == 0 ]; then
             echo "successfully backup the database!"
+        fi
     fi
 }
 
