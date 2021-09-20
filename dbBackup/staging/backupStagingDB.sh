@@ -56,13 +56,10 @@ if [ "${MYSQL_DATABASE}" == "**None**" ]; then
   exit 1
 fi
 
-export_aws_keys() {
-    export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-    export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-    export AWS_DEFAULT_REGION=$S3_REGION
-}
+export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
+export AWS_DEFAULT_REGION=$S3_REGION
 
-export_aws_keys
 sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > backup_staging.sql && gzip backup_staging.sql
 if [ $? == 0 ]; then
     echo "successfully created the dump sql file!"
