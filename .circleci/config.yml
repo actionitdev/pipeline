@@ -4,7 +4,6 @@ orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
-
   staging-build:
     machine:
       image: ubuntu-2004:202010-01
@@ -84,20 +83,20 @@ jobs:
             rm wp-content-staging.zip && \ 
             rm dumpfile.staging.sql.gz && \
             echo migration process is completed"
-            
+
       - run:
           name: Deploy to the production server
           command: |
-              ssh $SSH_USER@$SSH_PROD_HOST \
-              "echo starting the deployment pipeline && \
-              cd wordpress/pipeline && \
-              sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
-              git checkout dev && \ 
-              git pull && \ 
-              rm .init/dumpfile.sql.gz && \
-              mv ~/dumpfile.staging.sql.gz .init && \ 
-              sudo docker-compose -f production-docker-compose.yml up -d && \
-              echo deployment to production server is finished"
+            ssh $SSH_USER@$SSH_PROD_HOST \
+            "echo starting the deployment pipeline && \
+            cd wordpress/pipeline && \
+            sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
+            git checkout dev && \ 
+            git pull && \ 
+            rm .init/dumpfile.sql.gz && \
+            mv ~/dumpfile.staging.sql.gz .init && \ 
+            sudo docker-compose -f production-docker-compose.yml up -d && \
+            echo deployment to production server is finished"
 workflows:
   version: 2
   build-and-deploy:
