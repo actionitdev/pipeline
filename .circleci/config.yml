@@ -70,33 +70,34 @@ jobs:
              sudo wordpress/pipeline/dbBackup/staging/backupStagingDB.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION $MYSQL_STAGING_PORT $MYSQL_STAGING_USER $MYSQL_STAGING_PASSWORD $MYSQL_STAGING_DATABASE && \
              sudo wordpress/pipeline/dbBackup/staging/backupStagingWP.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION && \
              echo backup process for the staging server is completed"
-      - run:
-          name: Migrate sql and wp-content from staging to the production server
-          command: |
-            ssh $SSH_USER@$SSH_HOST \
-            "echo starting the migration process && \
-            cd wordpress/pipeline && \
-            sudo zip -r wp-content-staging.zip wp-content && \
-            sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.staging.sql && gzip dumpfile.staging.sql && \
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            rm wp-content-staging.zip && \ 
-            rm dumpfile.staging.sql.gz && \
-            echo migration process is completed"
+      #todo: uncomment after the backup has been tested
+      # - run:
+      #     name: Migrate sql and wp-content from staging to the production server
+      #     command: |
+      #       ssh $SSH_USER@$SSH_HOST \
+      #       "echo starting the migration process && \
+      #       cd wordpress/pipeline && \
+      #       sudo zip -r wp-content-staging.zip wp-content && \
+      #       sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.staging.sql && gzip dumpfile.staging.sql && \
+      #       sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+      #       sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+      #       rm wp-content-staging.zip && \ 
+      #       rm dumpfile.staging.sql.gz && \
+      #       echo migration process is completed"
 
-      - run:
-          name: Deploy to the production server
-          command: |
-            ssh $SSH_USER@$SSH_PROD_HOST \
-            "echo starting the deployment pipeline && \
-            cd wordpress/pipeline && \
-            sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
-            git checkout dev && \ 
-            git pull && \ 
-            rm .init/dumpfile.sql.gz && \
-            mv ~/dumpfile.staging.sql.gz .init && \ 
-            sudo docker-compose -f production-docker-compose.yml up -d && \
-            echo deployment to production server is finished"
+      # - run:
+      #     name: Deploy to the production server
+      #     command: |
+      #       ssh $SSH_USER@$SSH_PROD_HOST \
+      #       "echo starting the deployment pipeline && \
+      #       cd wordpress/pipeline && \
+      #       sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
+      #       git checkout dev && \ 
+      #       git pull && \ 
+      #       rm .init/dumpfile.sql.gz && \
+      #       mv ~/dumpfile.staging.sql.gz .init && \ 
+      #       sudo docker-compose -f production-docker-compose.yml up -d && \
+      #       echo deployment to production server is finished"
 workflows:
   version: 2
   build-and-deploy:
