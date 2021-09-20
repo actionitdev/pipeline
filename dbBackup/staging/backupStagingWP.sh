@@ -32,11 +32,6 @@ if [ "${S3_BUCKET}" == "**None**" ]; then
   exit 1
 fi
 
-echo "Validating credentials:"
-echo "S3 access id: ${S3_ACCESS_KEY_ID}"
-echo "S3 secret access key: ${S3_SECRET_ACCESS_KEY}"
-echo "S3 destination bucket: ${S3_BUCKET}"
-
 export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION=$S3_REGION
