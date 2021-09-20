@@ -17,11 +17,12 @@ jobs:
           name: "Test database connection"
           command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
       - gh/setup
-      - run:
-          name: "Create new pull request"
-          command: |
-            msg=`git log -1 --pretty=format:"Latest Commit: %s"`
-            gh pr create --title "New pull request from dev" --body "$msg" || echo "No need to create a new pull request."
+      #todo: uncomment if the GITHUB_TOKEN issue has been resolved
+      # - run:
+      #     name: "Create new pull request"
+      #     command: |
+      #       msg=`git log -1 --pretty=format:"Latest Commit: %s"`
+      #       gh pr create --title "New pull request from dev" --body "$msg" || echo "No need to create a new pull request."
 
   production-build:
     machine:
