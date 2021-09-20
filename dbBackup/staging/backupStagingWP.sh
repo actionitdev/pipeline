@@ -1,20 +1,20 @@
 #! /bin/bash
 
-set -e
+set +e
 
 
-if [ "$#" -eq 0 ]; then
-    echo "No arguments provided."
-    exit 1
-fi
+# if [ "$#" -eq 0 ]; then
+#     echo "No arguments provided."
+#     exit 1
+# fi
 
-if [ "$#" -ne 3 ]; then
-    echo "Illegal number of parameters"
-fi
+# if [ "$#" -ne 3 ]; then
+#     echo "Illegal number of parameters"
+# fi
 
-S3_ACCESS_KEY_ID=$1
-S3_SECRET_ACCESS_KEY=$2
-S3_REGION=$3
+S3_ACCESS_KEY_ID=AKIA4NOSAVB2R6H2KIYJ
+S3_SECRET_ACCESS_KEY=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
+S3_REGION=us-west-1
 DUMP_START_TIME=$(date +"%Y-%m-%dT%H%M%SZ")
 
 if [ "${S3_ACCESS_KEY_ID}" == "**None**" ]; then
@@ -36,7 +36,7 @@ export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION=$S3_REGION
 
-sudo docker exec wordpress tar --exclude=wp-content-staging.tar.gz -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content 2> /dev/null > wp-content-staging-backup.tar.gz
+sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content > wp-content-staging-backup.tar.gz
 
 if [ $? == 0 ]; then
     echo "wp-content backup has been created!"
