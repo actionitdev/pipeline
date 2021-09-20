@@ -56,6 +56,15 @@ if [ "${MYSQL_DATABASE}" == "**None**" ]; then
   exit 1
 fi
 
+echo "Validating credentials:"
+echo "S3 access id: ${S3_ACCESS_KEY_ID}"
+echo "S3 secret access key: ${S3_SECRET_ACCESS_KEY}"
+echo "S3 destination bucket: ${S3_BUCKET}"
+echo "staging MySQL user: ${MYSQL_USER}"
+echo "staging MySQL password: ${MYSQL_PASSWORD}"
+echo "staging MySQL port: ${MYSQL_PORT}"
+echo "staging MySQL database: ${MYSQL_DATABASE}"
+
 export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION=$S3_REGION
@@ -63,9 +72,13 @@ export AWS_DEFAULT_REGION=$S3_REGION
 sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > backup_staging.sql && gzip backup_staging.sql
 if [ $? == 0 ]; then
     echo "successfully created the dump sql file!"
+else
+    echo "failed to create the dump sql file"
 fi
 aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/staging/db/"${DUMP_START_TIME}-data.sql.gz"
 if [ $? == 0 ]; then
     echo "successfully backup the database!"
+else
+    echo "failed to transfer the backup to the S3"
 fi
 
