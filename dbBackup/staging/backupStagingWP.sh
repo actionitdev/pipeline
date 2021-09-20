@@ -32,13 +32,11 @@ if [ "${S3_BUCKET}" == "**None**" ]; then
   exit 1
 fi
 
-export_aws_keys() {
-    export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-    export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-    export AWS_DEFAULT_REGION=$S3_REGION
-}
 
-export_aws_keys
+export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
+export AWS_DEFAULT_REGION=$S3_REGION
+
 sudo docker exec wordpress tar -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content > wp-content-staging-backup.tar.gz
 if [ $? == 0 ]; then
     echo "wp-content backup has been created!"
