@@ -62,9 +62,9 @@ export AWS_DEFAULT_REGION=$S3_REGION
 
 sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > backup_staging.sql && gzip backup_staging.sql
 if [ $? == 0 ]; then
-    echo "successfully created the dump sql file!"
+    echo "successfully created the dump database file!"
 else
-    echo "failed to create the dump sql file"
+    echo "failed to create the dump database file"
 fi
 aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/staging/db/"${DUMP_START_TIME}-data.sql.gz"
 if [ $? == 0 ]; then

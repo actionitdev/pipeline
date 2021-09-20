@@ -45,7 +45,7 @@ else
 fi
 aws s3 cp wp-content-staging-backup.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
 if [ $? == 0 ]; then
-    echo "successfully backup the wordpress content!"
+    echo "successfully backup the wp-content!"
 else
-    echo "failed to transfer the backup to the S3"
+    echo "failed to transfer the wp-content backup to the S3"
 fi
