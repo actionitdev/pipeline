@@ -69,7 +69,7 @@ jobs:
             "echo backup the staging server && \
              sudo wordpress/pipeline/dbBackup/staging/backupStagingDB.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION $MYSQL_STAGING_PORT $MYSQL_STAGING_USER $MYSQL_STAGING_PASSWORD $MYSQL_STAGING_DATABASE && \
              sudo wordpress/pipeline/dbBackup/staging/backupStagingWP.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION && \
-             echo backup process for the staging server is completed"
+             echo backup workflow for the staging server is completed"
       #todo: uncomment after the backup has been tested
       # - run:
       #     name: Migrate sql and wp-content from staging to the production server
