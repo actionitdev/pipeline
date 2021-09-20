@@ -3,18 +3,18 @@
 set +e
 
 
-# if [ "$#" -eq 0 ]; then
-#     echo "No arguments provided."
-#     exit 1
-# fi
+if [ "$#" -eq 0 ]; then
+    echo "No arguments provided."
+    exit 1
+fi
 
-# if [ "$#" -ne 3 ]; then
-#     echo "Illegal number of parameters"
-# fi
+if [ "$#" -ne 3 ]; then
+    echo "Illegal number of parameters"
+fi
 
-S3_ACCESS_KEY_ID=AKIA4NOSAVB2R6H2KIYJ
-S3_SECRET_ACCESS_KEY=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
-S3_REGION=us-west-1
+S3_ACCESS_KEY_ID=$1
+S3_SECRET_ACCESS_KEY=$2
+S3_REGION=$3
 DUMP_START_TIME=$(date +"%Y-%m-%dT%H%M%SZ")
 
 if [ "${S3_ACCESS_KEY_ID}" == "**None**" ]; then
