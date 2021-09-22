@@ -61,8 +61,7 @@ services:
       - MYSQL_HOST=mysql
       - MYSQLDUMP_DATABASE=wp
       # - SCHEDULE=0 0 0 * * *
-      #todo: change to weekly if tests go well
-      - SCHEDULE_DB=* * * * *
+      - SCHEDULE_DB=0 0 * * 0
       # - SCHEDULE_WP=*/10 * * * *
     labels:
       # Disable traefik in mysql
