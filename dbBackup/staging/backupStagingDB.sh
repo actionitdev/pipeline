@@ -70,6 +70,6 @@ aws s3 cp backup_staging.sql.gz s3://actionit-staging/backup/staging/db/"${DUMP_
 if [ $? == 0 ]; then
     echo "successfully backup the database!"
 else
-    echo "failed to transfer backup into S3 bucket"
+    echo "failed to transfer backup into the S3 bucket"
 fi
 

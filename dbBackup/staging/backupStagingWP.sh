@@ -44,7 +44,7 @@ if [ $? == 0 ]; then
 else
     echo "failed to create the wp-content"
 fi
-aws s3 cp wp-content-staging-backup.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
+aws s3 cp wp-content-staging.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
 if [ $? == 0 ]; then
     echo "successfully backup the wp-content!"
 else
