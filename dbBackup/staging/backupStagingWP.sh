@@ -36,7 +36,8 @@ export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION=$S3_REGION
 
-sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content > wp-content-staging-backup.tar.gz
+sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content 
+sudo docker cp wordpress:/var/www/html/wp-content-staging.tar.gz .
 
 if [ $? == 0 ]; then
     echo "wp-content backup has been created!"
