@@ -53,37 +53,38 @@ copy_s3 () {
   #cat $SRC_FILE | aws $AWS_ARGS s3 cp - s3://$S3_BUCKET/$S3_PREFIX/$DEST_FILE
   aws s3 cp $SRC_FILE s3://$S3_BUCKET/$S3_PREFIX/$DEST_FILE
   echo "Objects in S3 bucket"
-  aws s3 ls s3://$S3_BUCKET/backup
+  aws s3 ls s3://$S3_BUCKET/$S3_PREFIX
   if [ $? != 0 ]; then
     >&2 echo "Error uploading ${DEST_FILE} on S3"
   fi
   
 }
 
-echo "Creating schema and dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
+#echo "Creating schema and dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
+echo "Creating dump for ${MYSQLDUMP_DATABASE} from ${MYSQL_HOST}..."
 
 DUMP_FILE="/tmp/dump.sql.gz"
-DUMP_SCHEMA_FILE="/tmp/schema.sql.gz"
+#DUMP_SCHEMA_FILE="/tmp/schema.sql.gz"
 mysqldump -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -p$MYSQL_PASSWORD --skip-lock-tables --single-transaction --databases $MYSQLDUMP_DATABASE | gzip > $DUMP_FILE
-#todo: remove the schema backup from the backupDB.sh
-mysqldump $MYSQL_HOST_OPTS --no-data --databases $MYSQLDUMP_DATABASE | gzip > $DUMP_SCHEMA_FILE
+
+#mysqldump $MYSQL_HOST_OPTS --no-data --databases $MYSQLDUMP_DATABASE | gzip > $DUMP_SCHEMA_FILE
 echo "Dumping successful"
 
 if [ $? == 0 ]; then
   if [ "${S3_FILENAME}" == "**None**" ]; then
-    S3_FILE="${DUMP_START_TIME}-data.sql.gz"
+    S3_FILE="${DUMP_START_TIME}-production-data.sql.gz"
     copy_s3 $DUMP_FILE $S3_FILE
     echo "Dumping data successful"
-    S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
-    copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
-    echo "Dumping schema successful"
+    # S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
+    # copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
+    # echo "Dumping schema successful"
   else
-    S3_FILE="${S3_FILENAME}-dump.sql.gz"
+    S3_FILE="${S3_FILENAME}-production-dump.sql.gz"
     copy_s3 $DUMP_FILE $S3_FILE
     echo "Dumping data successful"
-    S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
-    copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
-    echo "Dumping successful"
+    # S3_FILE="${DUMP_START_TIME}-schema.sql.gz"
+    # copy_s3 $DUMP_SCHEMA_FILE $S3_FILE
+    # echo "Dumping successful"
   fi
 else
   >&2 echo "Error creating dump of all databases"
