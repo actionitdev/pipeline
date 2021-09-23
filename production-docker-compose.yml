@@ -61,7 +61,7 @@ services:
       - MYSQL_HOST=mysql
       - MYSQLDUMP_DATABASE=wp
       # - SCHEDULE=0 0 0 * * *
-      - SCHEDULE_DB=0 0 * * 0
+      - SCHEDULE_DB=0 3	* *	6
       # - SCHEDULE_WP=*/10 * * * *
     labels:
       # Disable traefik in mysql
