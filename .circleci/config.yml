@@ -1,5 +1,9 @@
 version: 2.1
-
+# Enable to trigger workflow by sending post request in the dashboard
+parameters:
+  run_workflow_build-and-deploy:
+    default: true
+    type: boolean
 orbs:
   gh: circleci/github-cli@1.0.2
 
