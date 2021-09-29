@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set +e
+set -e
 
 
 if [ "$#" -eq 0 ]; then
@@ -49,8 +49,8 @@ if [ $? == 0 ]; then
 else
     echo "failed to create the wp-content"
 fi
-mv backup/wp-content-staging.tar.gz wp-content-staging.tar.gz
-rmdir backup
+mv ~/backup/wp-content-staging.tar.gz wp-content-staging.tar.gz
+rmdir ~/backup
 aws s3 cp wp-content-staging.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
 if [ $? == 0 ]; then
     echo "successfully backup the wp-content!"
