@@ -81,8 +81,6 @@ jobs:
             "echo starting the migration process && \
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem backup_staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            rm backup_staging.sql.gz && \
-            rm wp-content-staging.tar.gz && \
             echo migration process is completed"
 
       - run:
@@ -91,12 +89,12 @@ jobs:
             ssh $SSH_USER@$SSH_PROD_HOST \
             "echo starting the deployment pipeline && \
             cd wordpress/pipeline && \
-            rm -rf wp-content && \
+            sudo rm -rf wp-content && \
             sudo tar -xzf /home/ubuntu/wp-content-staging.tar.gz && \
             git checkout dev && \ 
             git pull && \ 
-            rm .init/dumpfile.sql.gz && \
-            mv ~/backup_staging.sql.gz .init && \ 
+            sudo rm .init/dumpfile.sql.gz && \
+            sudo mv ~/backup_staging.sql.gz .init && \ 
             sudo docker-compose -f production-docker-compose.yml up -d && \
             echo deployment to production server is finished"
 workflows:
