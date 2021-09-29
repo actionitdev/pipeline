@@ -36,15 +36,20 @@ export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
 export AWS_DEFAULT_REGION=$S3_REGION
 
-sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content 
-sudo docker cp wordpress:/var/www/html/wp-content-staging.tar.gz .
+mkdir backup
+
+# todo: uncomment these two lines the docker run volumes does not work as intended 
+# sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content 
+#sudo docker cp wordpress:/var/www/html/wp-content-staging.tar.gz .
+
+docker run --rm --volumes-from wordpress -v ~/backup:/backup ubuntu tar czvf /backup/wp-content-staging.tar.gz var/www/html/wp-content
 
 if [ $? == 0 ]; then
     echo "wp-content backup has been created!"
 else
     echo "failed to create the wp-content"
 fi
-aws s3 cp wp-content-staging.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
+aws s3 cp backup/wp-content-staging.tar.gz s3://actionit-staging/backup/staging/wp/"${DUMP_START_TIME}-wpcontent-backup.tar.gz"
 if [ $? == 0 ]; then
     echo "successfully backup the wp-content!"
 else
