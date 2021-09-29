@@ -79,14 +79,10 @@ jobs:
           command: |
             ssh $SSH_USER@$SSH_HOST \
             "echo starting the migration process && \
-            cd wordpress/pipeline && \
-            sudo docker exec wordpress tar --warning=no-file-changed -zcvf wp-content-staging.tar.gz -C / var/www/html/wp-content && \
-            sudo docker cp wordpress:/var/www/html/wp-content-staging.tar.gz . && \
-            sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.staging.sql && gzip dumpfile.staging.sql && \
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            rm wp-content-staging.tar.gz && \ 
-            rm dumpfile.staging.sql.gz && \
+            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem backup/wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem backup_staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+            rm -rf ~/backup && \ 
+            rm backup_staging.sql.gz && \
             echo migration process is completed"
 
       - run:
@@ -100,7 +96,7 @@ jobs:
             git checkout dev && \ 
             git pull && \ 
             rm .init/dumpfile.sql.gz && \
-            mv ~/dumpfile.staging.sql.gz .init && \ 
+            mv ~/backup_staging.sql.gz .init && \ 
             sudo docker-compose -f production-docker-compose.yml up -d && \
             echo deployment to production server is finished"
 workflows:
