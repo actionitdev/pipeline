@@ -45,7 +45,7 @@ mkdir backup
 docker run --rm --volumes-from wordpress -v ~/backup:/backup ubuntu tar czvf /backup/wp-content-staging.tar.gz var/www/html/wp-content
 
 if [ $? == 0 ]; then
-    echo "wp-content backup has been created!"
+    echo "wp-content backup has been created"
 else
     echo "failed to create the wp-content"
 fi
