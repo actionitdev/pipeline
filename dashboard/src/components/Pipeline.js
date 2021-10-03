@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HiCheckCircle,
   HiDotsCircleHorizontal,
@@ -6,6 +6,16 @@ import {
 } from "react-icons/hi";
 
 const Pipeline = ({ build, workflow, setLastDeploy }) => {
+  // Get the latest deployment result
+  useEffect(() => {
+    let status = [];
+    workflow[0] &&
+      build[workflow[0]] &&
+      build[workflow[0]].map((build) =>
+        build.lifecycle !== "finished" ? build.lifecycle : build.outcome
+      );
+    setLastDeploy(!status.includes("failed"));
+  }, [build, setLastDeploy, workflow]);
   const getWorkflowStatus = (builds, index) => {
     let status = "success";
     let textStyle = "text-success";
@@ -26,9 +36,6 @@ const Pipeline = ({ build, workflow, setLastDeploy }) => {
     } else {
       status = "queued";
       textStyle = "pending";
-    }
-    if (index === 0) {
-      setLastDeploy(status === "failed" ? false : true);
     }
     return [status, textStyle];
   };
