@@ -97,7 +97,8 @@ jobs:
             "echo starting the deployment pipeline && \
             cd wordpress/pipeline && \
             sudo rm -rf wp-content && \
-            sudo tar -xzf /home/ubuntu/wp-content-staging.tar.gz && \
+            sudo mv ~/wp-content-staging.tar.gz . && \
+            sudo tar -xvzf wp-content-staging.tar.gz && \
             git checkout dev && \ 
             git pull && \ 
             sudo rm .init/dumpfile.sql.gz && \
