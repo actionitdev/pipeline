@@ -81,7 +81,6 @@ jobs:
             "echo starting the migration process && \
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-             sudo rmdir ~/backup && \ 
              sudo rm staging.sql.gz && \
              sudo rm wp-content-staging.tar.gz && \
              echo migration process is completed"
@@ -132,3 +131,5 @@ workflows:
             branches:
               only:
                 - dev
+
+# sudo rmdir ~/backup && \ 
