@@ -87,6 +87,7 @@ jobs:
             "echo starting the migration process && \
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+             sudo rmdir ~/backup && \
              sudo rm staging.sql.gz && \
              sudo rm wp-content-staging.tar.gz && \
              echo migration process is completed"
@@ -99,12 +100,13 @@ jobs:
             sudo rm -rf wp-content && \
             sudo mv ~/wp-content-staging.tar.gz . && \
             sudo tar -xvzf wp-content-staging.tar.gz && \
+            sudo mv var/www/html/wp-content . && \
+            sudo rm -rf var && \
             git checkout dev && \ 
             git pull && \ 
             sudo rm .init/dumpfile.sql.gz && \
             sudo mv ~/staging.sql.gz .init && \ 
-            sudo rm ~/staging.sql.gz && \
-            sudo rm ~/wp-content-staging.tar.gz && \
+            sudo rm wp-content-staging.tar.gz && \
             sudo docker-compose -f production-docker-compose.yml up -d && \
             echo deployment to production server is finished"
 workflows:
@@ -137,6 +139,4 @@ workflows:
           filters:
             branches:
               only:
-                - dev
-
-# sudo rmdir ~/backup && \ 
+                - dev 
