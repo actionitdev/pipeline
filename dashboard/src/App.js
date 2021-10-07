@@ -22,7 +22,7 @@ function App() {
   axios.defaults.headers.common["Circle-Token"] =
     process.env.REACT_APP_CIRCLECI_TOKEN;
 
-  // Function to get circleCI build data
+  // Function to get circleCI history build data
   const getData = () => {
     axios.get(getBuildApi).then((res) => {
       const data = res.data;
@@ -62,6 +62,7 @@ function App() {
     }, 60000);
   };
 
+  // Function to add environment variable to CircleCi
   const setEnvVariable = (db, wp) => {
     axios.post(createEnvApi, {
       name: "backupDb",
@@ -73,6 +74,7 @@ function App() {
     });
   };
 
+  // Function to trigger new workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
     setMessage("Deployment has started!");
     axios

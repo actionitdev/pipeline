@@ -16,6 +16,8 @@ const Pipeline = ({ build, workflow, setLastDeploy }) => {
       );
     setLastDeploy(!status.includes("failed"));
   }, [build, setLastDeploy, workflow]);
+
+  // Function to get the overall workflow status from the related build results
   const getWorkflowStatus = (builds, index) => {
     let status = "success";
     let textStyle = "text-success";
@@ -40,6 +42,7 @@ const Pipeline = ({ build, workflow, setLastDeploy }) => {
     return [status, textStyle];
   };
 
+  // Function to get the workflow date
   const getWorkflowDate = (builds) => {
     if (builds) {
       return builds[0].usage_queued_at.substring(0, 10);
@@ -54,6 +57,7 @@ const Pipeline = ({ build, workflow, setLastDeploy }) => {
       );
     }
   };
+  // Function to get the result of every single build
   const getBuildStatus = (build) => {
     if (build.lifecycle !== "finished") {
       return (

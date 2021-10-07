@@ -23,6 +23,7 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
   };
   const s3 = new AWS.S3();
   useEffect(() => {
+    // Get latest three backup data from S3
     s3.listObjectsV2(dbparams, (err, data) => {
       if (err) {
         console.log(err, err.stack);
