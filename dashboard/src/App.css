@@ -79,6 +79,14 @@
   margin-bottom: 10px;
 }
 
+.navbar-dark .navbar-nav .nav-link.active{
+  color: rgba(255,255,255,.55);
+}
+
+.navbar-dark .navbar-nav .nav-link.active:hover{
+  color: #fff;
+}
+
 .pending {
   color: #3282b8;
 }
