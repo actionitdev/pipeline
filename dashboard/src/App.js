@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
+import Performance from './components/Performance';
 import "./App.css";
 
 // The full api address is in setupProxy.js file
@@ -22,7 +23,7 @@ function App() {
   axios.defaults.headers.common["Circle-Token"] =
     process.env.REACT_APP_CIRCLECI_TOKEN;
 
-  // Function to get circleCI history build data
+  // Function to get circleCI build data
   const getData = () => {
     axios.get(getBuildApi).then((res) => {
       const data = res.data;
@@ -62,7 +63,6 @@ function App() {
     }, 60000);
   };
 
-  // Function to add environment variable to CircleCi
   const setEnvVariable = (db, wp) => {
     axios.post(createEnvApi, {
       name: "backupDb",
@@ -74,7 +74,6 @@ function App() {
     });
   };
 
-  // Function to trigger new workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
     setMessage("Deployment has started!");
     axios
@@ -92,22 +91,6 @@ function App() {
   };
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark" className="nav">
-        <Container>
-          <Navbar.Brand href="./">Solferino Academy Dashboard</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="https://staging-sa.actionit.dev/" target="_blank">
-              Staging Site
-            </Nav.Link>
-            <Nav.Link
-              href="https://production-sa.actionit.dev/"
-              target="_blank"
-            >
-              Production Site
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <div className="container">
         <div className="row">
           <div className="col-md-6 left">
