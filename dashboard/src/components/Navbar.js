@@ -21,6 +21,9 @@ const header = () => {
       <LinkContainer to="/perfomancetesting">
       <Nav.Link>Performance Testing</Nav.Link>
       </LinkContainer>
+      <LinkContainer to="/accessibilitytesting">
+      <Nav.Link>Accessibility Testing</Nav.Link>
+      </LinkContainer>
       
     </Nav>
   </Navbar.Collapse>

@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Performance from './../src/components/Performance';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Navbar';
+import Accessibility from './components/Accessibility/Accessibility';
 
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/perfomancetesting" component={Performance} />
+        <Route path="/accessibilitytesting" component={Accessibility} />
         
       </Switch>
     </Router>
