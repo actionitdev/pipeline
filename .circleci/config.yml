@@ -136,8 +136,12 @@ workflows:
   version: 2
   db-synchronize:
     jobs:
-      - sync-db-prod-staging
-      
+      - sync-db-prod-staging:
+          filters:
+            branches:
+              only:
+                - dev
+
   build-and-deploy:
     jobs:
       - staging-build:
