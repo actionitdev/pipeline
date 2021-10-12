@@ -139,7 +139,7 @@ workflows:
   db-synchronize:
     triggers:
       - schedule:
-          cron: "0 0 1 1 *"
+          cron: "0 0 1 1 *" #set cron-jobs to be once a year, as a workaround to make this workflow can only be triggered manually.
           filters:
             branches:
               only:
