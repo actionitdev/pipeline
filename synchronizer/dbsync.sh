@@ -15,7 +15,7 @@ MYSQL_USER=$1
 MYSQL_PASSWORD=$2
 MYSQL_DATABASE=$3
 
-sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > staging.sql && gzip staging.sql
+sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD --no-tablespaces $MYSQL_DATABASE > synchronized-db.sql && gzip synchronized-db.sql
 
 if [ $? == 0 ]; then
     echo "successfully created the dump database file from the production server!"
@@ -23,7 +23,7 @@ else
     echo "failed to create the dump database file"
 fi
 
-sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/staging.sql.gz ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline/.init
+sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/synchronized-db.sql.gz ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline/.init
 
 if [ $? == 0 ]; then
     rm ~/wordpress/pipeline/.init/dumpfile.sql.gz
