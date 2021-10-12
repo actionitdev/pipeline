@@ -9,6 +9,8 @@ orbs:
 
 jobs:
   sync-db-prod-staging:
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - run:
           name: Turn off the staging server for DB synchronization
@@ -136,11 +138,7 @@ workflows:
   version: 2
   db-synchronize:
     jobs:
-      - sync-db-prod-staging:
-          filters:
-            branches:
-              only:
-                - dev
+      - sync-db-prod-staging
 
   build-and-deploy:
     jobs:
