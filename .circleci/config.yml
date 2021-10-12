@@ -140,6 +140,10 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 1 1 *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - sync-db-prod-staging
 
