@@ -4,6 +4,9 @@ parameters:
   run_workflow_build-and-deploy:
     default: true
     type: boolean
+  run_workflow_sync-db-prod-staging:
+    default: true
+    type: boolean
 orbs:
   gh: circleci/github-cli@1.0.2
 
