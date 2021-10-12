@@ -8,6 +8,31 @@ orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
+  sync-db-prod-staging:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - run:
+          name: Turn off the staging server for DB synchronization
+          command: |
+             ssh $SSH_USER@$SSH_HOST \
+             "echo turn off the staging server && \
+             sudo docker-compose -f wordpress/pipeline/staging-docker-compose.yml down && \
+             echo successfully turned off the staging server"
+      - run:
+          name: Synchronize database between production and staging server
+          command: |
+            ssh $SSH_USER@$SSH_PROD_HOST \
+            "echo synchronizing production and staging database && \
+            sudo wordpress/pipeline/synchronizer/dbsync.sh $MYSQL_PROD_USER $MYSQL_PROD_PASSWORD $MYSQL_PROD_DATABASE"
+      - run:
+          name: Turn on the staging server after DB synchronization
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo turn on the staging server && \
+            sudo docker-compose -f wordpress/pipeline/staging-docker-compose.yml up -d && \
+            echo successfully turned on the staging server"
+
   staging-build:
     machine:
       image: ubuntu-2004:202010-01
@@ -111,6 +136,17 @@ jobs:
             echo deployment to production server is finished"
 workflows:
   version: 2
+  db-synchronize:
+    triggers:
+      - schedule:
+          cron: "0 0 1 1 *" #set cron-jobs to be once a year, as a workaround to make this workflow can only be triggered manually.
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - sync-db-prod-staging
+
   build-and-deploy:
     jobs:
       - staging-build:
