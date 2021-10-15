@@ -166,7 +166,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - dev
     jobs:
       - sync-prod-staging
 
