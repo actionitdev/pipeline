@@ -10,7 +10,19 @@ const Accessibility = () => {
 
     // Function for triggering the accessibility assessment.
     function perform_assessment() {
+        
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
 
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+        }
+        });
+
+        xhr.open("POST", "http://localhost:5000/accessibility");
+
+        xhr.send();
     }
 
     return (<>
