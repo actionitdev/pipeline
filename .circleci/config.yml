@@ -39,7 +39,7 @@ jobs:
           name: Update content in the staging server
           command: |
              ssh $SSH_USER@$SSH_HOST \
-            "echo update contents in the staging server && \
+             "echo update contents in the staging server && \
              cd wordpress/pipeline && \
              sudo rm .init/dumpfile.sql.gz && \
              sudo rm -rf wp-content && \
