@@ -89,7 +89,29 @@ const getContents = pathStr => {
   return JSON.parse(output);
 };
 
-const compareReports = (from, to) => {
+
+
+
+
+var corsOptions = {
+    credentials:true,
+    origin:'http://localhost:3000',
+    optionsSuccessStatus:200
+};
+app.use(cors(corsOptions));
+
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json()); 
+
+app.get('/', function (req, res) {
+    res.send('Request Accepted')
+});
+
+app.post('/performance', function (req, res) {
+    let targetUrl = req.body.url
+	
+	
+    const compareReports = (from, to) => {
   var compareOutput = "";
   const metricFilter = [
     "first-contentful-paint",
@@ -140,29 +162,10 @@ const compareReports = (from, to) => {
         if (err) throw err;
       }
     );
+        res.send(compareOutput)
   
 };
-
-
-
-var corsOptions = {
-    credentials:true,
-    origin:'http://localhost:3000',
-    optionsSuccessStatus:200
-};
-app.use(cors(corsOptions));
-
-app.use(express.urlencoded({extended: true})); 
-app.use(express.json()); 
-
-app.get('/', function (req, res) {
-    res.send('Request Accepted')
-});
-
-app.post('/performance', function (req, res) {
-    let targetUrl = req.body.url
-	
-	
+    
 	const urlObj = new URL(targetUrl);
   let dirName = urlObj.host.replace("www.", "");
   if (urlObj.pathname !== "/") {
@@ -211,10 +214,10 @@ app.post('/performance', function (req, res) {
         if (err) throw err;
       }
     );
-	
+	 
   });
 	
-    res.send(targetUrl)
+   
 });
 
 app.use(express.static(__dirname + 'Accessibility_Reports')); //Serves resources from public folder
