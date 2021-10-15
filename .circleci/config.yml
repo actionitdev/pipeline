@@ -4,14 +4,14 @@ parameters:
   run_workflow_build-and-deploy:
     default: true
     type: boolean
-  run_workflow_sync-db-prod-staging:
+  run_workflow_sync-prod-staging:
     default: true
     type: boolean
 orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
-  sync-db-prod-staging:
+  sync-prod-staging:
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -23,13 +23,33 @@ jobs:
              sudo docker-compose -f wordpress/pipeline/staging-docker-compose.yml down && \
              echo successfully turned off the staging server"
       - run:
-          name: Synchronize database between production and staging server
+          name: Synchronize contents from production to the staging server
           command: |
             ssh $SSH_USER@$SSH_PROD_HOST \
-            "echo synchronizing production and staging database && \
-            sudo wordpress/pipeline/synchronizer/dbsync.sh $MYSQL_PROD_USER $MYSQL_PROD_PASSWORD $MYSQL_PROD_DATABASE"
+            "echo synchronizing production and staging server && \
+             mkdir synchronize && \
+             sudo docker run --rm --volumes-from wordpress -v ~/synchronize:/synchronize ubuntu tar --warning=no-file-changed -czvf /synchronize/wp-content-production.tar.gz var/www/html/wp-content && \
+             sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_PROD_USER --password=$MYSQL_PROD_PASSWORD --no-tablespaces $MYSQL_PROD_DATABASE > production.sql && gzip production.sql && \
+             sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/production.sql.gz ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline/.init && \
+             sudo scp -i ~/.ssh/pems/ai-sandbox.pem /home/ubuntu/synchronize/wp-content-production.tar.gz  ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline && \
+             sudo rm -rf synchronize && \
+             sudo rm production.sql.gz && \
+             echo successfully synchronizing production and staging server"
       - run:
-          name: Turn on the staging server after DB synchronization
+          name: Update content in the staging server
+          command: |
+             ssh $SSH_USER@$SSH_HOST \
+            "echo update contents in the staging server && \
+             cd wordpress/pipeline && \
+             sudo rm .init/dumpfile.sql.gz && \
+             sudo rm -rf wp-content && \
+             sudo tar -xvzf wp-content-production.tar.gz && \ 
+             sudo mv var/www/html/wp-content . && \
+             sudo rm -rf var && \
+             sudo rm wp-content-production.tar.gz && \
+             echo successfully update contents in the staging server"
+      - run:
+          name: Turn on the staging server after synchronization
           command: |
             ssh $SSH_USER@$SSH_HOST \
             "echo turn on the staging server && \
@@ -148,7 +168,7 @@ workflows:
               only:
                 - master
     jobs:
-      - sync-db-prod-staging
+      - sync-prod-staging
 
   build-and-deploy:
     jobs:
