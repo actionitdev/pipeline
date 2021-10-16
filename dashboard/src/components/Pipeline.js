@@ -5,17 +5,19 @@ import {
   HiExclamationCircle,
 } from "react-icons/hi";
 
-const Pipeline = ({ build, workflow, setLastDeploy }) => {
+const Pipeline = ({ build, workflow, setLastDeploy, latestDeployWorkflow }) => {
   // Get the latest deployment result
   useEffect(() => {
     let status = [];
-    if (workflow[0] && build[workflow[0]]) {
-      status = build[workflow[0]].map((build) =>
+    console.log(build);
+    console.log(workflow);
+    if (workflow.length > 0 && build[latestDeployWorkflow].length > 0) {
+      status = build[latestDeployWorkflow].map((build) =>
         build.lifecycle !== "finished" ? build.lifecycle : build.outcome
       );
     }
     setLastDeploy(!status.includes("failed"));
-  }, [build, setLastDeploy, workflow]);
+  }, [build, setLastDeploy, workflow, latestDeployWorkflow]);
 
   // Function to get the overall workflow status from the related build results
   const getWorkflowStatus = (builds, index) => {
