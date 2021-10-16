@@ -4,7 +4,7 @@ parameters:
   run_workflow_build-and-deploy:
     default: true
     type: boolean
-  run_workflow_sync-prod-staging:
+  run_workflow_db-synchronize:
     default: true
     type: boolean
 orbs:
