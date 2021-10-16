@@ -74,13 +74,33 @@ function App() {
     });
   };
 
-  // Function to trigger new workflow after clicking the 'new depoloyment' button
+  // Function to trigger 'build-and-deploy' workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
     setMessage("Deployment has started!");
     axios
       .post(postBuildApi, {
         branch: "dev",
         parameters: { "run_workflow_build-and-deploy": true },
+      })
+      .then(() => {
+        setRequestCount(requestCount + 1);
+        updateData();
+      })
+      .catch((err) => {
+        setMessage(`error: ${err}`);
+      });
+  };
+
+  // Function to trigger 'db-synchronize' workflow after clicking the 'synchronize database' button
+  const handleSyncClick = () => {
+    setMessage("Deployment has started!");
+    axios
+      .post(postBuildApi, {
+        branch: "dev",
+        parameters: {
+          "run_workflow_db-synchronize": true,
+          "run_workflow_build-and-deploy": false,
+        },
       })
       .then(() => {
         setRequestCount(requestCount + 1);
@@ -111,7 +131,11 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="col-md-6 left">
-            <NewDeploy handleClick={handleClick} message={message} />
+            <NewDeploy
+              handleClick={handleClick}
+              message={message}
+              handleSyncClick={handleSyncClick}
+            />
             <Backup setEnvVariable={setEnvVariable} lastDeploy={lastDeploy} />
           </div>
           <div className="col-md-6">

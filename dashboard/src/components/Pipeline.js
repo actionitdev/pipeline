@@ -9,11 +9,11 @@ const Pipeline = ({ build, workflow, setLastDeploy }) => {
   // Get the latest deployment result
   useEffect(() => {
     let status = [];
-    workflow[0] &&
-      build[workflow[0]] &&
-      build[workflow[0]].map((build) =>
+    if (workflow[0] && build[workflow[0]]) {
+      status = build[workflow[0]].map((build) =>
         build.lifecycle !== "finished" ? build.lifecycle : build.outcome
       );
+    }
     setLastDeploy(!status.includes("failed"));
   }, [build, setLastDeploy, workflow]);
 

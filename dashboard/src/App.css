@@ -56,13 +56,14 @@
 }
 
 .deploy {
-  margin-top: 100px;
-  margin-bottom: 50px;
+  /* margin-top: 100px; */
+  margin-bottom: 25px;
   text-align: center;
 }
 
 .deploybtn {
   margin-bottom: 10px;
+    width: 220px;
 }
 
 .fail {
@@ -73,6 +74,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top:50px;
 }
 
 .nav {
