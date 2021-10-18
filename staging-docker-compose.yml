@@ -28,6 +28,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/traefik
 
+  #run the mysql container with .init as mount volume
   mysql:
     image: mysql:8.0.23
     restart: always
@@ -44,6 +45,7 @@ services:
     volumes:
       - ./.init:/docker-entrypoint-initdb.d
 
+  #run the wordpress container with wp-content folder as the mount volume
   wordpress:
     depends_on:
       - mysql
