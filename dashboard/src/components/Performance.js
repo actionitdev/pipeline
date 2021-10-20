@@ -6,13 +6,15 @@ import Button from "react-bootstrap/button";
 export default function Performance() {
     const [content, setContent] = useState("");
     const [textInput, setTextInput] = useState("");
+	const [comparisonContent, setComparisonContent] = useState("")
 
     
     function handlePerformance () {
         CallApi.runPerformanceTest({"url":textInput})
         .then(response => {
             console.log(response.data)
-			setContent(response.data)
+			setContent("http://localhost:5000/" + response.data.directory)
+			setComparisonContent(response.data.compareTxt)
         })
     }
     
@@ -35,7 +37,10 @@ export default function Performance() {
                         </div>
                     </div>
                     <div className={style["results-section"]}>
-                        <pre>{content}</pre>
+						<a href = {content} target="_blank">View the performance test result</a>
+						<br/>
+						<h5>Compare to previous Test</h5>
+                        <pre>{comparisonContent}</pre>
                     </div>
                 </div>
                 
