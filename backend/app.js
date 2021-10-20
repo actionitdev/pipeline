@@ -10,7 +10,7 @@ const glob = require("glob");
 const path = require("path");
 
 var app = express();
-
+app.use(express.static("public"));
 
 const DEVTOOLS_RTT_ADJUSTMENT_FACTOR = 3.75;
 const DEVTOOLS_THROUGHPUT_ADJUSTMENT_FACTOR = 0.9;
@@ -54,7 +54,7 @@ const throttling = {
 
 
 const launchChromeAndRunLighthouse = url => {
-  return chromeLauncher.launch().then(chrome => {
+  return chromeLauncher.launch({chromeFlags: ['--headless']}).then(chrome => {
     const opts = {
       port: chrome.port,
 	  throttlingMethod: 'provided',
@@ -109,10 +109,16 @@ app.get('/', function (req, res) {
 
 app.post('/performance', function (req, res) {
     let targetUrl = req.body.url
+	let comparisonResult = ""
 	
 	
     const compareReports = (from, to) => {
   var compareOutput = "";
+  compareOutput += "Metric".padEnd(35, ' ');
+  compareOutput += "Previous Report".padEnd(35, ' ');
+  compareOutput += "Current Report".padEnd(35, ' ');
+  compareOutput += "Comparison Result".padEnd(35, ' ');
+  compareOutput += "\n"
   const metricFilter = [
     "first-contentful-paint",
     "first-meaningful-paint",
@@ -150,8 +156,17 @@ app.post('/performance', function (req, res) {
         }
       })();
       console.log(logColor, `${from["audits"][auditObj].title} is ${log}`);
-	  compareOutput += `First Report: ${from["audits"][auditObj].numericValue} **\t\tSecond Report: ${to["audits"][auditObj].numericValue} **\t\t`
-	  compareOutput += `${from["audits"][auditObj].title} is ${log}\n`;
+	  
+
+	  let previousResult = Number(`${from["audits"][auditObj].numericValue}`).toFixed(3);
+	  let currentResult = Number(`${to["audits"][auditObj].numericValue}`).toFixed(3);
+	  
+	  compareOutput += `${from["audits"][auditObj].title}`.padEnd(35, ' ');
+	  compareOutput += `${previousResult}ms`.padEnd(35, ' ');
+	  compareOutput += `${currentResult}ms`.padEnd(35, ' ');
+	  compareOutput += `${log}`.padEnd(35, ' ');
+	  compareOutput += '\n'
+
     }
   };
   
@@ -162,7 +177,9 @@ app.post('/performance', function (req, res) {
         if (err) throw err;
       }
     );
-        res.send(compareOutput)
+	
+	comparisonResult = compareOutput
+      
   
 };
     
@@ -172,12 +189,12 @@ app.post('/performance', function (req, res) {
     dirName = dirName + urlObj.pathname.replace(/\//g, "_");
   }
 
-  if (!fs.existsSync(dirName)) {
-    fs.mkdirSync(dirName);
+  if (!fs.existsSync("public/"+dirName)) {
+    fs.mkdirSync("public/" + dirName);
   }
 
   launchChromeAndRunLighthouse(targetUrl).then(results => {
-    const prevReports = glob(`${dirName}/*.json`, {
+    const prevReports = glob(`public/${dirName}/*.json`, {
       sync: true
     });
 
@@ -194,26 +211,27 @@ app.post('/performance', function (req, res) {
       const recentReport = new Date(max).toISOString();
 
       const recentReportContents = getContents(
-        dirName + "/" + recentReport.replace(/:/g, "_") + ".json"
+        "public/" + dirName + "/" + recentReport.replace(/:/g, "_") + ".json"
       );
 
       compareReports(recentReportContents, results.js);
     }
 
     fs.writeFile(
-      `${dirName}/${results.js["fetchTime"].replace(/:/g, "_")}.json`,
+      `public/${dirName}/${results.js["fetchTime"].replace(/:/g, "_")}.json`,
       results.json,
       err => {
         if (err) throw err;
       }
     );
 	fs.writeFile(
-      `${dirName}/${results.js["fetchTime"].replace(/:/g, "_")}.html`,
+      `public/${dirName}/${results.js["fetchTime"].replace(/:/g, "_")}.html`,
       results.html,
       err => {
         if (err) throw err;
       }
     );
+	res.send({directory:`${dirName}/${results.js["fetchTime"].replace(/:/g, "_")}.html`, compareTxt:comparisonResult})
 	 
   });
 	
