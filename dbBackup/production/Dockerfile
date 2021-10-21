@@ -39,7 +39,7 @@ ENV SCHEDULE_DB **None**
 ENV S3_IAMROLE false
 
 RUN rm /var/spool/cron/crontabs/root
-COPY root /var/spool/cron/crontabs
+COPY root /var/spool/cron/crontabs/root
 ADD run.sh run.sh
 ADD backupDB.sh backupDB.sh
 # ADD backupWP.sh backupWP.sh
