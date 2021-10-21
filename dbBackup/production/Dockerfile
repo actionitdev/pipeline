@@ -12,7 +12,7 @@ RUN go install
 
 FROM bentolor/docker-dind-awscli
 
-COPY root /etc/crontabs/crontab-root
+ADD root /etc/crontabs/crontab-root
 
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh
