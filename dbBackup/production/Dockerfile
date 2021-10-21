@@ -12,6 +12,8 @@ RUN go install
 
 FROM bentolor/docker-dind-awscli
 
+COPY root /etc/crontabs/crontab-root
+
 ADD install.sh install.sh
 RUN sh install.sh && rm install.sh
 
@@ -37,8 +39,6 @@ ENV S3_FILENAME **None**
 ENV SCHEDULE_DB **None**
 # ENV SCHEDULE_WP **None**
 ENV S3_IAMROLE false
-
-COPY ./root /etc/crontabs/root
 
 ADD run.sh run.sh
 ADD backupDB.sh backupDB.sh
