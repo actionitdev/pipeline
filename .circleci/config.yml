@@ -171,7 +171,7 @@ jobs:
             sudo rm .init/dumpfile.sql.gz && \
             sudo mv ~/staging.sql.gz .init && \ 
             sudo rm wp-content-staging.tar.gz && \
-            sudo docker-compose -f production-docker-compose.yml up -d && \
+            sudo docker-compose -f production-docker-compose.yml up --build -d && \
             echo deployment to production server is finished"
 workflows:
   version: 2
