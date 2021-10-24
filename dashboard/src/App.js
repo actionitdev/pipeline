@@ -15,11 +15,21 @@ const getBuildApi =
 const postBuildApi = "/api/v2/project/github/actionitdev/pipeline/pipeline";
 const createEnvApi = "api/v2/project/github/actionitdev/pipeline/envvar";
 function App() {
+  // Previous workflow id
   const [workflow, setWorkflow] = useState([]);
+  // Previous build records
   const [build, setBuild] = useState({});
+  // Reminding message for 'start new deployment' button
   const [message, setMessage] = useState("");
+  //  Reminding message for 'synchronize database' button
+  const [syncMessage, setSyncMessage] = useState("");
+  // The total count of sending the get request
   const [requestCount, setRequestCount] = useState(0);
-  const [lastDeploy, setLastDeploy] = useState();
+  // The latest deployment workflow id
+  const [latestDeployWorkflow, setLatestDeployWorkflow] = useState();
+  // If latest deployment is successful: true, if failed: false
+  // It determines the backup section is accessable or not
+  const [lastSuccessDeploy, setLastSuccessDeploy] = useState();
   axios.defaults.headers.common["Circle-Token"] =
     process.env.REACT_APP_CIRCLECI_TOKEN;
 
@@ -27,6 +37,10 @@ function App() {
   const getData = () => {
     axios.get(getBuildApi).then((res) => {
       const data = res.data;
+      const firstDeployWorkflow = data.find(
+        (build) => build.workflows.workflow_name === "build-and-deploy"
+      ).workflows.workflow_id;
+      setLatestDeployWorkflow(firstDeployWorkflow);
       const buildData = data.reduce((groupedBuild, build) => {
         const workflowId = build.workflows.workflow_id;
         if (groupedBuild[workflowId] == null) {
@@ -57,7 +71,7 @@ function App() {
     let inter = setInterval(() => {
       count += 1;
       getData();
-      if (count === 18) {
+      if (count === 15) {
         clearInterval(inter);
       }
     }, 60000);
@@ -74,12 +88,36 @@ function App() {
     });
   };
 
+  // Function to trigger 'build-and-deploy' workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
+    setSyncMessage("Synchronization has started!");
+    axios
+      .post(postBuildApi, {
+        branch: "dev",
+        parameters: {
+          "run_workflow_build-and-deploy": true,
+          "run_workflow_db-synchronize": false,
+        },
+      })
+      .then(() => {
+        setRequestCount(requestCount + 1);
+        updateData();
+      })
+      .catch((err) => {
+        setMessage(`error: ${err}`);
+      });
+  };
+
+  // Function to trigger 'db-synchronize' workflow after clicking the 'synchronize database' button
+  const handleSyncClick = () => {
     setMessage("Deployment has started!");
     axios
       .post(postBuildApi, {
         branch: "dev",
-        parameters: { "run_workflow_build-and-deploy": true },
+        parameters: {
+          "run_workflow_db-synchronize": true,
+          "run_workflow_build-and-deploy": false,
+        },
       })
       .then(() => {
         setRequestCount(requestCount + 1);
@@ -94,14 +132,23 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="col-md-6 left">
-            <NewDeploy handleClick={handleClick} message={message} />
-            <Backup setEnvVariable={setEnvVariable} lastDeploy={lastDeploy} />
+            <NewDeploy
+              handleClick={handleClick}
+              message={message}
+              syncMessage={syncMessage}
+              handleSyncClick={handleSyncClick}
+            />
+            <Backup
+              setEnvVariable={setEnvVariable}
+              lastDeploy={lastSuccessDeploy}
+            />
           </div>
           <div className="col-md-6">
             <Pipeline
               build={build}
               workflow={workflow}
-              setLastDeploy={setLastDeploy}
+              setLastDeploy={setLastSuccessDeploy}
+              latestDeployWorkflow={latestDeployWorkflow}
             />
           </div>
         </div>
