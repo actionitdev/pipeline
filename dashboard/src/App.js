@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import axios from "axios";
-import Performance from './components/Performance';
+import Performance from "./components/Performance";
 import "./App.css";
 
 // The full api address is in setupProxy.js file
@@ -90,7 +90,7 @@ function App() {
 
   // Function to trigger 'build-and-deploy' workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
-    setSyncMessage("Synchronization has started!");
+    setMessage("Deployment has started!");
     axios
       .post(postBuildApi, {
         branch: "dev",
@@ -110,7 +110,7 @@ function App() {
 
   // Function to trigger 'db-synchronize' workflow after clicking the 'synchronize database' button
   const handleSyncClick = () => {
-    setMessage("Deployment has started!");
+    setSyncMessage("Synchronization has started!");
     axios
       .post(postBuildApi, {
         branch: "dev",
