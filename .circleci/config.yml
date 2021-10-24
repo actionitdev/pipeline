@@ -39,13 +39,14 @@ jobs:
             sudo rm production.sql.gz && \
             echo successfully synchronizing production and staging server"
       # 3rd step: unzip the contents and DB, and mount both of them to the staging's containers
+      # todo: echo dev null if commands do not work 2> /dev/null
       - run:
           name: Update content in the staging server
           command: |
             ssh $SSH_USER@$SSH_HOST \
             "echo update contents in the staging server && \
             cd wordpress/pipeline && \
-            sudo rm .init/dumpfile.sql.gz && \
+            sudo rm .init/dumpfile.sql.gz && \ 
             sudo rm -rf wp-content && \
             sudo tar -xvzf wp-content-production.tar.gz && \ 
             sudo mv var/www/html/wp-content . && \
