@@ -45,13 +45,13 @@ mkdir backup
 #backup wp-content from the container via docker volume
 docker run --rm --volumes-from wordpress -v ~/backup:/backup ubuntu tar --warning=no-file-changed -czvf /backup/wp-content-staging.tar.gz var/www/html/wp-content
 
-if [ $? == 0 ]; then
-    echo "wp-content backup has been created"
-else
-    rmdir backup
-    rm staging.sql.gz
-    echo "failed to create the wp-content"
-fi
+# if [ $? == 0 ]; then
+#     echo "wp-content backup has been created"
+# else
+#     rmdir backup
+#     rm staging.sql.gz
+#     echo "failed to create the wp-content"
+# fi
 
 #transfer wp-content to S3 for backup
 mv ~/backup/wp-content-staging.tar.gz wp-content-staging.tar.gz

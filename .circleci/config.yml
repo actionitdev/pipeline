@@ -39,7 +39,8 @@ jobs:
             sudo rm production.sql.gz && \
             echo successfully synchronizing production and staging server"
       # 3rd step: unzip the contents and DB, and mount both of them to the staging's containers
-      # todo: echo dev null if commands do not work 2> /dev/null
+      # todo: echo dev null if commands do not work 2> /dev/null 
+      # todo: remove any contents inside
       - run:
           name: Update content in the staging server
           command: |
@@ -151,6 +152,9 @@ jobs:
             "echo starting the migration process && \
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
              sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+             sudo rmdir ~/backup && \
+             sudo rm staging.sql.gz && \
+             sudo rm wp-content-staging.tar.gz && \
              echo migration process is completed"
       #5th step: Start the deployment process
       - run:
