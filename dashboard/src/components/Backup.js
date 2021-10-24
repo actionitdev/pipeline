@@ -76,7 +76,8 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
                       <p className="mb-1">{wp[index].substr(37)}</p>
                     </div>
                     <div className="button-section">
-                      <Button
+                      {/* Hide the buttons for selecting the previous backup since this function on script level is not finished yet  */}
+                      {/* <Button
                         variant={select === index ? "dark" : "outline-dark"}
                         size="sm"
                         onClick={() => onClick(index)}
@@ -84,7 +85,7 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
                         disabled={lastDeploy}
                       >
                         Select
-                      </Button>
+                      </Button> */}
                       <div
                         style={{
                           visibility: select === index ? "visible" : "hidden",
