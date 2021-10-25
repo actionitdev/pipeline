@@ -33,7 +33,7 @@ jobs:
             mkdir synchronize && \
             sudo docker run --rm --volumes-from wordpress -v ~/synchronize:/synchronize ubuntu tar --warning=no-file-changed -czvf /synchronize/wp-content-production.tar.gz var/www/html/wp-content && \
             sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_PROD_USER --password=$MYSQL_PROD_PASSWORD --no-tablespaces $MYSQL_PROD_DATABASE > production.sql && gzip production.sql && \
-            sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/production.sql.gz ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline/.init && \
+            sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/production.sql.gz ubuntu@13.237.60.232:/home/ubuntu && \
             sudo scp -i ~/.ssh/pems/ai-sandbox.pem /home/ubuntu/synchronize/wp-content-production.tar.gz  ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline && \
             sudo rm -rf synchronize && \
             sudo rm production.sql.gz && \
@@ -46,6 +46,7 @@ jobs:
             "echo update contents in the staging server && \
             cd wordpress/pipeline && \
             sudo rm .init/* && \ 
+            sudo mv ~/production.sql.gz .init && \
             sudo rm -rf wp-content && \
             sudo tar -xvzf wp-content-production.tar.gz && \ 
             sudo mv var/www/html/wp-content . && \
