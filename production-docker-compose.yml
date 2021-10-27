@@ -1,6 +1,5 @@
 version: "3.2"
 services:
-  # Todo: uncomment the traefik if a domain name is available.
   traefik:
     image: traefik:v2.4
     container_name: traefik
@@ -29,6 +28,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/traefik
 
+  #run the mysql container with .init as mount volume
   mysql:
     image: mysql:8.0.23
     restart: always
@@ -45,6 +45,7 @@ services:
     volumes:
       - ./.init:/docker-entrypoint-initdb.d
 
+  #run the backupdb container to periodically backup the database weekly on Sunday 00:00
   backupdb:
     build: ./dbBackup/production/
     container_name: dbbackup
@@ -60,15 +61,12 @@ services:
       - MYSQL_PASSWORD=${mysql_root_pw}
       - MYSQL_HOST=mysql
       - MYSQLDUMP_DATABASE=wp
-      # - SCHEDULE=0 0 0 * * *
       - SCHEDULE_DB=0 0 * * 0
-      # - SCHEDULE_WP=*/10 * * * *
     labels:
       # Disable traefik in mysql
       - "traefik.enable=false"
-    # volumes:
-    #   - ./wp-content:/var/www/html/wp-content
 
+  #run the wordpress container with wp-content folder as the mount volume
   wordpress:
     depends_on:
       - mysql
@@ -77,17 +75,13 @@ services:
     restart: always
     expose:
       - "80"
-    # ports:
-    #   - "8080:80"
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${mysql_user}
       WORDPRESS_DB_PASSWORD: ${mysql_pw}
       WORDPRESS_DB_NAME: ${mysql_db}
       WORDPRESS_TABLE_PREFIX: wp_
-    labels:
-      # - "traefik.enable=true"
-      # - "traefik.docker.network=proxy"
+    labels: 
       - "traefik.http.routers.wordpress-apache.rule=Host(`production-sa.actionit.dev`)"
       - "traefik.http.routers.wordpress-apache.tls.certresolver=myresolver"
     volumes:
