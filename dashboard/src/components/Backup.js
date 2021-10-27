@@ -28,8 +28,12 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
       if (err) {
         console.log(err, err.stack);
       } else {
+        console.log("db", data.Contents);
         const contents = data.Contents;
-        const dbkeys = contents.map((item) => item.Key).slice(-3);
+        const dbkeys = contents
+          .map((item) => item.Key)
+          .slice(-3)
+          .reverse();
         setDb(dbkeys);
       }
     });
@@ -37,8 +41,12 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
       if (err) {
         console.log(err, err.stack);
       } else {
+        console.log("wp", data.Contents);
         const contents = data.Contents;
-        const wpkeys = contents.map((item) => item.Key).slice(-3);
+        const wpkeys = contents
+          .map((item) => item.Key)
+          .slice(-3)
+          .reverse();
         setWp(wpkeys);
       }
     });
