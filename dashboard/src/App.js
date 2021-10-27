@@ -86,6 +86,7 @@ function App() {
     }, 60000);
   };
 
+  // Function to create environment variables on CircleCI
   const setEnvVariable = (db, wp) => {
     axios.post(createEnvApi, {
       name: "backupDb",
