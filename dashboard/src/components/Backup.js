@@ -28,7 +28,6 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
       if (err) {
         console.log(err, err.stack);
       } else {
-        console.log("db", data.Contents);
         const contents = data.Contents;
         const dbkeys = contents
           .map((item) => item.Key)
@@ -41,7 +40,6 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
       if (err) {
         console.log(err, err.stack);
       } else {
-        console.log("wp", data.Contents);
         const contents = data.Contents;
         const wpkeys = contents
           .map((item) => item.Key)
