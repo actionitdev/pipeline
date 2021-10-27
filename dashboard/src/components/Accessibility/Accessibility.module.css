@@ -21,7 +21,7 @@
     display: flex;
     margin: 0.5rem 0;
     padding: 0.5rem;
-    justify-content: space-between;
+    justify-content: space-around;
     border-style: solid;
     border-width: 1px;
     border-color: rgb(219, 218, 218);
@@ -33,7 +33,7 @@
 }
 
 .url-input{
-    width: 55%;
+    width: 77%;
 }
 
 .url-input input{
@@ -42,8 +42,12 @@
     border-radius: 0.25rem;
 }
 
+.button-section{
+    
+}
+
 .button-section div{
-    margin: 0 0.5rem;
+    width: max-content;
 }
 
 .results-section{
@@ -53,4 +57,11 @@
     border-radius: 0.25rem;
     margin: 0.5rem;
     height: 82%;
+    overflow-y: scroll;
+}
+
+.loading-div{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 12rem;
 }
