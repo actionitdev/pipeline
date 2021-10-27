@@ -10,6 +10,7 @@ export default function Performance() {
 
     
     function handlePerformance () {
+	setComparisonContent("Test running")
         CallApi.runPerformanceTest({"url":textInput})
         .then(response => {
             console.log(response.data)
