@@ -1,10 +1,68 @@
 version: 2.1
-
+# Set parameter to workflows will enable workflow triggered by sending post request in the dashboard. Set to false means it will not be triggered by pushing commits.
+parameters:
+  run_workflow_build-and-deploy:
+    default: true
+    type: boolean
+  run_workflow_db-synchronize:
+    default: false
+    type: boolean
 orbs:
   gh: circleci/github-cli@1.0.2
 
 jobs:
+  #the sync-prod-staging job synchronize the contents (comments, posts) from the production to the staging server, so that the database is always up-to-date.
+  sync-prod-staging:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      # 1st step: to turn off the staging server
+      - run:
+          name: Turn off the staging server for DB synchronization
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo turn off the staging server && \
+            sudo docker-compose -f wordpress/pipeline/staging-docker-compose.yml down && \
+            echo successfully turned off the staging server"
+      # 2nd step: transfer all wp-contents and DB from the production to the staging server
+      - run:
+          name: Synchronize contents from production to the staging server
+          command: |
+            ssh $SSH_USER@$SSH_PROD_HOST \
+            "echo synchronizing production and staging server && \
+            mkdir synchronize && \
+            sudo docker run --rm --volumes-from wordpress -v ~/synchronize:/synchronize ubuntu tar --warning=no-file-changed -czvf /synchronize/wp-content-production.tar.gz var/www/html/wp-content && \
+            sudo docker exec mysql /usr/bin/mysqldump -u $MYSQL_PROD_USER --password=$MYSQL_PROD_PASSWORD --no-tablespaces $MYSQL_PROD_DATABASE > production.sql && gzip production.sql && \
+            sudo scp -i ~/.ssh/pems/ai-sandbox.pem ~/production.sql.gz ubuntu@13.237.60.232:/home/ubuntu && \
+            sudo scp -i ~/.ssh/pems/ai-sandbox.pem /home/ubuntu/synchronize/wp-content-production.tar.gz  ubuntu@13.237.60.232:/home/ubuntu/wordpress/pipeline && \
+            sudo rm -rf synchronize && \
+            sudo rm production.sql.gz && \
+            echo successfully synchronizing production and staging server"
+      # 3rd step: unzip the contents and DB, and mount both of them to the staging's containers
+      - run:
+          name: Update content in the staging server
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo update contents in the staging server && \
+            cd wordpress/pipeline && \
+            sudo rm .init/* && \ 
+            sudo mv ~/production.sql.gz .init && \
+            sudo rm -rf wp-content && \
+            sudo tar -xvzf wp-content-production.tar.gz && \ 
+            sudo mv var/www/html/wp-content . && \
+            sudo rm -rf var && \
+            sudo rm wp-content-production.tar.gz && \
+            echo successfully update contents in the staging server"
+      # 4th step: turn on the staging server after synchronization process
+      - run:
+          name: Turn on the staging server after synchronization
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo turn on the staging server && \
+            sudo docker-compose -f wordpress/pipeline/staging-docker-compose.yml up -d && \
+            echo successfully turned on the staging server"
 
+  #staging-build job is created to test staging's docker compose and database readiness before being deployed.
   staging-build:
     machine:
       image: ubuntu-2004:202010-01
@@ -17,20 +75,6 @@ jobs:
       - run:
           name: "Test database connection"
           command: docker exec $(docker ps -f name=mysql -q) mysql -u root -p$mysql_root_pw
-      # - run:
-      #     name: "Test website availability"
-      #     command: |
-      #       res=`curl localhost:8080`
-
-      #       if [ "$?" -ne 0 ]
-      #       then
-      #         exit 1
-      #       fi
-
-      #       if [ "$res" = "404 page not found" ]
-      #       then
-      #         exit 1
-      #       fi
       - gh/setup
       - run:
           name: "Create new pull request"
@@ -38,6 +82,7 @@ jobs:
             msg=`git log -1 --pretty=format:"Latest Commit: %s"`
             gh pr create --title "New pull request from dev" --body "$msg" || echo "No need to create a new pull request."
 
+  #production-build job is created to test production's docker compose readiness before being deployed.
   production-build:
     machine:
       image: ubuntu-2004:202010-01
@@ -47,13 +92,16 @@ jobs:
           name: "Test production-docker-compose build"
           command: docker-compose -f production-docker-compose.yml up -d
 
+  #staging-deploy job is create to deploy latest updates from local to the staging server, and to turn on the staging server once it's deployed.
   staging-deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
+      #1st step: add github project's ssh keys
       - add_ssh_keys:
           fingerprints:
             - "8a:45:83:7c:a1:87:b2:cd:cc:1e:f9:f1:d5:1a:4b:21"
+      #2nd step: deployment to the staging server
       - run:
           name: Deploy to lightsail staging server
           command: |
@@ -62,49 +110,79 @@ jobs:
             cd wordpress/pipeline && \
             git checkout dev && \ 
             git pull && \ 
+            sudo chmod 755 dbBackup/staging/backupStagingDB.sh && \
+            sudo chmod 755 dbBackup/staging/backupStagingWP.sh && \
             sudo docker-compose -f staging-docker-compose.yml up -d && \
             sudo chown -R www-data:www-data wp-content/plugins/ && \
             sudo chmod 775 wp-content && \
             sudo chown -R www-data:www-data wp-content/ && \
             echo deployment is finished"
 
+  #production-deploy job is create to deploy latest updates from staging to the production server, and to turn on the production server once it's deployed.
   production-deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
+      #1st step: add github project's ssh keys
       - add_ssh_keys:
           fingerprints:
             - "a1:0b:92:bb:27:64:20:fa:f4:7d:a8:aa:94:31:9a:0e"
+      #2nd step: backup the staging server's database before deployment using backupStagingDB.sh
+      - run:
+          name: Backup the database in the staging server
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo backup the staging server && \
+             sudo wordpress/pipeline/dbBackup/staging/backupStagingDB.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION $MYSQL_STAGING_PORT $MYSQL_STAGING_USER $MYSQL_STAGING_PASSWORD $MYSQL_STAGING_DATABASE && \
+             echo backup workflow for the database in the staging server is completed"
+      #3rd step: backup the staging server's wp-content before deployment using backupStagingWP.sh
+      - run:
+          name: Backup the wordpress content in the staging server
+          command: |
+            ssh $SSH_USER@$SSH_HOST \
+            "echo backup the staging server && \
+             sudo wordpress/pipeline/dbBackup/staging/backupStagingWP.sh $S3_ACCESS_KEY_ID $S3_SECRET_ACCESS_KEY $S3_REGION && \
+             echo backup workflow for the wordpress in the staging server is completed"
+      #4th step: Transfer WP-content and DB from the staging to the production server
       - run:
           name: Migrate sql and wp-content from staging to the production server
           command: |
             ssh $SSH_USER@$SSH_HOST \
             "echo starting the migration process && \
-            cd wordpress/pipeline && \
-            sudo zip -r wp-content-staging.zip wp-content && \
-            sudo docker exec mysql /usr/bin/mysqldump -u wpadmin --password=adminpw --no-tablespaces wp > dumpfile.staging.sql && gzip dumpfile.staging.sql && \
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.zip ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem dumpfile.staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
-            rm wp-content-staging.zip && \ 
-            rm dumpfile.staging.sql.gz && \
-            echo migration process is completed"
-            
+             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem wp-content-staging.tar.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+             sudo scp -i ~/.ssh/pems/ai-sandbox-production.pem staging.sql.gz ubuntu@3.104.75.134:/home/ubuntu/ && \ 
+             sudo rmdir ~/backup && \
+             sudo rm staging.sql.gz && \
+             sudo rm wp-content-staging.tar.gz && \
+             echo migration process is completed"
+      #5th step: Start the deployment process
       - run:
           name: Deploy to the production server
           command: |
-              ssh $SSH_USER@$SSH_PROD_HOST \
-              "echo starting the deployment pipeline && \
-              cd wordpress/pipeline && \
-              sudo unzip -f /home/ubuntu/wp-content-staging.zip && \
-              git checkout master && \ 
-              git pull && \ 
-              rm .init/dumpfile.sql.gz && \
-              mv ~/dumpfile.staging.sql.gz .init && \ 
-              sudo docker-compose -f production-docker-compose.yml up -d && \
-              echo deployment to production server is finished"
+            ssh $SSH_USER@$SSH_PROD_HOST \
+            "echo starting the deployment pipeline && \
+            cd wordpress/pipeline && \
+            sudo rm -rf wp-content && \
+            sudo mv ~/wp-content-staging.tar.gz . && \
+            sudo tar -xvzf wp-content-staging.tar.gz && \
+            sudo mv var/www/html/wp-content . && \
+            sudo rm -rf var && \
+            git checkout dev && \ 
+            git pull && \ 
+            sudo rm .init/dumpfile.sql.gz && \
+            sudo mv ~/staging.sql.gz .init && \ 
+            sudo rm wp-content-staging.tar.gz && \
+            sudo docker-compose -f production-docker-compose.yml up --build -d && \
+            echo deployment to production server is finished"
 workflows:
   version: 2
+  db-synchronize:
+    when: << pipeline.parameters.run_workflow_db-synchronize >>
+    jobs:
+      - sync-prod-staging
+
   build-and-deploy:
+    when: << pipeline.parameters.run_workflow_build-and-deploy >>
     jobs:
       - staging-build:
           filters:

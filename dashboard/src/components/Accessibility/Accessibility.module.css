@@ -1,0 +1,67 @@
+.main-div{
+    height: 40rem;
+    width: 70vw;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(219, 218, 218);
+    margin: 2rem auto;
+    border-radius: 0.25rem;
+}
+
+.navbar-div{
+    margin: 0.5rem;
+}
+
+.navbar-div div h4{
+    margin: 0.5rem;
+}
+
+.control-panel{
+    width: 100%;
+    display: flex;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    justify-content: space-around;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(219, 218, 218);
+    border-radius: 0.25rem;
+}
+
+.control-panel div{
+    display: inline-flex;
+}
+
+.url-input{
+    width: 77%;
+}
+
+.url-input input{
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.button-section{
+    
+}
+
+.button-section div{
+    width: max-content;
+}
+
+.results-section{
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(219, 218, 218);
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    height: 82%;
+    overflow-y: scroll;
+}
+
+.loading-div{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 12rem;
+}
