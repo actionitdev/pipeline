@@ -103,7 +103,7 @@ function App() {
     setMessage("Deployment has started!");
     axios
       .post(postBuildApi, {
-        branch: "dev",
+        branch: "master",
         parameters: {
           "run_workflow_build-and-deploy": true,
           "run_workflow_db-synchronize": false,
@@ -124,7 +124,7 @@ function App() {
     setStartSync(true);
     axios
       .post(postBuildApi, {
-        branch: "dev",
+        branch: "master",
         parameters: {
           "run_workflow_db-synchronize": true,
           "run_workflow_build-and-deploy": false,
