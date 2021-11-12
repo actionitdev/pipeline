@@ -380,11 +380,11 @@ In this project, five-variable cron job format is used, For example, `SCHEDULE=1
   If we need to modify which user can access the bucket, we need to set the Bucket policy which is in the **Permissions** tab.
   <br>The policy now allows the user that created for the website application to write to the bucket. Also, the Bucket and objects are not public.
 
-### Dashboard
+## Dashboard
 
 - `dashboard` is the folder to store the react project of dashboard.
 
-#### Run the Dashboard
+### Run the Dashboard
 
 1. To run the project on localhost, first access the `dashboard` directory from root.
 
@@ -425,7 +425,7 @@ or
 $ yarn start
 ```
 
-#### Dashboard User Interface
+### Dashboard User Interface
 
 Currently, there are three main functions on the dashboard:
 
