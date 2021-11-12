@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import Pipeline from "./components/Pipeline";
 import NewDeploy from "./components/NewDeploy";
 import Backup from "./components/Backup";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
 import axios from "axios";
 import "./App.css";
 
@@ -22,17 +19,24 @@ function App() {
   const [message, setMessage] = useState("");
   //  Reminding message for 'synchronize database' button
   const [syncMessage, setSyncMessage] = useState("");
-  // The total count of sending the get request
+  // The total count of sending the get request after clicking the button
   const [requestCount, setRequestCount] = useState(0);
   // The latest deployment workflow id
   const [latestDeployWorkflow, setLatestDeployWorkflow] = useState();
+  // The latest db synchronize workflow id
+  const [latestSyncWorkflow, setLatestSyncWorkflow] = useState();
   // If latest deployment is successful: true, if failed: false
   // It determines the backup section is accessable or not
   const [lastSuccessDeploy, setLastSuccessDeploy] = useState();
+  // If latest db sync is successful: true, if failed: false
+  // Only when db sync is successful will enable the deployment button
+  const [lastSuccessSync, setLastSuccessSync] = useState(false);
+  // start the db sync process
+  const [startSync, setStartSync] = useState(false);
   axios.defaults.headers.common["Circle-Token"] =
     process.env.REACT_APP_CIRCLECI_TOKEN;
 
-  // Function to get circleCI history build data
+  // Function to get circleCI build data
   const getData = () => {
     axios.get(getBuildApi).then((res) => {
       const data = res.data;
@@ -40,6 +44,12 @@ function App() {
         (build) => build.workflows.workflow_name === "build-and-deploy"
       ).workflows.workflow_id;
       setLatestDeployWorkflow(firstDeployWorkflow);
+      if (startSync) {
+        const firstSyncWorkflow = data.find(
+          (build) => build.workflows.workflow_name === "db-synchronize"
+        ).workflows.workflow_id;
+        setLatestSyncWorkflow(firstSyncWorkflow);
+      }
       const buildData = data.reduce((groupedBuild, build) => {
         const workflowId = build.workflows.workflow_id;
         if (groupedBuild[workflowId] == null) {
@@ -76,7 +86,7 @@ function App() {
     }, 60000);
   };
 
-  // Function to add environment variable to CircleCi
+  // Function to create environment variables on CircleCI
   const setEnvVariable = (db, wp) => {
     axios.post(createEnvApi, {
       name: "backupDb",
@@ -90,7 +100,7 @@ function App() {
 
   // Function to trigger 'build-and-deploy' workflow after clicking the 'new depoloyment' button
   const handleClick = () => {
-    setSyncMessage("Synchronization has started!");
+    setMessage("Deployment has started!");
     axios
       .post(postBuildApi, {
         branch: "dev",
@@ -110,7 +120,8 @@ function App() {
 
   // Function to trigger 'db-synchronize' workflow after clicking the 'synchronize database' button
   const handleSyncClick = () => {
-    setMessage("Deployment has started!");
+    setSyncMessage("Synchronization has started!");
+    setStartSync(true);
     axios
       .post(postBuildApi, {
         branch: "dev",
@@ -129,22 +140,6 @@ function App() {
   };
   return (
     <div className="App">
-      <Navbar bg="dark" variant="dark" className="nav">
-        <Container>
-          <Navbar.Brand href="./">Solferino Academy Dashboard</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="https://staging-sa.actionit.dev/" target="_blank">
-              Staging Site
-            </Nav.Link>
-            <Nav.Link
-              href="https://production-sa.actionit.dev/"
-              target="_blank"
-            >
-              Production Site
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <div className="container">
         <div className="row">
           <div className="col-md-6 left">
@@ -153,6 +148,7 @@ function App() {
               message={message}
               syncMessage={syncMessage}
               handleSyncClick={handleSyncClick}
+              lastSuccessSync={lastSuccessSync}
             />
             <Backup
               setEnvVariable={setEnvVariable}
@@ -164,7 +160,9 @@ function App() {
               build={build}
               workflow={workflow}
               setLastDeploy={setLastSuccessDeploy}
+              setLastSync={setLastSuccessSync}
               latestDeployWorkflow={latestDeployWorkflow}
+              latestSyncWorkflow={latestSyncWorkflow}
             />
           </div>
         </div>

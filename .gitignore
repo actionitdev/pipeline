@@ -5,3 +5,4 @@ wpBackup/
 traefik/
 dashboard/node_modules
 dashboard/.env
+backend/node_modules

@@ -1,0 +1,6 @@
+First Report: 1662.841 **		Second Report: 1947.261 **		First Contentful Paint is 17.1% slower
+First Report: 1779.36 **		Second Report: 1947.261 **		First Meaningful Paint is 9.44% slower
+First Report: 3482 **		Second Report: 2935 **		Speed Index is 15.71% faster
+First Report: 7.391000000000076 **		Second Report: 1.3719999999998436 **		Total Blocking Time is 81.44% faster
+First Report: 57.391 **		Second Report: 51.372 **		Max Potential First Input Delay is 10.49% faster
+First Report: 1980.563 **		Second Report: 3639.1310000038147 **		Time to Interactive is 83.74% slower

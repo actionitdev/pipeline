@@ -29,7 +29,10 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
         console.log(err, err.stack);
       } else {
         const contents = data.Contents;
-        const dbkeys = contents.map((item) => item.Key).slice(-3);
+        const dbkeys = contents
+          .map((item) => item.Key)
+          .slice(-3)
+          .reverse();
         setDb(dbkeys);
       }
     });
@@ -38,7 +41,10 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
         console.log(err, err.stack);
       } else {
         const contents = data.Contents;
-        const wpkeys = contents.map((item) => item.Key).slice(-3);
+        const wpkeys = contents
+          .map((item) => item.Key)
+          .slice(-3)
+          .reverse();
         setWp(wpkeys);
       }
     });
@@ -76,7 +82,8 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
                       <p className="mb-1">{wp[index].substr(37)}</p>
                     </div>
                     <div className="button-section">
-                      <Button
+                      {/* Hide the buttons for selecting the previous backup since this function on script level is not finished yet  */}
+                      {/* <Button
                         variant={select === index ? "dark" : "outline-dark"}
                         size="sm"
                         onClick={() => onClick(index)}
@@ -84,7 +91,7 @@ const Backup = ({ setEnvVariable, lastDeploy }) => {
                         disabled={lastDeploy}
                       >
                         Select
-                      </Button>
+                      </Button> */}
                       <div
                         style={{
                           visibility: select === index ? "visible" : "hidden",
